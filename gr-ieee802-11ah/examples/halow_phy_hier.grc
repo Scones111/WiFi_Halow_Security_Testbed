@@ -1,29 +1,21 @@
 options:
   parameters:
+    alias: ''
     author: ''
     catch_exceptions: 'True'
     category: '[IEEE802.11AH]'
-    cmake_opt: ''
     comment: ''
     copyright: ''
     description: ''
-    gen_cmake: 'On'
     gen_linking: dynamic
     generate_options: hb
+    generator_class_name: PythonHierBlockNoGuiGenerator
+    generator_module: gnuradio.grc.workflows.python_hb_nogui
     hier_block_src_path: '.:'
     id: halow_phy_hier
-    max_nouts: '0'
     output_language: python
-    placement: (0,0)
-    qt_qss_theme: ''
-    realtime_scheduling: ''
-    run: 'True'
-    run_command: '{python} -u {filename}'
-    run_options: prompt
-    sizing_mode: fixed
     thread_safe_setters: ''
     title: HaLow PHY Hier
-    window_size: (1000,1000)
   states:
     bus_sink: false
     bus_source: false
@@ -624,7 +616,7 @@ blocks:
     label: ''
     short_id: ''
     type: eng_float
-    value: 863.5e6
+    value: 917e6
   states:
     bus_sink: false
     bus_source: false
@@ -887,4 +879,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.10.0-rc1
+  grc_version: 3.10.12.0
