@@ -57,7 +57,7 @@
 /* Static Network configuration */
 #ifndef STATIC_LOCAL_IP
 /** Statically configured IP address (if ENABLE_DHCP is not set). */
-#define STATIC_LOCAL_IP                 "10.51.33.100"
+#define STATIC_LOCAL_IP                 "10.51.33.150"
 #endif
 #ifndef STATIC_GATEWAY
 /** Statically configured gateway address (if ENABLE_DHCP is not set). */

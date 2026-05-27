@@ -19,87 +19,115 @@
  * This file demonstrates how to run iperf using the Morse Micro WLAN API.
  */
 
+
 /*
- * Minimal lwIP TCP Client
+ * Minimal lwIP TCP Server
  * Morse Micro / lwIP compatible
  */
 
-#include <stdio.h>
+#include "mm_app_common.h"
+#include "mmosal.h"
+#include "mmipal.h"
+#include "mmwlan.h"
 #include <string.h>
+#include <stdio.h>
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
 
-#include "mm_app_common.h"
-#include "mmwlan.h"                    // Morse Micro
-#include "mmipal.h"                    // Morse Micro
-#include "mmosal.h"                    // Morse Micro
 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-static const char *TAG = "TCP_CLIENT";
 
-static void tcp_client_task(void *pvParameters)
+static const char *TAG = "TCP_SERVER";
+
+static void tcp_server_task(void *pvParameters)
 {
-    char *server_ip = "10.51.33.100";     // ← CHANGE TO YOUR SERVER IP
-    const int server_port = 5001;
-
+    // Wait until fully connected and IP obtained
     while (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
         vTaskDelay(pdMS_TO_TICKS(500));
     }
+    struct mmipal_ip_config ip_config;
 
-    ESP_LOGI(TAG, "Connected to Wi-Fi. Starting TCP Client...");
+    if (mmipal_get_ip_config(&ip_config) == MMIPAL_SUCCESS) {
 
-    while (1) {   // Reconnect loop
-        int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
-        if (sock < 0) {
-            ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
-            vTaskDelay(pdMS_TO_TICKS(1000));
-            continue;
-        }
-
-        struct sockaddr_in dest_addr;
-        dest_addr.sin_family = AF_INET;
-        dest_addr.sin_port = htons(server_port);
-        inet_pton(AF_INET, server_ip, &dest_addr.sin_addr);
-
-        ESP_LOGI(TAG, "Connecting to %s:%d ...", server_ip, server_port);
-
-        if (connect(sock, (struct sockaddr *)&dest_addr, sizeof(dest_addr)) < 0) {
-            ESP_LOGE(TAG, "Connection failed: errno %d", errno);
-            close(sock);
-            vTaskDelay(pdMS_TO_TICKS(2000));
-            continue;
-        }
-
-        ESP_LOGI(TAG, "Successfully connected to server!");
-
-        // Send and receive loop
-        while (1) {
-            // Send data
-            char tx_buffer[128];
-            snprintf(tx_buffer, sizeof(tx_buffer), "Hello from Morse Micro Client!\n");
-            send(sock, tx_buffer, strlen(tx_buffer), 0);
-
-            // Receive response
-            char rx_buffer[512];
-            int len = recv(sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
-            if (len <= 0) {
-                ESP_LOGI(TAG, "Server disconnected");
-                break;
-            }
-
-            rx_buffer[len] = '\0';
-            ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
-
-            vTaskDelay(pdMS_TO_TICKS(2000));   // Send every 2 seconds
-        }
-
-        close(sock);
-        vTaskDelay(pdMS_TO_TICKS(1000));
+        printf("IP address: %s\n", ip_config.ip_addr);
     }
+
+    ESP_LOGI(TAG, "Wi-Fi connected → Starting TCP Server on port 5001");
+
+    int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
+    if (listen_sock < 0) {
+        ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
+        vTaskDelete(NULL);
+        return;
+    }
+
+    struct sockaddr_in server_addr = {
+        .sin_family = AF_INET,
+        .sin_addr.s_addr = INADDR_ANY,
+        .sin_port = htons(5001)               // ← Change port if needed
+    };
+
+    if (bind(listen_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
+        ESP_LOGE(TAG, "Bind failed: errno %d", errno);
+        goto cleanup;
+    }
+
+    if (listen(listen_sock, 5) < 0) {
+        ESP_LOGE(TAG, "Listen failed: errno %d", errno);
+        goto cleanup;
+    }
+
+    while (1) {
+        struct sockaddr_storage client_addr;
+        socklen_t addr_len = sizeof(client_addr);
+        int client_sock = accept(listen_sock, (struct sockaddr *)&client_addr, &addr_len);
+
+        if (client_sock < 0) {
+            ESP_LOGE(TAG, "Accept failed: errno %d", errno);
+            continue;
+        }
+
+
+        char addr_str[32];
+        inet_ntoa_r(((struct sockaddr_in *)&client_addr)->sin_addr, addr_str, sizeof(addr_str));
+        ESP_LOGI(TAG, "Client connected from %s", addr_str);
+
+        while (1) {
+
+            if(mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED){
+                ESP_LOGI(TAG, "Wi-Fi disconnected, closing client socket");
+                goto cleanup;
+            }
+            char rx_buffer[512];
+
+            int len = recv(client_sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
+
+            if (len < 0) {
+                ESP_LOGE(TAG, "recv failed: errno %d", errno);
+                break;
+            } else if (len == 0) {
+                ESP_LOGI(TAG, "Client disconnected");
+                break;
+            } else {
+                rx_buffer[len] = '\0';
+                ESP_LOGI(TAG, "Received %d bytes: %s", len, rx_buffer);
+                
+                // Echo back
+                send(client_sock, "OK\n", 3, 0);
+            }
+        }
+
+        close(client_sock);
+        ESP_LOGI(TAG, "Client disconnected");
+    }
+cleanup:
+    close(listen_sock);
+    vTaskDelete(NULL);
 }
 
 void app_main(void)
@@ -112,8 +140,5 @@ void app_main(void)
 
     mmwlan_set_power_save_mode(MMWLAN_PS_DISABLED);
 
-    printf("Link is up, proceeding to start TCP client\n");
-
-    xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
-
+    xTaskCreate(tcp_server_task, "tcp_srv", 8192, NULL, 5, NULL);
 }
