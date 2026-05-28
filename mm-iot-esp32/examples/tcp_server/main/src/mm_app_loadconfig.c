@@ -41,13 +41,13 @@
 #ifndef SAE_PASSPHRASE
 /** Passphrase of the AP (ignored if security type is not SAE).
  *  (Do not quote; it will be stringified.) */
-#define SAE_PASSPHRASE                  Hs&U82DVN$DV
+//#define SAE_PASSPHRASE                  Hs&U82DVN$DV
 #endif
 
 /* Default security type  */
 #ifndef SECURITY_TYPE
 /** Security type (@see mmwlan_security_type). */
-#define SECURITY_TYPE                   MMWLAN_SAE
+#define SECURITY_TYPE                   MMWLAN_OPEN
 #endif
 
 /* Configure the STA to use DHCP, this overrides any static configuration.

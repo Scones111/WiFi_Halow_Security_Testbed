@@ -65,20 +65,31 @@ log "Examples directory: $EXAMPLES_DIR"
 cd "$EXAMPLES_DIR" || { echo "[ERROR] Failed to navigate to $EXAMPLES_DIR"; exit 1; }
 
 # Define flowgraphs to compile in order
-FLOWGRAPHS=("halow_phy_hier.grc" "halow_tx.grc")
+HALOW_PHY_HIER_FLOWGRAPHS="halow_phy_hier.grc"
+HALOW_TX_FLOWGRAPHS="halow_tx.grc"
+
+
+PHY_OUTPUT_DIR="$HOME/.local/state/gnuradio"
 
 # Compile each flowgraph
-for grc_file in "${FLOWGRAPHS[@]}"; do
+for grc_file in "${HALOW_PHY_HIER_FLOWGRAPHS}" "${HALOW_TX_FLOWGRAPHS}"; do
     if [ ! -f "$grc_file" ]; then
         echo "[ERROR] Flowgraph $grc_file not found in $EXAMPLES_DIR"
         exit 1
     fi
     
     log "Compiling $grc_file..."
-    grcc -d "$OUTPUT_DIR" "$grc_file" || { echo "[ERROR] Failed to compile $grc_file"; exit 1; }
+    if [ "$grc_file" == "halow_phy_hier.grc" ]; then
+        grcc -o "$PHY_OUTPUT_DIR" "$EXAMPLES_DIR/$grc_file"
+    fi
+    if [ "$grc_file" == "halow_tx.grc" ]; then
+        grcc -o "$EXAMPLES_DIR" "$EXAMPLES_DIR/$grc_file"
+    fi
 done
 
 log "Flowgraph compilation completed successfully!"
+
+echo "$RUN_SCRIPT"
 
 # Run the script if requested
 if [ "$RUN_SCRIPT" = true ]; then
@@ -91,10 +102,9 @@ if [ "$RUN_SCRIPT" = true ]; then
     fi
     
     log "Running $SCRIPT_NAME..."
-    python3 "$SCRIPT_PATH" "$@"
+    /usr/bin/python3 "$SCRIPT_PATH" "$@"
 else
-    log "To run the compiled script, use: python3 $OUTPUT_DIR/halow_tx.py"
+    log "To run the compiled script, use: /usr/bin/python3 $OUTPUT_DIR/halow_tx.py"
 fi
 
-
-python3 "FrameGenerator/main.py"
+cd ../..

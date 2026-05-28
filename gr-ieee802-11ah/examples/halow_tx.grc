@@ -350,7 +350,7 @@ blocks:
     options: '[1e6, 2e6, 4e6, 8e6, 16e6]'
     orient: Qt.QVBoxLayout
     type: real
-    value: 4e6
+    value: 8e6
     widget: combo_box
   states:
     bus_sink: false
@@ -539,7 +539,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    host: ''
+    host: 127.0.0.1
     maxoutbuf: '0'
     minoutbuf: '0'
     mtu: '10000'
