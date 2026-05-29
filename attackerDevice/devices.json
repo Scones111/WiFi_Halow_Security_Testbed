@@ -1,0 +1,41 @@
+{
+  "TrustedAP": [
+    {
+      "name": "Heltec",
+      "ip": "10.42.33.73",
+      "mac": "AA:BB:CC:DD:EE:01"
+    }
+  ],
+  "EvilTwin": [
+    {
+      "name": "EvilTwin",
+      "ip": "raspberrypi.local",
+      "mac": "AA:BB:CC:DD:EE:02",
+      "user": "rpi5",
+      "password":"halow",
+      "ssh_port": 24
+    }
+  ],
+  "Monitor": [
+    {
+      "name": "Monitor",
+      "ip": "10.42.0.1",
+      "mac": "",
+      "user": "root",
+      "password":"halow",
+      "ssh_port": 22
+    }
+  ],
+  "STA":[
+    {
+      "name": "tcp_server",
+      "ip": "10.43.33.100",
+      "mac": "AA:BB:CC:DD:EE:03"
+    },
+    {
+      "name": "tcp_client",
+      "ip": "10.43.33.150",
+      "mac": "AA:BB:CC:DD:EE:04"
+    }
+  ]
+}

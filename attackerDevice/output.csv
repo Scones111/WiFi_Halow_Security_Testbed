@@ -1,0 +1,3125 @@
+Frame 1: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:45:57.967246000 CEST
+    UTC Arrival Time: May  9, 2026 00:45:57.967246000 UTC
+    Epoch Arrival Time: 1778287557.967246000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time since reference or first frame: 0.000000000 seconds]
+    Frame Number: 1
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1677931414
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -51 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xcd00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1101 .... .... = RSSI: -51
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -51 dBm
+    TSF timestamp: 1677931414
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x2bcdf3af [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfda50348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 2: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:45:58.784597000 CEST
+    UTC Arrival Time: May  9, 2026 00:45:58.784597000 UTC
+    Epoch Arrival Time: 1778287558.784597000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.351000 milliseconds]
+    [Time delta from previous displayed frame: 817.351000 milliseconds]
+    [Time since reference or first frame: 817.351000 milliseconds]
+    Frame Number: 2
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1678750618
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -49 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xcf00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1111 .... .... = RSSI: -49
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -49 dBm
+    TSF timestamp: 1678750618
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xdbdafb2f [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfdb18348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 3: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:45:59.605613000 CEST
+    UTC Arrival Time: May  9, 2026 00:45:59.605613000 UTC
+    Epoch Arrival Time: 1778287559.605613000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.016000 milliseconds]
+    [Time delta from previous displayed frame: 821.016000 milliseconds]
+    [Time since reference or first frame: 1.638367000 seconds]
+    Frame Number: 3
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1679569820
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -50 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xce00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1110 .... .... = RSSI: -50
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -50 dBm
+    TSF timestamp: 1679569820
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xa12fba81 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfdbe0348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 4: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:00.423068000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:00.423068000 UTC
+    Epoch Arrival Time: 1778287560.423068000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.455000 milliseconds]
+    [Time delta from previous displayed frame: 817.455000 milliseconds]
+    [Time since reference or first frame: 2.455822000 seconds]
+    Frame Number: 4
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1680389022
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -47 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xd100, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1101 0001 .... .... = RSSI: -47
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -47 dBm
+    TSF timestamp: 1680389022
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x06d92e98 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfdca8348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 5: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:01.244071000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:01.244071000 UTC
+    Epoch Arrival Time: 1778287561.244071000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.003000 milliseconds]
+    [Time delta from previous displayed frame: 821.003000 milliseconds]
+    [Time since reference or first frame: 3.276825000 seconds]
+    Frame Number: 5
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1681208228
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -47 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xd100, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1101 0001 .... .... = RSSI: -47
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -47 dBm
+    TSF timestamp: 1681208228
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x585838ae [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfdd70348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 6: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:02.061494000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:02.061494000 UTC
+    Epoch Arrival Time: 1778287562.061494000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.423000 milliseconds]
+    [Time delta from previous displayed frame: 817.423000 milliseconds]
+    [Time since reference or first frame: 4.094248000 seconds]
+    Frame Number: 6
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1682027431
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -51 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xcd00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1101 .... .... = RSSI: -51
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -51 dBm
+    TSF timestamp: 1682027431
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xfb089fca [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfde38348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 7: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:02.882508000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:02.882508000 UTC
+    Epoch Arrival Time: 1778287562.882508000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.014000 milliseconds]
+    [Time delta from previous displayed frame: 821.014000 milliseconds]
+    [Time since reference or first frame: 4.915262000 seconds]
+    Frame Number: 7
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1682846633
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -56 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xc800, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1000 .... .... = RSSI: -56
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -56 dBm
+    TSF timestamp: 1682846633
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xb9a5bb74 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfdf00348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 8: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:03.699935000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:03.699935000 UTC
+    Epoch Arrival Time: 1778287563.699935000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.427000 milliseconds]
+    [Time delta from previous displayed frame: 817.427000 milliseconds]
+    [Time since reference or first frame: 5.732689000 seconds]
+    Frame Number: 8
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1683665838
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -50 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xce00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1110 .... .... = RSSI: -50
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -50 dBm
+    TSF timestamp: 1683665838
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xc606afc7 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfdfc8348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 9: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:04.521007000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:04.521007000 UTC
+    Epoch Arrival Time: 1778287564.521007000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.072000 milliseconds]
+    [Time delta from previous displayed frame: 821.072000 milliseconds]
+    [Time since reference or first frame: 6.553761000 seconds]
+    Frame Number: 9
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1684485040
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -48 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xd000, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1101 0000 .... .... = RSSI: -48
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -48 dBm
+    TSF timestamp: 1684485040
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x6a9e6dd1 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfe090348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 10: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:05.338409000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:05.338409000 UTC
+    Epoch Arrival Time: 1778287565.338409000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.402000 milliseconds]
+    [Time delta from previous displayed frame: 817.402000 milliseconds]
+    [Time since reference or first frame: 7.371163000 seconds]
+    Frame Number: 10
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1685304244
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -49 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xcf00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1111 .... .... = RSSI: -49
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -49 dBm
+    TSF timestamp: 1685304244
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x714989e6 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfe158348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 11: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:06.159449000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:06.159449000 UTC
+    Epoch Arrival Time: 1778287566.159449000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.040000 milliseconds]
+    [Time delta from previous displayed frame: 821.040000 milliseconds]
+    [Time since reference or first frame: 8.192203000 seconds]
+    Frame Number: 11
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1686123447
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -50 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xce00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1110 .... .... = RSSI: -50
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -50 dBm
+    TSF timestamp: 1686123447
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x4daf8545 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfe220348
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
+Frame 12: Packet, 61 bytes on wire (488 bits), 61 bytes captured (488 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:06.976832000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:06.976832000 UTC
+    Epoch Arrival Time: 1778287566.976832000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 817.383000 milliseconds]
+    [Time delta from previous displayed frame: 817.383000 milliseconds]
+    [Time since reference or first frame: 9.009586000 seconds]
+    Frame Number: 12
+    Frame Length: 61 bytes (488 bits)
+    Capture Length: 61 bytes (488 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1686942650
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -51 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xcd00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1101 .... .... = RSSI: -51
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -51 dBm
+    TSF timestamp: 1686942650
+IEEE 802.11 S1G Beacon, Flags: ....R.F.C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c0a
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..1. = Compressed SSID Present: Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0x7a0245be [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R.F.C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (9 bytes)
+        Timestamp: 0xfe2e8348
+        Change Sequence: 0
+        Compressed SSID: 0x14ff33c2
+    Tagged parameters (4 bytes)
+        Tag: Traffic Indication Map (TIM): DTIM 1 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 1
+            DTIM period: 2
+
+Frame 13: Packet, 129 bytes on wire (1032 bits), 129 bytes captured (1032 bits)
+    Encapsulation type: IEEE 802.11 plus radiotap radio header (23)
+    Arrival Time: May  9, 2026 02:46:07.797982000 CEST
+    UTC Arrival Time: May  9, 2026 00:46:07.797982000 UTC
+    Epoch Arrival Time: 1778287567.797982000
+    [Time shift for this packet: 0.000000000 seconds]
+    [Time delta from previous captured frame: 821.150000 milliseconds]
+    [Time delta from previous displayed frame: 821.150000 milliseconds]
+    [Time since reference or first frame: 9.830736000 seconds]
+    Frame Number: 13
+    Frame Length: 129 bytes (1032 bits)
+    Capture Length: 129 bytes (1032 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: radiotap:wlan_radio:wlan]
+    Character encoding: ASCII (0)
+Radiotap Header v0, Length 34
+    Header revision: 0
+    Header pad: 0
+    Header length: 34
+    Present flags
+        Present flags word: 0x1000002f
+            .... .... .... .... .... .... .... ...1 = TSFT: Present
+            .... .... .... .... .... .... .... ..1. = Flags: Present
+            .... .... .... .... .... .... .... .1.. = Rate: Present
+            .... .... .... .... .... .... .... 1... = Channel: Present
+            .... .... .... .... .... .... ...0 .... = FHSS: Absent
+            .... .... .... .... .... .... ..1. .... = dBm Antenna Signal: Present
+            .... .... .... .... .... .... .0.. .... = dBm Antenna Noise: Absent
+            .... .... .... .... .... .... 0... .... = Lock Quality: Absent
+            .... .... .... .... .... ...0 .... .... = TX Attenuation: Absent
+            .... .... .... .... .... ..0. .... .... = dB TX Attenuation: Absent
+            .... .... .... .... .... .0.. .... .... = dBm TX Power: Absent
+            .... .... .... .... .... 0... .... .... = Antenna: Absent
+            .... .... .... .... ...0 .... .... .... = dB Antenna Signal: Absent
+            .... .... .... .... ..0. .... .... .... = dB Antenna Noise: Absent
+            .... .... .... .... .0.. .... .... .... = RX flags: Absent
+            .... .... .... .... 0... .... .... .... = TX flags: Absent
+            .... .... .... ...0 .... .... .... .... = Reserved bit16: Absent
+            .... .... .... ..0. .... .... .... .... = data retries: Absent
+            .... .... .... .0.. .... .... .... .... = XChannel: Absent
+            .... .... .... 0... .... .... .... .... = MCS information: Absent
+            .... .... ...0 .... .... .... .... .... = A-MPDU Status: Absent
+            .... .... ..0. .... .... .... .... .... = VHT information: Absent
+            .... .... .0.. .... .... .... .... .... = frame timestamp: Absent
+            .... .... 0... .... .... .... .... .... = HE information: Absent
+            .... ...0 .... .... .... .... .... .... = HE-MU information: Absent
+            .... ..0. .... .... .... .... .... .... = Reserved bit25: Absent
+            .... .0.. .... .... .... .... .... .... = 0 Length PSDU: Absent
+            .... 0... .... .... .... .... .... .... = L-SIG: Absent
+            ...1 .... .... .... .... .... .... .... = TLVs: Present
+            ..0. .... .... .... .... .... .... .... = Radiotap NS next: False
+            .0.. .... .... .... .... .... .... .... = Vendor NS next: False
+            0... .... .... .... .... .... .... .... = Ext: Absent
+    MAC timestamp: 1687761957
+    Flags: 0x10
+        .... ...0 = CFP: False
+        .... ..0. = Preamble: Long
+        .... .0.. = WEP: False
+        .... 0... = Fragmentation: False
+        ...1 .... = FCS at end: True
+        ..0. .... = Data Pad: False
+        .0.. .... = Bad FCS: False
+        0... .... = Short GI: False
+    Data Rate: 64.0 Mb/s
+    Channel frequency: 920
+    Channel flags: 0x0008
+        .... .... .... ...0 = 700 MHz spectrum: False
+        .... .... .... ..0. = 800 MHz spectrum: False
+        .... .... .... .0.. = 900 MHz spectrum: False
+        .... .... ...0 .... = Turbo: False
+        .... .... ..0. .... = Complementary Code Keying (CCK): False
+        .... .... .0.. .... = Orthogonal Frequency-Division Multiplexing (OFDM): False
+        .... .... 0... .... = 2 GHz spectrum: False
+        .... ...0 .... .... = 5 GHz spectrum: False
+        .... ..0. .... .... = Passive: False
+        .... .0.. .... .... = Dynamic CCK-OFDM: False
+        .... 0... .... .... = Gaussian Frequency Shift Keying (GFSK): False
+        ...0 .... .... .... = GSM (900MHz): False
+        ..0. .... .... .... = Static Turbo: False
+        .0.. .... .... .... = Half Rate Channel (10MHz Channel Width): False
+        0... .... .... .... = Quarter Rate Channel (5MHz Channel Width): False
+    Antenna signal: -50 dBm
+    S1G
+        TLV type: S1G (32)
+        TLV datalen: 6
+        Known: 0x00f7, S1G PPDU Format Known, Response Indication Known, Guard Interval Known, Bandwidth Known, MCS Known, Color Known, Uplink Indication Known
+            .... .... .... ...1 = S1G PPDU Format Known: True
+            .... .... .... ..1. = Response Indication Known: True
+            .... .... .... .1.. = Guard Interval Known: True
+            .... .... .... 0... = NSS Known: False
+            .... .... ...1 .... = Bandwidth Known: True
+            .... .... ..1. .... = MCS Known: True
+            .... .... .1.. .... = Color Known: True
+            .... .... 1... .... = Uplink Indication Known: True
+            0000 0000 .... .... = Reserved 1: 0x00
+        Data1: 0x0000, S1G PPDU Format: S1G 1M, Response Indication: No response, Guard Interval: Long GI, NSS: 1, Bandwidth: 1MHz channel, MCS: 0
+            .... .... .... ..00 = S1G PPDU Format: S1G 1M (0)
+            .... .... .... 00.. = Response Indication: No response (0)
+            .... .... ...0 .... = Reserved 2: 0x0
+            .... .... ..0. .... = Guard Interval: Long GI (0)
+            .... .... 00.. .... = NSS: 1 (0)
+            .... 0000 .... .... = Bandwidth: 1MHz channel (0)
+            0000 .... .... .... = MCS: 0 (0)
+        Data2: 0xce00, Color: 0
+            .... .... .... .000 = Color: 0 (0)
+            .... .... .... 0... = Uplink Indication: False
+            .... .... 0000 .... = Reserved 3: 0x0
+            1100 1110 .... .... = RSSI: -50
+802.11 radio information
+    PHY type: 802.11ah (S1G) (10)
+    Data rate: 64.0 Mb/s
+    Frequency: 920MHz
+    Signal strength (dBm): -50 dBm
+    TSF timestamp: 1687761957
+IEEE 802.11 S1G Beacon, Flags: ....R...C
+    Type/Subtype: S1G Beacon (0x0031)
+    Frame Control Field: 0x1c08
+        .... ..00 = Version: 0
+        .... 11.. = Type: Extension frame (3)
+        0001 .... = Subtype: 1
+        .... ...0 = Next TBTT Present: Not Present
+        .... ..0. = Compressed SSID Present: Not Present
+        .... .0.. = ANO Present: Not Present
+        ..00 1... = BSS BW: 1
+        .0.. .... = Security: Not supported
+        0... .... = AP PM: Not supported
+    .000 0000 0000 0000 = Duration: 0 microseconds
+    Receiver address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Source address: HeltecAutoma_a:b9:14 (78:72:64:ea:b9:14)
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+    Frame check sequence: 0xa5d6a5f3 [unverified]
+    [FCS Status: Unverified]
+    [WLAN Flags: ....R...C]
+IEEE 802.11 wireless LAN extension frame
+    Fixed parameters (5 bytes)
+        Timestamp: 0xfe3b03b0
+        Change Sequence: 0
+    Tagged parameters (76 bytes)
+        Tag: S1G Beacon Compatibility
+            Tag Number: S1G Beacon Compatibility (213)
+            Tag length: 8
+            Compatibility Information: 0x0061
+            Beacon Interval: 1600
+            TSF Completion: 0x00000016
+        Tag: Traffic Indication Map (TIM): DTIM 0 of 2 bitmap
+            Tag Number: Traffic Indication Map (TIM) (5)
+            Tag length: 2
+            DTIM count: 0
+            DTIM period: 2
+        Tag: S1G Capabilities
+            Tag Number: S1G Capabilities (217)
+            Tag length: 15
+            S1G Capabilities Information
+                S1G Capabilities
+                    S1G Capabilities Byte 1: 0x9e
+                        .... ...0 = S1G_LONG Support: Not supported
+                        .... ..1. = Short GI for 1MHz: Supported
+                        .... .1.. = Short GI for 2MHz: Supported
+                        .... 1... = Short GI for 4MHz: Supported
+                        ...1 .... = Short GI for 8MHz: Supported
+                        ..0. .... = Short GI for 16MHz: Not supported
+                        10.. .... = Supported Channel Width: STA supports 1MHz, 2MHz, 4MHz and 8MHz operation (0x2)
+                    S1G Capabilities Byte 2: 0x00
+                        .... ...0 = Rx LDPC: Not supported
+                        .... ..0. = Tx STBC: Not supported
+                        .... .0.. = Rx STBC: Not supported
+                        .... 0... = SU Beamformer Capable: Not supported
+                        ...0 .... = SU Beamformee Capable: Not supported
+                        000. .... = Beamformee STS Capability: 0
+                    S1G Capabilities Byte 3: 0x40
+                        .... .000 = Number of Sounding Dimensions: 0
+                        .... 0... = MU Beamformer Capable: Not supported
+                        ...0 .... = MU Beamformee Capable: Not supported
+                        ..0. .... = +HTC-VHT Capable: Not supported
+                        01.. .... = Traveling Pilot Support: Traveling Pilot Support activated for only one space-time stream (0x1)
+                    S1G Capabilities Byte 4: 0xf8
+                        .... ...0 = RD Responder: Not supported
+                        .... ..0. = HT Delayed Block Ack: Not supported
+                        .... .0.. = Maximum MPDU Length: 3895 (0)
+                        ...1 1... = Maximum A-MPDU Length Exponent: 3
+                        111. .... = Minimum MPDU Start Spacing: 16 uS (7)
+                    S1G Capabilities Byte 5: 0x80
+                        .... ...0 = Uplink Sync Capable: Not supported
+                        .... ..0. = Dynamic AID: Not supported
+                        .... .0.. = BAT Support: Not supported
+                        .... 0... = TIM AID Support: Not supported
+                        ...0 .... = Non TIM Support: Not supported
+                        ..0. .... = Group AID Support: Not supported
+                        10.. .... = STA Type Support: AP supports only non-sensor STAs. STA is a non-sensor STA (0x2)
+                    S1G Capabilities Byte 6: 0x0c
+                        .... ...0 = Centralized Authentication Control: Not supported
+                        .... ..0. = Distributed Authentication Control: Not supported
+                        .... .1.. = A-MSDU Supported: Supported
+                        .... 1... = A-MPDU Support: Supported
+                        ...0 .... = Asymmetric Block Ack Supported: Not supported
+                        ..0. .... = Flow Control Supported: Not supported
+                        00.. .... = Sectorized Beam Capable: AP or non-AP: Not supported (0x0)
+                    S1G Capabilities Byte 7: 0x00
+                        .... ...0 = OBSS Mitigation Support: Not supported
+                        .... ..0. = Fragment BA Support: Not supported
+                        .... .0.. = NDS PS-Poll Supported: Not supported
+                        .... 0... = Raw Operation Support: Not supported
+                        ...0 .... = Page Slicing Support: Not supported
+                        ..0. .... = TXOP Sharing Implicit Ack Support: Not supported
+                        00.. .... = VHT Link Adaptation Capable: STA does not provide VHT MFB (0x0)
+                    S1G Capabilities Byte 8: 0x02
+                        .... ...0 = TACK Support as PS-Poll Response: Not supported
+                        .... ..1. = Duplicate 1 MHz Support: Supported
+                        .... .0.. = MCS Negotiation Support: Not supported
+                        .... 0... = 1 MHz Control Response Preamble Supported: Not supported
+                        ...0 .... = NDP Beamforming Report Poll Supported: Not supported
+                        ..0. .... = Unsolicited Dynamic AID: Not supported
+                        .0.. .... = Sector Training Operation Supported: Not supported
+                        0... .... = Temporary PS Mode Switch: Not supported
+                    S1G Capabilities Byte 9: 0x40
+                        .... ...0 = TWT Grouping Support: Not supported
+                        .... ..0. = BDT Capable: Not supported
+                        ...0 00.. = COLOR: 0
+                        ..0. .... = TWT Requester Support: Not supported
+                        .1.. .... = TWT Responder Support: Supported
+                        0... .... = PV1 Frame Support: Not supported
+                    S1G Capabilities Byte 10: 0x00
+                        .... ...0 = Link Adaptation per Normal Control Response Capable: Not supported
+                        0000 000. = Reserved: 0x00
+                Supported S1G-MCS and NSS Set
+                    Supported S1G-MCS and NSS Set: 0x0001fa00fd
+                        .... .... .... .... .... .... .... .... 1111 1101 = Rx S1G-MCS Map: 0xfd
+                        .... .... .... .... .... ...0 0000 0000 .... .... = Rx Highest Supported Long GI Data Rate: 0x000
+                        .... .... .... ...1 1111 101. .... .... .... .... = Tx S1G-MCS Map: 0xfd
+                        .... ..00 0000 000. .... .... .... .... .... .... = Tx Highest Supported Long GI Data Rate: 0x000
+                        .... 00.. .... .... .... .... .... .... .... .... = Rx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        ..00 .... .... .... .... .... .... .... .... .... = Tx Single Spatial Stream and S1G-MCS Map for 1MHz: 0x0
+                        00.. .... .... .... .... .... .... .... .... .... = Reserved: 0x0
+        Tag: S1G Operation
+            Tag Number: S1G Operation (232)
+            Tag length: 6
+            S1G Operation Information
+                Channel Width: 1: 1 MHz BSS operating channel width
+                    .... ...1 = Primary Channel Width: 1MHz BSS Primary Channel Width (1)
+                    ...0 000. = BSS Operating Channel Width: 0
+                    ..0. .... = 1MHz Primary Channel Location: Located on lower side of 2MHz primary channel (0)
+                    .0.. .... = Reserved: 0
+                    0... .... = MCS10 Use: Use of MCS10 possible (0)
+                Operating Class: 1
+                Primary Channel Number: 37
+                Channel Center Frequency: 37
+                Basic S1G-MCS and NSS Set: 0xccc4
+        Tag: Short Beacon Interval
+            Tag Number: Short Beacon Interval (214)
+            Tag length: 2
+            Short Beacon Interval: 800
+        Tag: SSID parameter set: "H7608"
+            Tag Number: SSID parameter set (0)
+            Tag length: 5
+            SSID: "H7608"
+        Tag: Vendor Specific: Microsoft Corp.: WMM/WME: Parameter Element
+            Tag Number: Vendor Specific (221)
+            Tag length: 24
+            OUI: 00:50:f2 (Microsoft Corp.)
+            Vendor Specific OUI Type: 2
+            Type: WMM/WME (0x02)
+            WME Subtype: Parameter Element (1)
+            WME Version: 1
+            WME QoS Info: 0x81
+                [Expert Info (Warning/Undecoded): Could not deduce direction to decode correctly, ftype 49]
+                    [Could not deduce direction to decode correctly, ftype 49]
+                    [Severity level: Warning]
+                    [Group: Undecoded]
+            Update EDCA Info: 0x00
+                .... ...0 = Override: False
+                .... .00. = PS-Poll ACI: 0x0
+                ...0 0... = RAW ACI: 0x0
+                .00. .... = STA Type: Valid for both sensor and non-sensor STAs (0x0)
+                0... .... = Reserved: 0x0
+            Ac Parameters ACI 0 (Best Effort), ACM no, AIFSN 3, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x03
+                    .00. .... = ACI: Best Effort (0)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0011 = AIFSN: 3
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 1 (Background), ACM no, AIFSN 7, ECWmin/max 4/10 (CWmin/max 15/1023), TXOP 469
+                ACI / AIFSN Field: 0x27
+                    .01. .... = ACI: Background (1)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0111 = AIFSN: 7
+                    0... .... = Reserved: 0
+                ECW: 0xa4
+                    1010 .... = ECW Max: 10 (CW Max: 1023)
+                    .... 0100 = ECW Min: 4 (CW Min: 15)
+                TXOP Limit: 469
+            Ac Parameters ACI 2 (Video), ACM no, AIFSN 2, ECWmin/max 3/4 (CWmin/max 7/15), TXOP 469
+                ACI / AIFSN Field: 0x42
+                    .10. .... = ACI: Video (2)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x43
+                    0100 .... = ECW Max: 4 (CW Max: 15)
+                    .... 0011 = ECW Min: 3 (CW Min: 7)
+                TXOP Limit: 469
+            Ac Parameters ACI 3 (Voice), ACM no, AIFSN 2, ECWmin/max 2/3 (CWmin/max 3/7), TXOP 469
+                ACI / AIFSN Field: 0x62
+                    .11. .... = ACI: Voice (3)
+                    ...0 .... = Admission Control Mandatory: No
+                    .... 0010 = AIFSN: 2
+                    0... .... = Reserved: 0
+                ECW: 0x32
+                    0011 .... = ECW Max: 3 (CW Max: 7)
+                    .... 0010 = ECW Min: 2 (CW Min: 3)
+                TXOP Limit: 469
+
