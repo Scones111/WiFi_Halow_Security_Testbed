@@ -40,12 +40,12 @@ if __name__ == "__main__":
             print("Evil Twin attack selected")
             #setup evil twin
             client = setupEvilTwin.connect_to_evilTwin()
-            client = setupEvilTwin.start_evil_twin(client)
+            setupEvilTwin.start_evil_twin(client)
             log.log_event("evil_twin_initiated","evil twin has been initialed and is transmitting beacon frames")
             #transmit frames
             evilTwin.transmit_frame_deauth(log)
 
-            client =setupEvilTwin.stop_evil_twin(client)
+            setupEvilTwin.stop_evil_twin(client)
             setupEvilTwin.disconnect_evil_twin(client)
 
         elif mode_choice == "2":

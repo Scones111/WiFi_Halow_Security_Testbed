@@ -9,7 +9,6 @@ class EventHandler:
         self.end = 0.0
 
     def log_event(self, event_type, details):
-        print(self.events)
         timestamp = time.time() - self.start
         new_event = {"timestamp": timestamp, "event_type": event_type, "details": details}
         temp_pd = pd.DataFrame([new_event])
@@ -23,7 +22,3 @@ class EventHandler:
 
     def end_log(self):
         self.end = time.time()
-
-test = EventHandler()
-
-test.log_event("t","t")
