@@ -18,6 +18,7 @@ def transmit_frame_deauth(log:EventHandler):
             details = "Transmitted a deauthentication frame"    
             transmitData(raw_frame)
             log.log_event(event_type,details)
+        
         else:
             break
 

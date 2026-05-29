@@ -10,8 +10,6 @@ HOST = data["EvilTwin"][0]["ip"]
 USER = data["EvilTwin"][0]["user"]
 PASSWORD = data["EvilTwin"][0]["password"]
 
-client:paramiko.SSHClient
-
 def connect_to_evilTwin():
     print("Starting SSH connection to", HOST)
     # SSH connect
@@ -30,7 +28,7 @@ def connect_to_evilTwin():
     print("SSH connected")
     return client
 
-def start_evil_twin():
+def start_evil_twin(client):
     command = (
         f"./ap_mode.sh "
     )
@@ -41,7 +39,7 @@ def start_evil_twin():
     return "evil twin running"
 
 
-def stop_evil_twin():
+def stop_evil_twin(client):
     # execute command
     command = (
         f"./ap_mode_down.sh "
@@ -54,7 +52,7 @@ def stop_evil_twin():
     exit_status = stdout.channel.recv_exit_status()
     return "evil twin down"
 
-def disconnect_evil_twin():
+def disconnect_evil_twin(client):
     client.close()
 
 

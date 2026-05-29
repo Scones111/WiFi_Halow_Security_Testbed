@@ -21,6 +21,7 @@ if __name__ == "__main__":
     event_type = None
     details = None
     mode_choice = None
+    client = None
 
     # loop for mode selection
     while(True):
@@ -38,11 +39,14 @@ if __name__ == "__main__":
         if mode_choice == "1":
             print("Evil Twin attack selected")
             #setup evil twin
-            setupEvilTwin.connect_to_evilTwin()
-            setupEvilTwin.start_evil_twin()
+            client = setupEvilTwin.connect_to_evilTwin()
+            client = setupEvilTwin.start_evil_twin(client)
             log.log_event("evil_twin_initiated","evil twin has been initialed and is transmitting beacon frames")
             #transmit frames
             evilTwin.transmit_frame_deauth(log)
+
+            client =setupEvilTwin.stop_evil_twin(client)
+            setupEvilTwin.disconnect_evil_twin(client)
 
         elif mode_choice == "2":
             print("DoS deauthentication attack selected")
