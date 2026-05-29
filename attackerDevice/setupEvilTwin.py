@@ -58,13 +58,3 @@ def disconnect_evil_twin():
     client.close()
 
 
-client = connect_to_evilTwin()
-start_evil_twin()
-
-time.sleep(5)
-
-stop_evil_twin()
-disconnect_evil_twin()
-
-print("done")
-
