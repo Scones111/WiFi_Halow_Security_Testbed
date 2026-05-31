@@ -30,7 +30,7 @@
     {
       "name": "tcp_server",
       "ip": "10.43.33.100",
-      "mac": "AA:BB:CC:DD:EE:03"
+      "mac": "3c:22:7f:71:dc:b8"
     },
     {
       "name": "tcp_client",

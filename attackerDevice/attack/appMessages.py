@@ -1,7 +1,7 @@
 def print_intro():
 
     intro_message = """
-FRAME GENERATOR
+ATTACKER DEVICE
 ========================================================================
 This script was created as a part of a master thesis project to generate 
 frames for testing and evaluation of WiFi HaLow networks.

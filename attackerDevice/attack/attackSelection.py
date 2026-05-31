@@ -1,28 +1,23 @@
 from scapy.all import wrpcap
 import time
-import appMessages
-from attackLogGenerator import EventHandler
-
-import setupEvilTwin
-import evilTwin
+import attackerDevice.attack.appMessages as appMessages
+from attackerDevice.attack.attackLogGenerator import EventHandler
+import attackerDevice.attack.setupEvilTwin as setupEvilTwin
+import attackerDevice.attack.attacks.evilTwin as evilTwin
 
 
 # include a start time to allow sync with wireshark
 
-if __name__ == "__main__":
+def run():
     appMessages.print_intro()
 
     log = EventHandler()
 
 
     # initialize variables for choice and raw frame
-    raw_frame = None
     continue_choice = None
-    event_type = None
-    details = None
     mode_choice = None
     client = None
-
     # loop for mode selection
     while(True):
         print("which attack do you want to perform?")

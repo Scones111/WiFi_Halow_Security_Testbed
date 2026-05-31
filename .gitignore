@@ -1,3 +1,4 @@
 .vscode/
-Logging/
-MonitorDevice/
+logs/*
+pcaps/*
+__pycache__/

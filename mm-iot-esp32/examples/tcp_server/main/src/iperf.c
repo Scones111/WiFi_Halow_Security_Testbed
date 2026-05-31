@@ -57,6 +57,11 @@ static void tcp_server_task(void *pvParameters)
         printf("IP address: %s\n", ip_config.ip_addr);
     }
 
+    struct mmwlan_link_info info;
+    if (mmwlan_get_link_info(&info) == MMWLAN_SUCCESS) {
+        printf("Bandwidth: %d MHz | Signal Strength: %d dBm\n", info.op_bw_mhz, info.rssi);
+    }
+
     ESP_LOGI(TAG, "Wi-Fi connected → Starting TCP Server on port 5001");
 
     int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
@@ -69,7 +74,7 @@ static void tcp_server_task(void *pvParameters)
     struct sockaddr_in server_addr = {
         .sin_family = AF_INET,
         .sin_addr.s_addr = INADDR_ANY,
-        .sin_port = htons(5001)               // ← Change port if needed
+        .sin_port = htons(5001)
     };
 
     if (bind(listen_sock, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
