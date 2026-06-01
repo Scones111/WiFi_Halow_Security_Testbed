@@ -1,4 +1,4 @@
 .vscode/
-logs/*
-pcaps/*
+attackerDevice/monitor/logs/*
+attackerDevice/monitor/pcaps/*
 __pycache__/

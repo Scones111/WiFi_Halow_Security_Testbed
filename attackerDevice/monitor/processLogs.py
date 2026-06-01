@@ -362,15 +362,25 @@ def log_events(path_to_pcap_file,pcap_filter):
 # ================================================================    
 
 # test code
-"""filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
+
+"""
+filename = Path(__file__).resolve().parent / "pcaps/testbed_0.pcap"
+print(filename)
 packets = pyshark.FileCapture(
     filename,
     display_filter="(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)",
     keep_packets=False
 )
 
-for i in packets:
-    process_wlan(i)
+
+for packet in packets:
+    has_wlan = hasattr(packet, 'wlan')
+    has_tcp  = hasattr(packet, 'tcp')
+    if has_wlan and has_tcp:
+        process_tcp(packet)
+    elif has_wlan:
+        process_wlan(packet)
+    
 
 packets.close()
 """

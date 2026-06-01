@@ -6,8 +6,8 @@ import os
 
 DEVICE_FILE = "devices.json"
 
-FILE_DEST = "monitor/logs"
-os.makedirs(os.path.dirname(FILE_DEST), exist_ok=True)
+FILE_DEST = "monitor\logs"
+os.makedirs(FILE_DEST, exist_ok=True)
 
 ATTACK_LOG = "attackLog_0.csv"
 ATTACK_LOG_NAME = "attackLog"
@@ -39,7 +39,7 @@ def get_mac(device_name):
     return macs
 
 def write_to_attacklog(row):
-    with open(ATTACK_LOG, "a", newline="") as f:
+    with open(os.path.join(FILE_DEST, ATTACK_LOG), "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys())
 
         # Write header only if file is new
@@ -49,10 +49,11 @@ def write_to_attacklog(row):
         writer.writerow(row)
 
 def write_to_tcp_log(row):
-    with open(TCP_LOG, "a", newline="") as f:
+    with open(os.path.join(FILE_DEST, TCP_LOG), "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys())
 
         # Write header only if file is new
+        
         if not os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
             writer.writeheader()
 
