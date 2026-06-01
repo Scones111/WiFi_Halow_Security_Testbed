@@ -32,7 +32,7 @@ PCAP_NAME = "testbed"
 counter = 0
 while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
     counter+=1
-    PCAP = f"{PCAP_NAME}_{counter}.csv"
+    PCAP = f"{PCAP_NAME}_{counter}.pcap"
 
 
 
