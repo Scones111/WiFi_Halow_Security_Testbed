@@ -22,7 +22,6 @@ WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !
 
 client = None
 wireshark = None
-logfile = None
 
 PCAP_PATH = "monitor/pcaps"
 os.makedirs(os.path.dirname(PCAP_PATH), exist_ok=True)
@@ -38,17 +37,9 @@ while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
 
 def cleanup() -> None:
     """Close open resources without exiting the process."""
-    global client, wireshark, logfile
+    global client, wireshark
 
     print("Cleaning up...")
-
-    if logfile is not None:
-        try:
-            logfile.close()
-        except Exception:
-            pass
-        finally:
-            logfile = None
 
     if wireshark is not None:
         try:
@@ -65,6 +56,8 @@ def cleanup() -> None:
             pass
         finally:
             client = None
+
+    processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
 
     
 
@@ -89,7 +82,7 @@ def start_monitor_device_logging(
 
     Returns the actual pcap file path used.
     """
-    global client, wireshark, logfile
+    global client, wireshark
 
     if register_signals:
         register_signal_handlers()
