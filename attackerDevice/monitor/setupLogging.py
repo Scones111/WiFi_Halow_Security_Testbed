@@ -23,15 +23,16 @@ wireshark = None
 logfile = None
 
 PCAP_PATH = "monitor/pcaps"
+os.makedirs(os.path.dirname(PCAP_PATH), exist_ok=True)
 PCAP = "testbed_0.pcap"
-PCAP_NAME = "testbed_0"
+PCAP_NAME = "testbed"
 
 counter = 0
 while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
     counter+=1
     PCAP = f"{PCAP_NAME}_{counter}.csv"
 
-os.makedirs(os.path.dirname(os.path.join(PCAP_PATH,PCAP)), exist_ok=True)
+
 
 def cleanup() -> None:
     """Close open resources without exiting the process."""

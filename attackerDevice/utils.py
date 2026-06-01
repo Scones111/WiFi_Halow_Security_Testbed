@@ -6,7 +6,8 @@ import os
 
 DEVICE_FILE = "devices.json"
 
-FILE_DEST = "MonitorDevice/logs"
+FILE_DEST = "Monitor/logs"
+os.makedirs(os.path.dirname(FILE_DEST), exist_ok=True)
 
 ATTACK_LOG = "attackLog_0.csv"
 ATTACK_LOG_NAME = "attackLog"
