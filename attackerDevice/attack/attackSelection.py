@@ -1,9 +1,8 @@
 from scapy.all import wrpcap
-import time
-import attackerDevice.attack.appMessages as appMessages
-from attackerDevice.attack.attackLogGenerator import EventHandler
-import attackerDevice.attack.attacks.setupEvilTwin as setupEvilTwin
-import attackerDevice.attack.attacks.evilTwin as evilTwin
+import attack.appMessages as appMessages
+from attack.attackLogGenerator import EventHandler
+import attack.attacks.setupEvilTwin as setupEvilTwin
+import attack.attacks.evilTwin as evilTwin
 
 
 # include a start time to allow sync with wireshark

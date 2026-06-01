@@ -362,7 +362,7 @@ def log_events(packet):
 # ================================================================    
 
 # test code
-filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
+"""filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
 packets = pyshark.FileCapture(
     filename,
     display_filter="(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)",
@@ -373,3 +373,4 @@ for i in packets:
     process_wlan(i)
 
 packets.close()
+"""

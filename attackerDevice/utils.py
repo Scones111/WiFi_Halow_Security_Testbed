@@ -4,9 +4,9 @@ import csv
 import os
 
 
-DEVICE_FILE = "attackerDevice/devices.json"
+DEVICE_FILE = "devices.json"
 
-FILE_DEST = "attackerDevice/MonitorDevice/logs"
+FILE_DEST = "MonitorDevice/logs"
 
 ATTACK_LOG = "attackLog_0.csv"
 ATTACK_LOG_NAME = "attackLog"

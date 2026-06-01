@@ -5,7 +5,7 @@ import signal
 import sys
 from typing import Optional
 import json
-import processLogs
+from monitor import processLogs
 
 with open("devices.json", "r") as file:
     data = json.load(file)
@@ -13,7 +13,7 @@ with open("devices.json", "r") as file:
 
 # SSH Configuration
 DEFAULT_HOST = data["Monitor"][0]["ip"]
-DEFAULT_USER = data["Monitor"][0]["root"]
+DEFAULT_USER = data["Monitor"][0]["user"]
 DEFAULT_PASSWORD = data["Monitor"][0]["password"]
 
 DEFAULT_INTERFACE = "morse0"
@@ -22,7 +22,7 @@ client = None
 wireshark = None
 logfile = None
 
-PCAP_PATH = "attackerDevice/MonitorDevice/pcaps"
+PCAP_PATH = "MonitorDevice/pcaps"
 PCAP = "testbed_0.pcap"
 PCAP_NAME = "testbed_0"
 
@@ -90,7 +90,7 @@ def start_monitor_device_logging(
     if register_signals:
         register_signal_handlers()
 
-    print("Starting SSH connection to", host)
+    print("Starting SSH connection to", DEFAULT_HOST)
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
