@@ -22,7 +22,7 @@ client = None
 wireshark = None
 logfile = None
 
-PCAP_PATH = "MonitorDevice/pcaps"
+PCAP_PATH = "monitor/pcaps"
 PCAP = "testbed_0.pcap"
 PCAP_NAME = "testbed_0"
 
