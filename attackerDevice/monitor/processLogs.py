@@ -347,18 +347,23 @@ def process_tcp(packet:Packet):
 
 
 # implement logging https://docs.zeek.org/en/master/frameworks/logging.html
-def log_events(packet):
+def log_events(path_to_pcap_file):
+    packets = pyshark.FileCapture(path_to_pcap_file)
     has_wlan = hasattr(packet, 'wlan')
     has_tcp  = hasattr(packet, 'tcp')
 
-    event = None
-    if has_wlan and has_tcp:
-        event = process_tcp(packet)
-    elif has_wlan:
-        event = process_wlan(packet)
+    for event in packets:
+        event = None
+        if has_wlan and has_tcp:
+            event = process_tcp(packet)
+        elif has_wlan:
+            event = process_wlan(packet)
     
-    if event is not None:
-        utils.write_to_csv(event)
+        if event is not None:
+            utils.write_to_csv(event)
+
+    #todo implement post process for machine learning features
+    
 # ================================================================    
 
 # test code

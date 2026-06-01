@@ -18,7 +18,7 @@ DEFAULT_PASSWORD = data["Monitor"][0]["password"]
 
 DEFAULT_INTERFACE = "morse0"
 
-WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
+WIRESHARK_FILTER = "'(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6'"
 
 client = None
 wireshark = None
@@ -65,6 +65,7 @@ def cleanup() -> None:
             pass
         finally:
             client = None
+
     
 
 
