@@ -123,8 +123,7 @@ def start_monitor_device_logging(
         while True:
             data = stdout.channel.recv(4096)
             if not data:
-                print("tcpdump process ended")
-                break
+                continue
 
             pcapfile.write(data)
             pcapfile.flush()
