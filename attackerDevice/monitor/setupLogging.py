@@ -16,7 +16,7 @@ DEFAULT_HOST = data["Monitor"][0]["ip"]
 DEFAULT_USER = data["Monitor"][0]["user"]
 DEFAULT_PASSWORD = data["Monitor"][0]["password"]
 
-DEFAULT_INTERFACE = "mon0"
+DEFAULT_INTERFACE = "morse0"
 
 client = None
 wireshark = None
@@ -105,9 +105,9 @@ def start_monitor_device_logging(
         f"-i {DEFAULT_INTERFACE} "
         f"-U "
         f"-s0 "
-        f"-w -"
+        f"-w - "
         # went through a filtered out packets were not interested in (only look at wlan and tcp)
-        f"\"(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)\"" 
+        f"'(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)'" 
     )
 
     stdin, stdout, stderr = client.exec_command(command)
