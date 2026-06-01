@@ -124,8 +124,6 @@ def start_monitor_device_logging(
             if not data:
                 continue
 
-            print("data is being retrieved from ssh connection")
-            print(data)
             if start_wireshark and wireshark is not None:
                 wireshark.stdin.write(data)
                 wireshark.stdin.flush()
