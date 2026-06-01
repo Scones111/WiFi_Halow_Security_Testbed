@@ -353,13 +353,16 @@ def log_events(path_to_pcap_file,pcap_filter):
 
         has_wlan = hasattr(packet, 'wlan')
         has_tcp  = hasattr(packet, 'tcp')
-        
+
         if has_wlan and has_tcp:
             process_tcp(packet)
         elif has_wlan:
             process_wlan(packet)
     
-        #todo implement post process for machine learning features
+    #todo implement post process for machine learning features
+
+    packets.close()
+    
     
 # ================================================================    
 
