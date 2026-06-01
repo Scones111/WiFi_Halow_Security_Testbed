@@ -2,7 +2,7 @@ from scapy.all import wrpcap
 import time
 import attackerDevice.attack.appMessages as appMessages
 from attackerDevice.attack.attackLogGenerator import EventHandler
-import attackerDevice.attack.setupEvilTwin as setupEvilTwin
+import attackerDevice.attack.attacks.setupEvilTwin as setupEvilTwin
 import attackerDevice.attack.attacks.evilTwin as evilTwin
 
 

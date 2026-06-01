@@ -1,6 +1,6 @@
 # code to run the evil twin attack
 import frames
-from attackLogGenerator import EventHandler
+from attackerDevice.attack.attackLogGenerator import EventHandler
 from SDRtransmitTCP import transmitData
 
 def transmit_frame_deauth(log:EventHandler):

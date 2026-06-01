@@ -41,21 +41,21 @@ def write_to_attacklog(row):
     with open(ATTACK_LOG, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys())
 
-    # Write header only if file is new
-    if not os.path.exists(os.path.join(FILE_DEST, ATTACK_LOG)):
-        writer.writeheader()
+        # Write header only if file is new
+        if not os.path.exists(os.path.join(FILE_DEST, ATTACK_LOG)):
+            writer.writeheader()
 
-    writer.writerow(row)
+        writer.writerow(row)
 
 def write_to_tcp_log(row):
     with open(TCP_LOG, "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys())
 
-    # Write header only if file is new
-    if not os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
-        writer.writeheader()
+        # Write header only if file is new
+        if not os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
+            writer.writeheader()
 
-    writer.writerow(row)
+        writer.writerow(row)
 
 def turn_hex_to_string(hex:str):
     hex = hex.replace(':','')

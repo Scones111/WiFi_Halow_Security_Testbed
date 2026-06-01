@@ -309,7 +309,8 @@ def process_wlan(packet:Packet):
         handle_association_resp(event)
 
     if store_packet_to_log:
-        utils.write_to_attacklog(event)
+        print(event)
+        #utils.write_to_attacklog(event)
 
 def process_tcp(packet:Packet):
     packet_number = int(packet.frame_info.number)
@@ -361,7 +362,6 @@ def log_events(packet):
 # ================================================================    
 
 # test code
-"""
 filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
 packets = pyshark.FileCapture(
     filename,
@@ -373,4 +373,3 @@ for i in packets:
     process_wlan(i)
 
 packets.close()
-"""
