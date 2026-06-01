@@ -48,6 +48,7 @@ def cleanup() -> None:
             pass
         finally:
             wireshark = None
+            processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
 
     if client is not None:
         try:
@@ -56,8 +57,6 @@ def cleanup() -> None:
             pass
         finally:
             client = None
-
-    processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
 
     
 
