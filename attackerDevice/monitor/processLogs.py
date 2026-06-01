@@ -348,10 +348,12 @@ def process_tcp(packet:Packet):
 # implement logging https://docs.zeek.org/en/master/frameworks/logging.html
 def log_events(path_to_pcap_file,pcap_filter):
     packets = pyshark.FileCapture(path_to_pcap_file,display_filter=pcap_filter,keep_packets=False)
-    has_wlan = hasattr(packet, 'wlan')
-    has_tcp  = hasattr(packet, 'tcp')
 
     for packet in packets:
+
+        has_wlan = hasattr(packet, 'wlan')
+        has_tcp  = hasattr(packet, 'tcp')
+        
         if has_wlan and has_tcp:
             process_tcp(packet)
         elif has_wlan:
