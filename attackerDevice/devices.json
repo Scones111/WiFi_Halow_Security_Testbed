@@ -10,7 +10,7 @@
     {
       "name": "EvilTwin",
       "ip": "raspberrypi.local",
-      "mac": "AA:BB:CC:DD:EE:02",
+      "mac": "9c:04:b6:46:07:34",
       "user": "rpi5",
       "password":"halow",
       "ssh_port": 24
@@ -30,12 +30,12 @@
     {
       "name": "tcp_server",
       "ip": "10.43.33.100",
-      "mac": "AA:BB:CC:DD:EE:03"
+      "mac": "3c:22:7f:71:dc:b8"
     },
     {
       "name": "tcp_client",
       "ip": "10.43.33.150",
-      "mac": "AA:BB:CC:DD:EE:04"
+      "mac": "3c:22:7f:71:df:d6"
     }
   ]
 }
