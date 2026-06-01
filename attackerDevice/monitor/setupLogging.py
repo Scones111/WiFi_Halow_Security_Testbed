@@ -94,7 +94,7 @@ def start_monitor_device_logging(
 
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(DEFAULT_HOST, DEFAULT_USER, DEFAULT_PASSWORD, timeout=10)
+    client.connect(DEFAULT_HOST, port=22, username=DEFAULT_USER, password=DEFAULT_PASSWORD, timeout=10)
 
     print("SSH connected")
 
