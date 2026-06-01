@@ -16,7 +16,7 @@ DEFAULT_HOST = data["Monitor"][0]["ip"]
 DEFAULT_USER = data["Monitor"][0]["user"]
 DEFAULT_PASSWORD = data["Monitor"][0]["password"]
 
-DEFAULT_INTERFACE = "morse0"
+DEFAULT_INTERFACE = "mon0"
 
 client = None
 wireshark = None
