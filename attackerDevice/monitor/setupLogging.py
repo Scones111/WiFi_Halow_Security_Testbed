@@ -24,7 +24,7 @@ client = None
 wireshark = None
 
 PCAP_PATH = "monitor/pcaps"
-os.makedirs(os.path.dirname(PCAP_PATH), exist_ok=True)
+os.makedirs(PCAP_PATH, exist_ok=True)
 PCAP = "testbed_0.pcap"
 PCAP_NAME = "testbed"
 
