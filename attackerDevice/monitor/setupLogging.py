@@ -31,6 +31,7 @@ while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
     counter+=1
     PCAP = f"{PCAP_NAME}_{counter}.csv"
 
+os.makedirs(os.path.dirname(os.path.join(PCAP_PATH,PCAP)), exist_ok=True)
 
 def cleanup() -> None:
     """Close open resources without exiting the process."""
