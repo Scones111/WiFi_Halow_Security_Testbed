@@ -18,6 +18,8 @@ DEFAULT_PASSWORD = data["Monitor"][0]["password"]
 
 DEFAULT_INTERFACE = "morse0"
 
+WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
+
 client = None
 wireshark = None
 logfile = None
@@ -63,7 +65,6 @@ def cleanup() -> None:
             pass
         finally:
             client = None
-
     
 
 
@@ -106,18 +107,15 @@ def start_monitor_device_logging(
         f"-U "
         f"-s0 "
         f"-w - "
-        # went through a filtered out packets were not interested in (only look at wlan and tcp)
-        f"'(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)'" 
     )
 
     stdin, stdout, stderr = client.exec_command(command)
 
     if start_wireshark:
-        wireshark = subprocess.Popen(["wireshark", "-k", "-i", "-"], stdin=subprocess.PIPE)
+        wireshark = subprocess.Popen(["wireshark", "-k", "-i", "-","-Y",WIRESHARK_FILTER,"-w",os.path.join(PCAP_PATH, PCAP)], stdin=subprocess.PIPE)
         print("Wireshark started")
 
-    print(f"Saving packet capture to {PCAP}")
-    pcapfile = open(os.path.join(PCAP_PATH, PCAP), "wb")
+    print(f"Saving packet capture to {os.path.join(PCAP_PATH, PCAP)}")
 
     try:
         while True:
@@ -125,14 +123,12 @@ def start_monitor_device_logging(
             if not data:
                 continue
 
-            pcapfile.write(data)
-            pcapfile.flush()
-
+            print("data is being retrieved from ssh connection")
+            print(data)
             if start_wireshark and wireshark is not None:
                 wireshark.stdin.write(data)
                 wireshark.stdin.flush()
 
-            processLogs.log_events(data)
     except KeyboardInterrupt:
         print("Capture interrupted by user")
     finally:
