@@ -186,10 +186,12 @@ def post_processing(filename):
 # ================================================================
 # Code for logging the information during execution
 
+deauth_no = 0
 def deauth_counter():
     global deauth_no 
     deauth_no += 1
     return deauth_no
+
 
 def handle_authentication_req(event):
     if event["bssid"] == EVIL_TWIN:
@@ -246,9 +248,8 @@ def process_wlan(packet:Packet):
     src = getattr(wlan,'sa',None)
     dst = getattr(wlan,'da',None)
     bssid = getattr(wlan,'bssid',None)
-
-    fc_type = int(wlan.fc_type)
-    fc_subtype = int(wlan.fc_subtype)
+    fc_type = int(wlan.fc_tree.type)
+    fc_subtype = int(wlan.fc_tree.subtype)
     mgt = None
     ssid = None
     status = None
@@ -283,12 +284,14 @@ def process_wlan(packet:Packet):
     # Filter out packet frames not relevant to attack
     store_packet_to_log = False
     
-
-    if frameTypes[fc_type][fc_subtype] == "Deauthentication" and packet==KNOWN_ATTACK_FRAMES:
+    if frameTypes[fc_type][fc_subtype] == "Deauthentication":
         store_packet_to_log = True
-        # todo implement the other log for post processing,
-        # maybe we can set up a connection between the attacker and the monitor device
-        # allow for remote executing of this script
+        if packet.frame_raw.value[int(packet.radiotap.length)*2:] == KNOWN_ATTACK_FRAMES.hex():
+            event["attack_type"] = "Deauthentication Attack"
+            event["details"] = f"Deauthentication frame number {deauth_counter()} sent by attacker"
+        else:
+            event["details"] = "Legitimate Deauthentication frame not sent by attacker"
+
         deauth_counter()
 
     elif frameTypes[fc_type][fc_subtype] == "Authentication":
@@ -319,8 +322,8 @@ def process_tcp(packet:Packet):
     src = getattr(wlan,'sa',None)
     dst = getattr(wlan,'da',None)
     bssid = getattr(wlan,'bssid',None)
-    fc_type = int(wlan.fc_type)
-    fc_subtype = int(wlan.fc_subtype)
+    fc_type = int(wlan.fc_tree.type)
+    fc_subtype = int(wlan.fc_tree.subtype)
 
 
     event = {
@@ -367,25 +370,27 @@ def log_events(path_to_pcap_file,pcap_filter):
 # ================================================================    
 
 # test code
-
 """
-filename = Path(__file__).resolve().parent / "pcaps/testbed_0.pcap"
-print(filename)
+print(KNOWN_ATTACK_FRAMES)
+print(' '.join('{:02x}'.format(x) for x in KNOWN_ATTACK_FRAMES))
+filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
+
 packets = pyshark.FileCapture(
     filename,
-    display_filter="(wlan or tcp) and not (arp or stp or rldp or mdns or udp or icmpv6 or igmp or ipv6)",
+    use_json=True,
+    include_raw=True,
+    display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6",
     keep_packets=False
 )
-
 
 for packet in packets:
     has_wlan = hasattr(packet, 'wlan')
     has_tcp  = hasattr(packet, 'tcp')
+
     if has_wlan and has_tcp:
         process_tcp(packet)
     elif has_wlan:
         process_wlan(packet)
-    
 
 packets.close()
 """
