@@ -71,15 +71,21 @@ def register_signal_handlers() -> None:
     signal.signal(signal.SIGTERM, _cleanup_and_exit)
 
 
-def start_monitor_device_logging(
-    start_wireshark: bool = True,
-    register_signals: bool = True,
-) -> str:
+def start_monitor_device_logging():
     
+
+    print("starting monitor device logging")
+    print("exit with Ctrl+C")
+
+    stop = os.system(f"ssh {DEFAULT_USER}@{DEFAULT_HOST} tcpdump -i {DEFAULT_INTERFACE} -U -s0 -w - | wireshark -k -i - -Y \"{WIRESHARK_FILTER}\" -w {os.path.join(PCAP_PATH, PCAP)}")
+
+    if stop == 2:
+        processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
     """
     Start packet capture from the monitor device and save to a pcap file.
 
     Returns the actual pcap file path used.
+    """
     """
     global client, wireshark
 
@@ -124,3 +130,4 @@ def start_monitor_device_logging(
         print("Capture interrupted by user")
     finally:
         cleanup()
+"""

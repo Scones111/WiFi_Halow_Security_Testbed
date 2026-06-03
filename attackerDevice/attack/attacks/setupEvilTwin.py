@@ -5,7 +5,7 @@ import time
 with open("devices.json", "r") as file:
     data = json.load(file)
 
-# SSH Configuration
+# SSH Configuration for evil twin
 HOST = data["EvilTwin"][0]["ip"]
 USER = data["EvilTwin"][0]["user"]
 PASSWORD = data["EvilTwin"][0]["password"]

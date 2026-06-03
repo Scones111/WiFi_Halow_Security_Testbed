@@ -6,9 +6,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.abspath(os.path.join(script_dir, '..', '..'))
 sys.path.insert(0, project_root)
 
-
 from datetime import datetime, timezone
-import time
 from pathlib import Path
 import pyshark
 from pyshark.packet.packet import Packet
@@ -153,7 +151,7 @@ def packet_extract(packet,layers:tuple):
 
     return final_extract
 
-def post_processing(packets):
+def MLLog_processing(packets):
     # load required devices
     # normal traffic = 0, malicious traffic = 1
     # can also use a string to clasify the data
@@ -168,8 +166,6 @@ def post_processing(packets):
         #reset label to 0, for normal traffic
         label = 0
 
-        fc_type = int(packet.wlan.fc_tree.type)
-        fc_subtype = int(packet.wlan.fc_tree.subtype)
         features.loc[i,"packet_number"] = i
 
         if hasattr(packet.wlan,"bssid"):
@@ -326,7 +322,7 @@ def log_events(path_to_pcap_file,pcap_filter):
     
     #todo implement post process for machine learning features
 
-    post_processing(packets)
+    MLLog_processing(packets)
 
     packets.close()
     
