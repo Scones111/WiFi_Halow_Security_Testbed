@@ -35,6 +35,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
+#include "esp_system.h"
+#include "esp_timer.h"
+#include "esp_heap_caps.h"
 
 
 #include <sys/socket.h>
@@ -43,6 +46,49 @@
 
 
 static const char *TAG = "TCP_SERVER";
+volatile uint32_t tcp_disconnect_count = 0;
+
+static float get_cpu_usage_percent(void)
+{
+    static uint32_t prev_total_run_time = 0;
+    static uint32_t prev_idle_run_time = 0;
+
+    uint32_t ulTotalRunTime;
+    UBaseType_t uxArraySize = uxTaskGetNumberOfTasks();
+    TaskStatus_t *pxTaskStatusArray = malloc(uxArraySize * sizeof(TaskStatus_t));
+    float cpu_used_percent = 0.0f;
+
+    if (pxTaskStatusArray != NULL) {
+        uxArraySize = uxTaskGetSystemState(pxTaskStatusArray, uxArraySize, &ulTotalRunTime);
+        uint32_t actual_total_time = 0;
+        uint32_t idle_run_time = 0;
+        for (UBaseType_t x = 0; x < uxArraySize; x++) {
+            actual_total_time += pxTaskStatusArray[x].ulRunTimeCounter;
+            if (strncmp(pxTaskStatusArray[x].pcTaskName, "IDLE", 4) == 0) {
+                idle_run_time += pxTaskStatusArray[x].ulRunTimeCounter;
+            }
+        }
+        free(pxTaskStatusArray);
+
+        if (prev_total_run_time != 0 && actual_total_time > prev_total_run_time) {
+            uint32_t total_delta = actual_total_time - prev_total_run_time;
+            uint32_t idle_delta = idle_run_time - prev_idle_run_time;
+
+            if (total_delta > 0) {
+                cpu_used_percent = 100.0f - ((float)idle_delta / total_delta) * 100.0f;
+            }
+        }
+        
+        prev_total_run_time = actual_total_time;
+        prev_idle_run_time = idle_run_time;
+    }
+    
+    if (cpu_used_percent < 0.0f) cpu_used_percent = 0.0f;
+    if (cpu_used_percent > 100.0f) cpu_used_percent = 100.0f;
+
+    return cpu_used_percent;
+}
+
 
 static void tcp_server_task(void *pvParameters)
 {
@@ -59,6 +105,7 @@ static void tcp_server_task(void *pvParameters)
 
     ESP_LOGI(TAG, "Wi-Fi connected → Starting TCP Server on port 5001");
 
+    int client_sock = -1;
     int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
     if (listen_sock < 0) {
         ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
@@ -82,16 +129,25 @@ static void tcp_server_task(void *pvParameters)
         goto cleanup;
     }
 
+
     while (1) {
         struct sockaddr_storage client_addr;
         socklen_t addr_len = sizeof(client_addr);
-        int client_sock = accept(listen_sock, (struct sockaddr *)&client_addr, &addr_len);
+        client_sock = accept(listen_sock, (struct sockaddr *)&client_addr, &addr_len);
 
         if (client_sock < 0) {
             ESP_LOGE(TAG, "Accept failed: errno %d", errno);
+            vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
         }
 
+        int timeout_count = 0;
+
+        struct timeval timeout;
+        timeout.tv_sec = 3;
+        timeout.tv_usec = 0;
+        setsockopt(client_sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+        setsockopt(client_sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
 
         char addr_str[32];
         inet_ntoa_r(((struct sockaddr_in *)&client_addr)->sin_addr, addr_str, sizeof(addr_str));
@@ -100,32 +156,57 @@ static void tcp_server_task(void *pvParameters)
         while (1) {
 
             if(mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED){
-                ESP_LOGI(TAG, "Wi-Fi disconnected, closing client socket");
-                goto cleanup;
+                ESP_LOGI(TAG, "Wi-Fi disconnected, dropping client to wait for reconnect");
+                break;
             }
             char rx_buffer[512];
 
             int len = recv(client_sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
 
             if (len < 0) {
+                if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    timeout_count++;
+                    if (timeout_count >= 3) {
+                        ESP_LOGW(TAG, "Client timeout (9 seconds), dropping connection");
+                        break;
+                    }
+                    continue; // Timeout, loop back to check Wi-Fi state
+                }
                 ESP_LOGE(TAG, "recv failed: errno %d", errno);
                 break;
             } else if (len == 0) {
                 ESP_LOGI(TAG, "Client disconnected");
                 break;
             } else {
+                timeout_count = 0; // reset timeout counter on successful read
                 rx_buffer[len] = '\0';
                 ESP_LOGI(TAG, "Received %d bytes: %s", len, rx_buffer);
                 
                 // Echo back
                 send(client_sock, "OK\n", 3, 0);
+
+                int64_t end_time = esp_timer_get_time();
+                uint32_t free_heap = esp_get_free_heap_size();
+                uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
+                float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
+                float cpu_used_percent = get_cpu_usage_percent();
+                
+                uint32_t tcp_disconnects = tcp_disconnect_count;
+
+                ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
+                         end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
             }
         }
 
         close(client_sock);
+        client_sock = -1;
         ESP_LOGI(TAG, "Client disconnected");
+        tcp_disconnect_count++;
     }
 cleanup:
+    if (client_sock >= 0) {
+        close(client_sock);
+    }
     close(listen_sock);
     vTaskDelete(NULL);
 }

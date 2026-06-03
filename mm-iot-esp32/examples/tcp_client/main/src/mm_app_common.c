@@ -20,6 +20,7 @@
 /** Binary semaphore used to start user_main() once the link comes up. */
 static struct mmosal_semb *link_established = NULL;
 
+
 /**
  * WLAN station status callback, invoked when WLAN STA state changes.
  *
@@ -27,16 +28,15 @@ static struct mmosal_semb *link_established = NULL;
  */
 static void sta_status_callback(enum mmwlan_sta_state sta_state)
 {
+    /* Log current state */
     switch (sta_state)
     {
     case MMWLAN_STA_DISABLED:
         printf("WLAN STA disabled\n");
         break;
-
     case MMWLAN_STA_CONNECTING:
         printf("WLAN STA connecting\n");
         break;
-
     case MMWLAN_STA_CONNECTED:
         printf("WLAN STA connected\n");
         break;

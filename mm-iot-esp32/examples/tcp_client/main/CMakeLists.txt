@@ -10,4 +10,4 @@ set(inc
 
 idf_component_register(SRCS ${src}
                        INCLUDE_DIRS ${inc}
-                       PRIV_REQUIRES driver morselib mm_shims mmipal mmiperf lwip esp_adc)
+                       PRIV_REQUIRES driver morselib mm_shims mmipal mmiperf lwip esp_adc esp_timer)

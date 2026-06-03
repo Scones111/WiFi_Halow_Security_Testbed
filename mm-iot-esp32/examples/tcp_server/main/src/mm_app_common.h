@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <stdint.h>
+
 /**
  * @file
  * Morse Micro application helper routines for initializing/de-initializing the Wireless LAN
