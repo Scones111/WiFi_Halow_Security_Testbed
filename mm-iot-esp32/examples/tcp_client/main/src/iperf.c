@@ -29,6 +29,9 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
+#include "esp_system.h"
+#include "esp_timer.h"
+#include "esp_heap_caps.h"
 
 #include "mm_app_common.h"
 #include "mmwlan.h"                    // Morse Micro
@@ -44,7 +47,50 @@
 #include "esp_adc/adc_cali_scheme.h"
 
 static const char *TAG = "TCP_CLIENT";
+volatile uint32_t tcp_disconnect_count = 0;
 static const char *TAG_TEMP = "TEMP_SENSOR";
+
+static float get_cpu_usage_percent(void)
+{
+    static uint32_t prev_total_run_time = 0;
+    static uint32_t prev_idle_run_time = 0;
+
+    uint32_t ulTotalRunTime;
+    UBaseType_t uxArraySize = uxTaskGetNumberOfTasks();
+    TaskStatus_t *pxTaskStatusArray = malloc(uxArraySize * sizeof(TaskStatus_t));
+    float cpu_used_percent = 0.0f;
+
+    if (pxTaskStatusArray != NULL) {
+        uxArraySize = uxTaskGetSystemState(pxTaskStatusArray, uxArraySize, &ulTotalRunTime);
+        uint32_t actual_total_time = 0;
+        uint32_t idle_run_time = 0;
+        for (UBaseType_t x = 0; x < uxArraySize; x++) {
+            actual_total_time += pxTaskStatusArray[x].ulRunTimeCounter;
+            // ESP32 has IDLE0 and IDLE1 for both cores
+            if (strncmp(pxTaskStatusArray[x].pcTaskName, "IDLE", 4) == 0) {
+                idle_run_time += pxTaskStatusArray[x].ulRunTimeCounter;
+            }
+        }
+        free(pxTaskStatusArray);
+
+        if (prev_total_run_time != 0 && actual_total_time > prev_total_run_time) {
+            uint32_t total_delta = actual_total_time - prev_total_run_time;
+            uint32_t idle_delta = idle_run_time - prev_idle_run_time;
+
+            if (total_delta > 0) {
+                cpu_used_percent = 100.0f - ((float)idle_delta / total_delta) * 100.0f;
+            }
+        }
+        
+        prev_total_run_time = actual_total_time;
+        prev_idle_run_time = idle_run_time;
+    }
+    
+    if (cpu_used_percent < 0.0f) cpu_used_percent = 0.0f;
+    if (cpu_used_percent > 100.0f) cpu_used_percent = 100.0f;
+
+    return cpu_used_percent;
+}
 
 #define ADC_UNIT        ADC_UNIT_1
 #define ADC_CHANNEL     ADC_CHANNEL_5 // Changed from ADC_CHANNEL_0 (GPIO1) to ADC_CHANNEL_5 (GPIO6) to avoid pin conflict with Morse Micro chip
@@ -110,6 +156,7 @@ static void tcp_client_task(void *pvParameters)
     ESP_LOGI(TAG, "ADC Initialized. Starting TCP Client loop...");
 
     // TCP reconnect loop
+    bool first_connect = true;
     while (1) {
         int sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
         if (sock < 0) {
@@ -117,6 +164,12 @@ static void tcp_client_task(void *pvParameters)
             vTaskDelay(pdMS_TO_TICKS(1000));
             continue;
         }
+
+        struct timeval timeout;
+        timeout.tv_sec = 3;
+        timeout.tv_usec = 0;
+        setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
+        setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
 
         struct sockaddr_in dest_addr;
         dest_addr.sin_family = AF_INET;
@@ -133,9 +186,15 @@ static void tcp_client_task(void *pvParameters)
         }
 
         ESP_LOGI(TAG, "Successfully connected to server!");
+        
+        if (!first_connect) {
+            tcp_disconnect_count++;
+        }
+        first_connect = false;
 
-        // Send and receive loop
+        // Start measurement loop
         while (1) {
+            // Measure temperaturew;
             int adc_raw;
             int voltage = 0;
             float temperature = 0.0;
@@ -169,13 +228,31 @@ static void tcp_client_task(void *pvParameters)
             // Receive response
             char rx_buffer[512];
             int len = recv(sock, rx_buffer, sizeof(rx_buffer) - 1, 0);
-            if (len <= 0) {
+            if (len < 0) {
+                if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    ESP_LOGE(TAG, "Server receive timeout");
+                } else {
+                    ESP_LOGE(TAG, "recv failed: errno %d", errno);
+                }
+                break; // Break inner loop to trigger reconnect
+            } else if (len == 0) {
                 ESP_LOGI(TAG, "Server disconnected");
                 break; // Break inner loop to trigger reconnect
             }
 
             rx_buffer[len] = '\0';
             ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
+
+            int64_t end_time = esp_timer_get_time();
+            uint32_t free_heap = esp_get_free_heap_size();
+            uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
+            float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
+            float cpu_used_percent = get_cpu_usage_percent();
+            
+            uint32_t tcp_disconnects = tcp_disconnect_count;
+
+            ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
+                     end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
 
             vTaskDelay(pdMS_TO_TICKS(2000));   // Read and send every 2 seconds
         }
