@@ -4,7 +4,7 @@ def print_intro():
 ATTACKER DEVICE
 ========================================================================
 This script was created as a part of a master thesis project to generate 
-frames for testing and evaluation of WiFi HaLow networks.
+attacks for testing and evaluation of WiFi HaLow networks.
 
 The script is designed to generate frames and allowing for saving them 
 to a pcap file or transmitting them directly to GNU Radio for over-the-air 

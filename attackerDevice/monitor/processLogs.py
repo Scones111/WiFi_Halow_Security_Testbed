@@ -14,8 +14,8 @@ import pyshark
 from pyshark.packet.packet import Packet
 import pandas as pd
 import attackerDevice.utils as utils
-from attackerDevice.attack.frames import *
-
+import attackerDevice.attack.frames.generateAllFrames as generateAllFrames
+import attackerDevice.monitor.events as events
 
 #Load MAC address of the known devices
 TRUSTED_AP = utils.get_mac("TrustedAP")[0]
@@ -24,7 +24,7 @@ STA = utils.get_mac("STA")
 
 # Use this to be used to compare and log the known attack frame we are transmitting
 # allows for filtering out other similar frames easily
-KNOWN_ATTACK_FRAMES =  deauth_frame("FF:FF:FF:FF:FF:FF")
+KNOWN_ATTACK_FRAMES =  generateAllFrames.retrieve_all_attack_frames()
 
 #initialize columns to be used:
 
@@ -57,16 +57,16 @@ feat_map = {
     "frame_len": ("frame_info", "len"),
     "radiotap_length": ("radiotap", "length"),
     "radiotap_dbm_antsignal": ("radiotap", "dbm_antsignal"),
-    "radiotap_channel_freq": ("radiotap", "channel_freq"),
+    "radiotap_channel_freq": ("radiotap", "channel.freq"),
     "wlan_duration": ("wlan", "duration"),
-    "wlan_fc_type": ("wlan", "fc_type"),
-    "wlan_fc_subtype": ("wlan", "fc_subtype"),
-    "wlan_fc_ds": ("wlan", "fc_ds"),
-    "wlan_fc_frag": ("wlan", "fc_frag"),
-    "wlan_fc_retry": ("wlan", "fc_retry"),
-    "wlan_fc_pwrmgt": ("wlan", "fc_pwrmgt"),
-    "wlan_fc_moredata": ("wlan", "fc_moredata"),
-    "wlan_fc_protected": ("wlan", "fc_protected"),
+    "wlan_fc_type": ("wlan", "fc_tree", "type"),
+    "wlan_fc_subtype": ("wlan", "fc_tree", "subtype"),
+    "wlan_fc_ds": ("wlan", "fc_tree", "flags_tree", "tods"),
+    "wlan_fc_frag": ("wlan", "fc_tree", "flags_tree", "frag"),
+    "wlan_fc_retry": ("wlan", "fc_tree", "flags_tree", "retry"),
+    "wlan_fc_pwrmgt": ("wlan", "fc_tree", "flags_tree", "pwrmgt"),
+    "wlan_fc_moredata": ("wlan", "fc_tree", "flags_tree", "moredata"),
+    "wlan_fc_protected": ("wlan", "fc_tree", "flags_tree", "protected"),
 }
 # ================================================================
 # Provided the types from specification of the MAC and PHY as according to ieee802.11
@@ -131,27 +131,30 @@ frameTypes = {
 
 # ================================================================
 # Post processing, for machine learning according to AWID3 paper
+# intended for extracting features and assigning labels for machine learning
 
 #function to load attributes
-def packet_extract(packet,layer,field):
-    if hasattr(packet, layer):
-        layer_extract = getattr(packet,layer)
-        if hasattr(layer_extract,field):
-            return getattr(layer_extract,field) 
+def packet_extract(packet,layers:tuple):
     
-    return None
+    temp_extract = None
+    final_extract = None
 
-def post_processing(filename):
+    if hasattr(packet, layers[0]):
+        temp_extract = getattr(packet, layers[0], None)
+        final_extract = temp_extract
+
+    for layer in layers[1:]:
+        if temp_extract is not None and hasattr(temp_extract, layer):
+            temp_extract = getattr(temp_extract, layer)
+            final_extract = temp_extract
+        else:
+            final_extract = None
+            break
+
+    return final_extract
+
+def post_processing(packets):
     # load required devices
-    maliciousAP=utils.load_json()["EvilTwin"][0]['mac']
-    
-    # load attack log Used for categorizing:
-    attack_start = None
-    attack_end = None
-
-    # Load captured pcap
-    packets = pyshark.FileCapture(filename)
-
     # normal traffic = 0, malicious traffic = 1
     # can also use a string to clasify the data
     label=0
@@ -164,27 +167,34 @@ def post_processing(filename):
     for packet in packets:
         #reset label to 0, for normal traffic
         label = 0
-        time_stamp = float(packet.sniff_timestamp)
 
+        fc_type = int(packet.wlan.fc_tree.type)
+        fc_subtype = int(packet.wlan.fc_tree.subtype)
         features.loc[i,"packet_number"] = i
 
         if hasattr(packet.wlan,"bssid"):
-            if packet.wlan.bssid == maliciousAP:
+            if packet.wlan.bssid == EVIL_TWIN:
                 label = 1
         elif hasattr(packet.wlan,"sa"):
-            if packet.wlan.sa == maliciousAP:
+            if packet.wlan.sa == EVIL_TWIN:
                 label = 1
+        elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in KNOWN_ATTACK_FRAMES:
+            label = 1
 
         features.loc[i,"label"] = label
 
         for feature in feat_map.keys():
-            features.loc[i,feature] = packet_extract(packet,feat_map[feature][0],feat_map[feature][1])
-        
+            features.loc[i,feature] = packet_extract(packet,feat_map[feature])
+
         i += 1
-        break
+
+    utils.write_to_ml_log(features)
+
 
 # ================================================================
-# Code for logging the information during execution
+# Code for logging the information and events from capture pcap file
+# pure attack logging, can contain information for machine learning,
+# but intended purpose is to log events and details for better overview of attacks
 
 deauth_no = 0
 def deauth_counter():
@@ -192,53 +202,6 @@ def deauth_counter():
     deauth_no += 1
     return deauth_no
 
-
-def handle_authentication_req(event):
-    if event["bssid"] == EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] = "STA is Sending association request to Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
-        event["details"] = "STA is Sending association request to Trusted AP"
-
-    return event
-
-def handle_authentication_resp(event):
-    if event["status"] == 0:
-        event["details"] = "Successful Authentication to "
-    else: 
-        event["details"] = "Unsuccessful Authentication (check status code) to "
-
-    if event["bssid"] == EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] += "Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
-        event["details"] += "Trusted AP"
-
-    return event
-
-def handle_association_req(event):
-    if event["bssid"] == EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] = "STA is Sending association request to Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
-        event["details"] = "STA is Sending association request to Trusted AP"
-
-    return event
-
-def handle_association_resp(event):
-    if event["status"] == 0:
-        event["details"] = "Successful association to "
-    else: 
-        event["details"] = "Unsuccessful association (check status code) to "
-
-    if event["bssid"] == EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] += "Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
-        event["attack_type"]
-        event["details"] += "Trusted AP"
-
-    return event
 
 def process_wlan(packet:Packet):
     packet_number = int(packet.frame_info.number)
@@ -286,30 +249,34 @@ def process_wlan(packet:Packet):
     
     if frameTypes[fc_type][fc_subtype] == "Deauthentication":
         store_packet_to_log = True
-        if packet.frame_raw.value[int(packet.radiotap.length)*2:] == KNOWN_ATTACK_FRAMES.hex():
-            event["attack_type"] = "Deauthentication Attack"
-            event["details"] = f"Deauthentication frame number {deauth_counter()} sent by attacker"
-        else:
-            event["details"] = "Legitimate Deauthentication frame not sent by attacker"
+        events.handle_deauth(event,packet,deauth_counter())
 
-        deauth_counter()
+
+    if frameTypes[fc_type][fc_subtype] == "Probe Request":
+        store_packet_to_log = True
+        events.handle_probe_req(event)
+        print(event)
+
+    elif frameTypes[fc_type][fc_subtype] == "Probe Response":
+        store_packet_to_log = True
+        events.handle_probe_resp(event)
+        print(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Authentication":
-        
         if src != bssid:
             store_packet_to_log = True
-            handle_authentication_req(event)
+            events.handle_authentication_req(event)
         elif src == bssid:
             store_packet_to_log = True
-            handle_authentication_resp(event)
+            events.handle_authentication_resp(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Association Request":
         store_packet_to_log = True
-        handle_association_req(event)
+        events.handle_association_req(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Association Response":
         store_packet_to_log = True
-        handle_association_resp(event)
+        events.handle_association_resp(event)
 
     if store_packet_to_log:
         utils.write_to_attacklog(event)
@@ -338,12 +305,7 @@ def process_tcp(packet:Packet):
         "details":None,
     }
     
-    if bssid == EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] = "Transmitting data using Evil Twin AP"
-    elif bssid == TRUSTED_AP:
-        event["attack_type"]
-        event["details"] = "Transmitting data using Trusted AP"
+    events.handle_tcp(event)
 
     utils.write_to_tcp_log(event)
 
@@ -364,6 +326,8 @@ def log_events(path_to_pcap_file,pcap_filter):
     
     #todo implement post process for machine learning features
 
+    post_processing(packets)
+
     packets.close()
     
     
@@ -371,9 +335,7 @@ def log_events(path_to_pcap_file,pcap_filter):
 
 # test code
 """
-print(KNOWN_ATTACK_FRAMES)
-print(' '.join('{:02x}'.format(x) for x in KNOWN_ATTACK_FRAMES))
-filename = Path(__file__).resolve().parent / "SuccessfulDeauthenticationAttack.pcap"
+filename = Path(__file__).resolve().parent / "testbed_2.pcap"
 
 packets = pyshark.FileCapture(
     filename,
@@ -383,14 +345,7 @@ packets = pyshark.FileCapture(
     keep_packets=False
 )
 
-for packet in packets:
-    has_wlan = hasattr(packet, 'wlan')
-    has_tcp  = hasattr(packet, 'tcp')
-
-    if has_wlan and has_tcp:
-        process_tcp(packet)
-    elif has_wlan:
-        process_wlan(packet)
+post_processing(packets)
 
 packets.close()
 """

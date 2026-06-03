@@ -2,10 +2,14 @@ import json
 from pathlib import Path
 import csv
 import os
+import pandas as pd
+#import attackerDevice.attack.frames as frames
+#from attackerDevice.attack.frames.deauth import deauth_frame
 
-
+#get device file path
 DEVICE_FILE = "devices.json"
 
+# create log files
 FILE_DEST = "monitor/logs"
 os.makedirs(FILE_DEST, exist_ok=True)
 
@@ -25,6 +29,14 @@ while os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
     counter+=1
     TCP_LOG = f"{TCP_LOG_NAME}_{counter}.csv"
 
+#create machine learning log file
+ML_FILE_DEST = "monitor/MLLogs"
+ML_LOG = "MLLog_0.csv"
+ML_LOG_NAME = "MLLog"
+os.makedirs(ML_FILE_DEST, exist_ok=True)
+while os.path.exists(os.path.join(ML_FILE_DEST, ML_LOG)):
+    counter += 1
+    ML_LOG = f"{ML_LOG_NAME}_{counter}.csv"
 
 def load_json():
     with open(DEVICE_FILE, "r") as f:
@@ -64,3 +76,5 @@ def turn_hex_to_string(hex:str):
     hex_bytes = bytes.fromhex(hex)
     return hex_bytes.decode('utf-8', errors='replace')
 
+def write_to_ml_log(features:pd.DataFrame):
+    features.to_csv(os.path.join(ML_FILE_DEST, ML_LOG), mode='a', header=not os.path.exists(os.path.join(ML_FILE_DEST, ML_LOG)), index=False)

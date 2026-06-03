@@ -49,7 +49,7 @@ def cleanup() -> None:
         finally:
             wireshark = None
             processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
-
+            
     if client is not None:
         try:
             client.close()

