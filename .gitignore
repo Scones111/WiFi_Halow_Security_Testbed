@@ -1,4 +1,6 @@
 .vscode/
+.DS_Store
+.venv
 attackerDevice/monitor/logs/*
 attackerDevice/monitor/pcaps/*
 __pycache__/
