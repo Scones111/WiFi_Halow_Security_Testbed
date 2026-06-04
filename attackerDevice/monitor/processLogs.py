@@ -167,7 +167,15 @@ def packet_extract(packet,field):
     
     return final_extract
 
-def MLLog_processing(packets):
+def MLLog_processing(pcap, pcap_filter=None):
+    packets = pyshark.LiveCapture(
+        pcap,
+        display_filter=pcap_filter,
+        keep_packets=False,
+        use_json=True,
+        include_raw=True,
+    )
+
     # normal traffic = 0, malicious traffic = 1
     label=0
 

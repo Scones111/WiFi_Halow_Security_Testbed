@@ -97,5 +97,5 @@ def start_monitor_device_logging():
             wgui.stdin.write(packets)
             wgui.stdin.flush()
 
-            processLogs.log_events(packets)
-            processLogs.MLLog_processing(packets)
+            processLogs.log_events(packets,WIRESHARK_FILTER)
+            processLogs.MLLog_processing(packets,WIRESHARK_FILTER)
