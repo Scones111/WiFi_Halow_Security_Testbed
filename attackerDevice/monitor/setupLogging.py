@@ -34,7 +34,6 @@ while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
     PCAP = f"{PCAP_NAME}_{counter}.pcap"
 
 
-
 def cleanup() -> None:
     """Close open resources without exiting the process."""
     global client, wireshark
@@ -58,9 +57,6 @@ def cleanup() -> None:
         finally:
             client = None
 
-    
-
-
 def _cleanup_and_exit(*args) -> None:
     cleanup()
     sys.exit(0)
@@ -72,35 +68,15 @@ def register_signal_handlers() -> None:
 
 
 def start_monitor_device_logging():
-    
-
-    print("starting monitor device logging")
-    print("exit with Ctrl+C")
-
-    stop = os.system(f"ssh {DEFAULT_USER}@{DEFAULT_HOST} tcpdump -i {DEFAULT_INTERFACE} -U -s0 -w - | wireshark -k -i - -Y \"{WIRESHARK_FILTER}\" -w {os.path.join(PCAP_PATH, PCAP)}")
-
-    if stop == 2:
-        processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
-    """
-    Start packet capture from the monitor device and save to a pcap file.
-
-    Returns the actual pcap file path used.
-    """
-    """
-    global client, wireshark
-
-    if register_signals:
-        register_signal_handlers()
-
     print("Starting SSH connection to", DEFAULT_HOST)
 
-    client = paramiko.SSHClient()
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(DEFAULT_HOST, port=22, username=DEFAULT_USER, password=DEFAULT_PASSWORD, timeout=10)
+    shh = paramiko.SSHClient()
+    shh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    shh.connect(DEFAULT_HOST, port=22, username=DEFAULT_USER, password=DEFAULT_PASSWORD, timeout=10)
 
     print("SSH connected")
 
-    command = (
+    tcpdump_command = (
         f"tcpdump "
         f"-i {DEFAULT_INTERFACE} "
         f"-U "
@@ -108,26 +84,18 @@ def start_monitor_device_logging():
         f"-w - "
     )
 
-    stdin, stdout, stderr = client.exec_command(command)
+    _, stdout, _ = shh.exec_command(tcpdump_command)
 
-    if start_wireshark:
-        wireshark = subprocess.Popen(["wireshark", "-k", "-i", "-","-Y",WIRESHARK_FILTER,"-w",os.path.join(PCAP_PATH, PCAP)], stdin=subprocess.PIPE)
-        print("Wireshark started")
+    wgui = subprocess.Popen(["wireshark", "-k", "-i", "-","-Y",WIRESHARK_FILTER,"-w",os.path.join(PCAP_PATH, PCAP)], stdin=subprocess.PIPE)
 
     print(f"Saving packet capture to {os.path.join(PCAP_PATH, PCAP)}")
 
-    try:
-        while True:
-            data = stdout.channel.recv(4096)
-            if not data:
-                continue
+    while True:
+        packets = stdout.channel.recv(4096)
+         
+        if packets is not None:
+            wgui.stdin.write(packets)
+            wgui.stdin.flush()
 
-            if start_wireshark and wireshark is not None:
-                wireshark.stdin.write(data)
-                wireshark.stdin.flush()
-
-    except KeyboardInterrupt:
-        print("Capture interrupted by user")
-    finally:
-        cleanup()
-"""
+            processLogs.log_events(packets)
+            processLogs.MLLog_processing(packets)

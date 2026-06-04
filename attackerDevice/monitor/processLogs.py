@@ -25,46 +25,53 @@ STA = utils.get_mac("STA")
 KNOWN_ATTACK_FRAMES =  generateAllFrames.retrieve_all_attack_frames()
 
 #initialize columns to be used:
-
-
 columns = [
     "packet_number", # keep track of packet number in pcap
+    "frame_name",
 
     #features according to the specification of Pick Quality Over Quantity: 
     #Expert Feature Selection and Data Preprocessing for 802.11 Intrusion Detection Systems
     #=================================================
     "frame_len",
-    "radiotap_length",
-    "radiotap_dbm_antsignal",
-    "radiotap_channel_freq",
-    "wlan_fc_type",
-    "wlan_fc_subtype",
-    "wlan_fc_ds",
-    "wlan_fc_frag",
-    "wlan_fc_retry",
-    "wlan_fc_pwrmgt",
-    "wlan_fc_moredata",
-    "wlan_fc_protected",
-    "wlan_duration",
+    "length",
+    "dbm_antsignal",
+    "channel_freq",
+    "type",
+    "subtype",
+    "ds",
+    "frag",
+    "retry",
+    "pwrmgt",
+    "moredata",
+    "protected",
+    "duration",
     #=================================================
     "label" # ground truth
 ]
 
-# Features to extract according to AWID3 evil twin and flooding falls under impersonation attacks
-feat_map = {
+frame_map = {
+    "packet_number": ("frame_info","number"),
     "frame_len": ("frame_info", "len"),
-    "radiotap_length": ("radiotap", "length"),
-    "radiotap_dbm_antsignal": ("radiotap", "dbm_antsignal"),
-    "radiotap_channel_freq": ("radiotap", "channel.freq"),
-    "wlan_duration": ("wlan", "duration"),
-    "wlan_fc_type": ("wlan", "fc_tree", "type"),
-    "wlan_fc_subtype": ("wlan", "fc_tree", "subtype"),
-    "wlan_fc_ds": ("wlan", "fc_tree", "flags_tree", "tods"),
-    "wlan_fc_frag": ("wlan", "fc_tree", "flags_tree", "frag"),
-    "wlan_fc_retry": ("wlan", "fc_tree", "flags_tree", "retry"),
-    "wlan_fc_pwrmgt": ("wlan", "fc_tree", "flags_tree", "pwrmgt"),
-    "wlan_fc_moredata": ("wlan", "fc_tree", "flags_tree", "moredata"),
-    "wlan_fc_protected": ("wlan", "fc_tree", "flags_tree", "protected"),
+    "length": ("radiotap", "length"),
+    "dbm_antsignal": ("radiotap", "dbm_antsignal"),
+    "channel_freq": ("radiotap", "channel", "freq"),
+    "timestamp": ("sniff_timestamp",),
+    "src": ("wlan", "sa"),
+    "dst": ("wlan", "da"),
+    "bssid": ("wlan", "bssid"),
+    "duration": ("wlan", "duration"),
+    "type": ("wlan", "fc_tree", "type"),
+    "subtype": ("wlan", "fc_tree", "subtype"),
+    "ds": ("wlan", "fc_tree", "flags_tree", "tods"),
+    "frag": ("wlan", "fc_tree", "flags_tree", "frag"),
+    "retry": ("wlan", "fc_tree", "flags_tree", "retry"),
+    "pwrmgt": ("wlan", "fc_tree", "flags_tree", "pwrmgt"),
+    "moredata": ("wlan", "fc_tree", "flags_tree", "moredata"),
+    "protected": ("wlan", "fc_tree", "flags_tree", "protected"),
+    "ssid_mgt": ("wlan.mgt", "tagged.all", "tag", "ssid"),
+    "ssid_ext": ("wlan_ext", "tagged.all", "tag", "ssid"),
+    "status": ("wlan.mgt", "all", "status_code"),
+    "reason": ("wlan.mgt", "all", "reason_code")
 }
 # ================================================================
 # Provided the types from specification of the MAC and PHY as according to ieee802.11
@@ -131,30 +138,37 @@ frameTypes = {
 # Post processing, for machine learning according to AWID3 paper
 # intended for extracting features and assigning labels for machine learning
 
+#iterate through tags
+def tags_extract(tags,field):
+    for tag in tags:
+        if hasattr(tag,field):
+            return getattr(tag,field).get_default_value()
+    return None
+
 #function to load attributes
-def packet_extract(packet,layers:tuple):
-    
-    temp_extract = None
+def packet_extract(packet,field):
+    temp_fields = frame_map[field]
+
+    temp_extract = packet
     final_extract = None
-
-    if hasattr(packet, layers[0]):
-        temp_extract = getattr(packet, layers[0], None)
-        final_extract = temp_extract
-
-    for layer in layers[1:]:
-        if temp_extract is not None and hasattr(temp_extract, layer):
-            temp_extract = getattr(temp_extract, layer)
+    for temp_field in temp_fields:
+        if hasattr(temp_extract,temp_field):
+            temp_extract = getattr(temp_extract, temp_field)
             final_extract = temp_extract
         else:
             final_extract = None
             break
 
+        if temp_field == "tag":
+            if isinstance(temp_extract,pyshark.packet.layers.json_layer.JsonLayer):
+                temp_extract = [temp_extract]
+            final_extract = tags_extract(temp_extract,temp_fields[-1])
+            break
+    
     return final_extract
 
 def MLLog_processing(packets):
-    # load required devices
     # normal traffic = 0, malicious traffic = 1
-    # can also use a string to clasify the data
     label=0
 
     #initialize pandas dataframe
@@ -166,7 +180,10 @@ def MLLog_processing(packets):
         #reset label to 0, for normal traffic
         label = 0
 
-        features.loc[i,"packet_number"] = i
+        features.loc[i,"packet_number"] = packet_extract(packet,"packet_number")
+        fc_type = int(packet_extract(packet,"type"))
+        fc_subtype = int(packet_extract(packet,"subtype"))
+        features.loc[i,"frame_name"] = frameTypes[fc_type][fc_subtype]
 
         if hasattr(packet.wlan,"bssid"):
             if packet.wlan.bssid == EVIL_TWIN:
@@ -179,8 +196,10 @@ def MLLog_processing(packets):
 
         features.loc[i,"label"] = label
 
-        for feature in feat_map.keys():
-            features.loc[i,feature] = packet_extract(packet,feat_map[feature])
+
+        for feature in columns:
+            if feature not in ["packet_number","frame_name","label"]:
+                features.loc[i,feature] = packet_extract(packet,feature)
 
         i += 1
 
@@ -200,30 +219,34 @@ def deauth_counter():
 
 
 def process_wlan(packet:Packet):
-    packet_number = int(packet.frame_info.number)
-    wlan = getattr(packet,"wlan",None)
-    ts = packet.sniff_timestamp
-    rf =packet.radiotap.dbm_antsignal
-    src = getattr(wlan,'sa',None)
-    dst = getattr(wlan,'da',None)
-    bssid = getattr(wlan,'bssid',None)
-    fc_type = int(wlan.fc_tree.type)
-    fc_subtype = int(wlan.fc_tree.subtype)
-    mgt = None
+    #todo change this code to use packet_extract
+    packet_number = packet_extract(packet,"packet_number")
+    ts = packet_extract(packet,"timestamp")
+    rf = packet_extract(packet,"dbm_antsignal")
+    src = packet_extract(packet,"src")
+    dst = packet_extract(packet,"dst")
+    bssid  = packet_extract(packet,"bssid")
+    fc_type = int(packet_extract(packet,"type"))
+    fc_subtype = int(packet_extract(packet,"subtype"))
+
     ssid = None
-    status = None
-    reason = None
-    if hasattr(packet,"wlan.mgt"):
-        mgt = getattr(packet,'wlan.mgt')
-        ssid = getattr(mgt,'wlan.ssid',None)
-        if ssid != "SSID: <MISSING>" and ssid is not None:
-            ssid = utils.turn_hex_to_string(ssid)
-        status = getattr(mgt,'wlan_fixed_status_code',None)
-        if status:
-            status = int(status,16)
-        reason = getattr(mgt,'wlan_fixed_status_code',None)
-        if reason:
-            reason = int(reason,16)
+
+    if frameTypes[fc_type][fc_subtype] == "S1G Beacon":
+        ssid = packet_extract(packet,"ssid_ext")
+    else:
+        ssid = packet_extract(packet,"ssid_mgt")
+
+    if ssid is not None and ssid != None:
+        ssid = utils.turn_hex_to_string(ssid)
+    
+    status = packet_extract(packet,"status")
+    if status is not None:
+        status = int(status,16)
+
+    
+    reason = packet_extract(packet,"reason")
+    if reason is not None:
+        reason = int(reason,16)
 
     event = {
         "attack_type":None,
@@ -239,7 +262,6 @@ def process_wlan(packet:Packet):
         "status":status,
         "details":None,
     }
-
     # Filter out packet frames not relevant to attack
     store_packet_to_log = False
     
@@ -247,16 +269,15 @@ def process_wlan(packet:Packet):
         store_packet_to_log = True
         events.handle_deauth(event,packet,deauth_counter())
 
-
     if frameTypes[fc_type][fc_subtype] == "Probe Request":
         store_packet_to_log = True
+        mgt = getattr(packet,'wlan.mgt')
+        ssid = getattr(mgt,'wlan.ssid',None)
         events.handle_probe_req(event)
-        print(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Probe Response":
         store_packet_to_log = True
         events.handle_probe_resp(event)
-        print(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Authentication":
         if src != bssid:
@@ -278,15 +299,15 @@ def process_wlan(packet:Packet):
         utils.write_to_attacklog(event)
 
 def process_tcp(packet:Packet):
-    packet_number = int(packet.frame_info.number)
-    wlan = getattr(packet,"wlan",None)
-    ts = packet.sniff_timestamp
-    rf = packet.radiotap.dbm_antsignal
-    src = getattr(wlan,'sa',None)
-    dst = getattr(wlan,'da',None)
-    bssid = getattr(wlan,'bssid',None)
-    fc_type = int(wlan.fc_tree.type)
-    fc_subtype = int(wlan.fc_tree.subtype)
+    #todo change this code to use packet_extract
+    packet_number = packet_extract(packet,"packet_number")
+    ts = packet_extract(packet,"timestamp")
+    rf = packet_extract(packet,"dbm_antsignal")
+    src = packet_extract(packet,"src")
+    dst = packet_extract(packet,"dst")
+    bssid  = packet_extract(packet,"bssid")
+    fc_type = int(packet_extract(packet,"type"))
+    fc_subtype = int(packet_extract(packet,"subtype"))
 
 
     event = {
@@ -307,8 +328,14 @@ def process_tcp(packet:Packet):
 
 
 # implement logging https://docs.zeek.org/en/master/frameworks/logging.html
-def log_events(path_to_pcap_file,pcap_filter):
-    packets = pyshark.FileCapture(path_to_pcap_file,display_filter=pcap_filter,keep_packets=False)
+def log_events(pcap,pcap_filter):
+    packets = pyshark.LiveCapture(
+        pcap,
+        display_filter=pcap_filter,
+        keep_packets=False,
+        use_json=True,
+        include_raw=True,
+    )
 
     for packet in packets:
 
@@ -337,11 +364,22 @@ packets = pyshark.FileCapture(
     filename,
     use_json=True,
     include_raw=True,
-    display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6",
+    display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 and !basicxid",
     keep_packets=False
 )
 
-post_processing(packets)
+for packet in packets:
+
+    has_wlan = hasattr(packet, 'wlan')
+    has_tcp  = hasattr(packet, 'tcp')
+
+    if has_wlan and has_tcp:
+        process_tcp(packet)
+    elif has_wlan:
+        process_wlan(packet)
+
+MLLog_processing(packets)
 
 packets.close()
+
 """

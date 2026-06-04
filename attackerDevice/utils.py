@@ -34,6 +34,7 @@ ML_FILE_DEST = "monitor/MLLogs"
 ML_LOG = "MLLog_0.csv"
 ML_LOG_NAME = "MLLog"
 os.makedirs(ML_FILE_DEST, exist_ok=True)
+
 while os.path.exists(os.path.join(ML_FILE_DEST, ML_LOG)):
     counter += 1
     ML_LOG = f"{ML_LOG_NAME}_{counter}.csv"
@@ -51,22 +52,26 @@ def get_mac(device_name):
     return macs
 
 def write_to_attacklog(row):
+    header = False
+    if not os.path.exists(os.path.join(FILE_DEST, ATTACK_LOG)):
+        header = True
     with open(os.path.join(FILE_DEST, ATTACK_LOG), "a", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=row.keys())
 
-        # Write header only if file is new
-        if not os.path.exists(os.path.join(FILE_DEST, ATTACK_LOG)):
+        if header:
             writer.writeheader()
 
         writer.writerow(row)
 
 def write_to_tcp_log(row):
-    with open(os.path.join(FILE_DEST, TCP_LOG), "a", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=row.keys())
+    header = False
+    if not os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
+        header = True
 
-        # Write header only if file is new
+    with open(os.path.join(FILE_DEST, TCP_LOG), "a", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=row.keys())       
         
-        if not os.path.exists(os.path.join(FILE_DEST, TCP_LOG)):
+        if header:
             writer.writeheader()
 
         writer.writerow(row)
