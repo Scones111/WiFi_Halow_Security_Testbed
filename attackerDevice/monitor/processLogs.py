@@ -167,14 +167,7 @@ def packet_extract(packet,field):
     
     return final_extract
 
-def MLLog_processing(pcap, pcap_filter=None):
-    packets = pyshark.LiveCapture(
-        pcap,
-        display_filter=pcap_filter,
-        use_json=True,
-        include_raw=True,
-    )
-
+def MLLog_processing(packets):
     # normal traffic = 0, malicious traffic = 1
     label=0
 
@@ -336,9 +329,10 @@ def process_tcp(packet:Packet):
 
 # implement logging https://docs.zeek.org/en/master/frameworks/logging.html
 def log_events(pcap,pcap_filter):
-    packets = pyshark.LiveCapture(
+    packets = pyshark.FileCapture(
         pcap,
         display_filter=pcap_filter,
+        keep_packets=False,
         use_json=True,
         include_raw=True,
     )

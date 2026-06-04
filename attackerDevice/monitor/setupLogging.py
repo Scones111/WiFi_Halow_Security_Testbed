@@ -20,8 +20,8 @@ DEFAULT_INTERFACE = "morse0"
 
 WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
 
-client = None
-wireshark = None
+ssh = None
+wgui = None
 
 PCAP_PATH = "monitor/pcaps"
 os.makedirs(PCAP_PATH, exist_ok=True)
@@ -35,27 +35,29 @@ while os.path.exists(os.path.join(PCAP_PATH, PCAP)):
 
 
 def cleanup() -> None:
-    """Close open resources without exiting the process."""
-    global client, wireshark
+    """
+    clean up subprocesses and ssh connection
+    """
+    global ssh, wgui
 
     print("Cleaning up...")
 
-    if wireshark is not None:
+    if wgui is not None:
         try:
-            wireshark.terminate()
+            wgui.terminate()
         except Exception:
             pass
         finally:
-            wireshark = None
+            wgui = None
             processLogs.log_events(os.path.join(PCAP_PATH, PCAP),WIRESHARK_FILTER)
             
-    if client is not None:
+    if ssh is not None:
         try:
-            client.close()
+            ssh.close()
         except Exception:
             pass
         finally:
-            client = None
+            ssh = None
 
 def _cleanup_and_exit(*args) -> None:
     cleanup()
@@ -67,16 +69,25 @@ def register_signal_handlers() -> None:
     signal.signal(signal.SIGTERM, _cleanup_and_exit)
 
 
-def start_monitor_device_logging():
+def start_monitor_device_logging() -> str:
+    
+    """
+    start monitor device, capture data from ssh connection and store them in a pcap.
+
+    pcap is is kept and logs are processed after logging has been performed
+    """
+    global ssh, wgui
+    register_signal_handlers()
+
     print("Starting SSH connection to", DEFAULT_HOST)
 
-    shh = paramiko.SSHClient()
-    shh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    shh.connect(DEFAULT_HOST, port=22, username=DEFAULT_USER, password=DEFAULT_PASSWORD, timeout=10)
+    ssh = paramiko.SSHClient()
+    ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    ssh.connect(DEFAULT_HOST, port=22, username=DEFAULT_USER, password=DEFAULT_PASSWORD, timeout=10)
 
     print("SSH connected")
 
-    tcpdump_command = (
+    command = (
         f"tcpdump "
         f"-i {DEFAULT_INTERFACE} "
         f"-U "
@@ -84,18 +95,22 @@ def start_monitor_device_logging():
         f"-w - "
     )
 
-    _, stdout, _ = shh.exec_command(tcpdump_command)
+    _, stdout, _ = ssh.exec_command(command)
 
     wgui = subprocess.Popen(["wireshark", "-k", "-i", "-","-Y",WIRESHARK_FILTER,"-w",os.path.join(PCAP_PATH, PCAP)], stdin=subprocess.PIPE)
+    
+    print(f"Packet stored in: {os.path.join(PCAP_PATH, PCAP)}")
 
-    print(f"Saving packet capture to {os.path.join(PCAP_PATH, PCAP)}")
+    try:
+        while True:
+            data = stdout.channel.recv(4096)
+            if not data:
+                continue
 
-    while True:
-        packets = stdout.channel.recv(4096)
-         
-        if packets is not None:
-            wgui.stdin.write(packets)
+            wgui.stdin.write(data)
             wgui.stdin.flush()
 
-            processLogs.log_events(packets,WIRESHARK_FILTER)
-            processLogs.MLLog_processing(packets,WIRESHARK_FILTER)
+    except KeyboardInterrupt:
+        print("Capture interrupted by user")
+    finally:
+        cleanup()
