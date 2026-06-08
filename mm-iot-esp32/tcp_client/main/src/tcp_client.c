@@ -46,7 +46,7 @@
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 
-#define TCP_SERVER_IP "10.51.33.100"            // ← CHANGE TO YOUR SERVER IP
+#define TCP_SERVER_IP "192.168.0.200"            // ← CHANGE TO YOUR SERVER IP
 #define CENTRALIZED_LOG_SERVER "192.168.0.101"  // ← CHANGE TO YOUR DEVICE IP
 
 static const char *TAG = "TCP_CLIENT";
@@ -93,6 +93,61 @@ static float get_cpu_usage_percent(void)
     if (cpu_used_percent > 100.0f) cpu_used_percent = 100.0f;
 
     return cpu_used_percent;
+}
+
+static void udp_metrics_task(void *pvParameters)
+{
+    // Wait until fully connected
+    while (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+
+    int udp_metrics_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    if (udp_metrics_sock < 0) {
+        ESP_LOGE(TAG, "Unable to create UDP metrics socket: errno %d", errno);
+        vTaskDelete(NULL);
+        return;
+    }
+
+    struct sockaddr_in udp_dest_addr;
+    memset(&udp_dest_addr, 0, sizeof(udp_dest_addr));
+    udp_dest_addr.sin_family = AF_INET;
+    udp_dest_addr.sin_port = htons(5005);
+    inet_pton(AF_INET, CENTRALIZED_LOG_SERVER, &udp_dest_addr.sin_addr);
+
+    ESP_LOGI(TAG, "Starting dedicated UDP metrics task to %s:5005", CENTRALIZED_LOG_SERVER);
+
+    while (1) {
+        if (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
+            vTaskDelay(pdMS_TO_TICKS(1000));
+            continue;
+        }
+
+        int64_t end_time = esp_timer_get_time();
+        uint32_t free_heap = esp_get_free_heap_size();
+        uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
+        float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
+        float cpu_used_percent = get_cpu_usage_percent();
+        uint32_t tcp_disconnects = tcp_disconnect_count;
+
+        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
+                 end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+
+        if (udp_metrics_sock >= 0) {
+            char udp_buf[256];
+            snprintf(udp_buf, sizeof(udp_buf), 
+                     "{\"device\": \"client\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
+                     end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+            int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
+            if (sent < 0) {
+                ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
+            } else {
+                ESP_LOGI(TAG, "UDP packet sent (%d bytes) to %s:5005", sent, CENTRALIZED_LOG_SERVER);
+            }
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
 }
 
 #define ADC_UNIT        ADC_UNIT_1
@@ -157,16 +212,6 @@ static void tcp_client_task(void *pvParameters)
     }
 
     ESP_LOGI(TAG, "ADC Initialized. Starting TCP Client loop...");
-
-    int udp_metrics_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
-    if (udp_metrics_sock < 0) {
-        ESP_LOGE(TAG, "Unable to create UDP metrics socket: errno %d", errno);
-    }
-    struct sockaddr_in udp_dest_addr;
-    memset(&udp_dest_addr, 0, sizeof(udp_dest_addr));
-    udp_dest_addr.sin_family = AF_INET;
-    udp_dest_addr.sin_port = htons(5005);
-    inet_pton(AF_INET, CENTRALIZED_LOG_SERVER, &udp_dest_addr.sin_addr);
 
     // TCP reconnect loop
     bool first_connect = true;
@@ -256,30 +301,6 @@ static void tcp_client_task(void *pvParameters)
             rx_buffer[len] = '\0';
             ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
 
-            int64_t end_time = esp_timer_get_time();
-            uint32_t free_heap = esp_get_free_heap_size();
-            uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
-            float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
-            float cpu_used_percent = get_cpu_usage_percent();
-            
-            uint32_t tcp_disconnects = tcp_disconnect_count;
-
-            ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
-                     end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
-
-            if (udp_metrics_sock >= 0) {
-                char udp_buf[256];
-                snprintf(udp_buf, sizeof(udp_buf), 
-                         "{\"device\": \"client\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
-                         end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
-                int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
-                if (sent < 0) {
-                    ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
-                } else {
-                    ESP_LOGI(TAG, "UDP packet sent (%d bytes) to %s:5005", sent, CENTRALIZED_LOG_SERVER);
-                }
-            }
-
             vTaskDelay(pdMS_TO_TICKS(5000));   // Read and send every 5 seconds
         }
 
@@ -301,5 +322,6 @@ void app_main(void)
     printf("Link is up, proceeding to start TCP client\n");
 
     xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
+    xTaskCreate(udp_metrics_task, "udp_metrics", 4096, NULL, 5, NULL);
 
 }

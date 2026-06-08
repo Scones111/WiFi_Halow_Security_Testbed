@@ -90,6 +90,61 @@ static float get_cpu_usage_percent(void)
     return cpu_used_percent;
 }
 
+static void udp_metrics_task(void *pvParameters)
+{
+    // Wait until fully connected
+    while (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
+        vTaskDelay(pdMS_TO_TICKS(500));
+    }
+
+    int udp_metrics_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    if (udp_metrics_sock < 0) {
+        ESP_LOGE(TAG, "Unable to create UDP metrics socket: errno %d", errno);
+        vTaskDelete(NULL);
+        return;
+    }
+
+    struct sockaddr_in udp_dest_addr;
+    memset(&udp_dest_addr, 0, sizeof(udp_dest_addr));
+    udp_dest_addr.sin_family = AF_INET;
+    udp_dest_addr.sin_port = htons(5005);
+    inet_pton(AF_INET, CENTRALIZED_LOG_SERVER, &udp_dest_addr.sin_addr);
+
+    ESP_LOGI(TAG, "Starting dedicated UDP metrics task to %s:5005", CENTRALIZED_LOG_SERVER);
+
+    while (1) {
+        if (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
+            vTaskDelay(pdMS_TO_TICKS(1000));
+            continue;
+        }
+
+        int64_t end_time = esp_timer_get_time();
+        uint32_t free_heap = esp_get_free_heap_size();
+        uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
+        float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
+        float cpu_used_percent = get_cpu_usage_percent();
+        uint32_t tcp_disconnects = tcp_disconnect_count;
+
+        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
+                 end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+
+        if (udp_metrics_sock >= 0) {
+            char udp_buf[256];
+            snprintf(udp_buf, sizeof(udp_buf), 
+                     "{\"device\": \"server\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
+                     end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+            int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
+            if (sent < 0) {
+                ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
+            } else {
+                ESP_LOGI(TAG, "UDP packet sent (%d bytes) to %s:5005", sent, CENTRALIZED_LOG_SERVER);
+            }
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(5000));
+    }
+}
+
 
 static void tcp_server_task(void *pvParameters)
 {
@@ -107,7 +162,6 @@ static void tcp_server_task(void *pvParameters)
     ESP_LOGI(TAG, "Wi-Fi connected → Starting TCP Server on port 5001");
 
     int client_sock = -1;
-    int udp_metrics_sock = -1;
     int listen_sock = socket(AF_INET, SOCK_STREAM, IPPROTO_IP);
     if (listen_sock < 0) {
         ESP_LOGE(TAG, "Unable to create socket: errno %d", errno);
@@ -130,17 +184,6 @@ static void tcp_server_task(void *pvParameters)
         ESP_LOGE(TAG, "Listen failed: errno %d", errno);
         goto cleanup;
     }
-
-
-    udp_metrics_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
-    if (udp_metrics_sock < 0) {
-        ESP_LOGE(TAG, "Unable to create UDP metrics socket: errno %d", errno);
-    }
-    struct sockaddr_in udp_dest_addr;
-    memset(&udp_dest_addr, 0, sizeof(udp_dest_addr));
-    udp_dest_addr.sin_family = AF_INET;
-    udp_dest_addr.sin_port = htons(5005);
-    inet_pton(AF_INET, CENTRALIZED_LOG_SERVER, &udp_dest_addr.sin_addr);
 
     while (1) {
         struct sockaddr_storage client_addr;
@@ -196,30 +239,6 @@ static void tcp_server_task(void *pvParameters)
                 
                 // Echo back
                 send(client_sock, "OK\n", 3, 0);
-
-                int64_t end_time = esp_timer_get_time();
-                uint32_t free_heap = esp_get_free_heap_size();
-                uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
-                float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
-                float cpu_used_percent = get_cpu_usage_percent();
-                
-                uint32_t tcp_disconnects = tcp_disconnect_count;
-
-                ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
-                         end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
-
-                if (udp_metrics_sock >= 0) {
-                    char udp_buf[256];
-                    snprintf(udp_buf, sizeof(udp_buf), 
-                             "{\"device\": \"server\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
-                             end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
-                    int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
-                    if (sent < 0) {
-                        ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
-                    } else {
-                        ESP_LOGI(TAG, "UDP packet sent (%d bytes) to %s:5005", sent, CENTRALIZED_LOG_SERVER);
-                    }
-                }
             }
         }
 
@@ -231,9 +250,6 @@ static void tcp_server_task(void *pvParameters)
 cleanup:
     if (client_sock >= 0) {
         close(client_sock);
-    }
-    if (udp_metrics_sock >= 0) {
-        close(udp_metrics_sock);
     }
     close(listen_sock);
     vTaskDelete(NULL);
@@ -250,4 +266,5 @@ void app_main(void)
     mmwlan_set_power_save_mode(MMWLAN_PS_DISABLED);
 
     xTaskCreate(tcp_server_task, "tcp_srv", 8192, NULL, 5, NULL);
+    xTaskCreate(udp_metrics_task, "udp_metrics", 4096, NULL, 5, NULL);
 }
