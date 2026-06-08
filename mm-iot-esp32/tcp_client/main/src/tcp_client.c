@@ -46,6 +46,9 @@
 #include "esp_adc/adc_cali.h"
 #include "esp_adc/adc_cali_scheme.h"
 
+#define TCP_SERVER_IP "10.51.33.100"            // ← CHANGE TO YOUR SERVER IP
+#define CENTRALIZED_LOG_SERVER "192.168.0.101"  // ← CHANGE TO YOUR DEVICE IP
+
 static const char *TAG = "TCP_CLIENT";
 volatile uint32_t tcp_disconnect_count = 0;
 static const char *TAG_TEMP = "TEMP_SENSOR";
@@ -98,7 +101,7 @@ static float get_cpu_usage_percent(void)
 static void tcp_client_task(void *pvParameters)
 {
     // Server config
-    char *server_ip = "10.51.33.100";     // ← CHANGE TO YOUR SERVER IP
+    char *server_ip = TCP_SERVER_IP;
     const int server_port = 5001;
 
     // Wait for Wi-Fi
@@ -154,6 +157,16 @@ static void tcp_client_task(void *pvParameters)
     }
 
     ESP_LOGI(TAG, "ADC Initialized. Starting TCP Client loop...");
+
+    int udp_metrics_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_IP);
+    if (udp_metrics_sock < 0) {
+        ESP_LOGE(TAG, "Unable to create UDP metrics socket: errno %d", errno);
+    }
+    struct sockaddr_in udp_dest_addr;
+    memset(&udp_dest_addr, 0, sizeof(udp_dest_addr));
+    udp_dest_addr.sin_family = AF_INET;
+    udp_dest_addr.sin_port = htons(5005);
+    inet_pton(AF_INET, CENTRALIZED_LOG_SERVER, &udp_dest_addr.sin_addr);
 
     // TCP reconnect loop
     bool first_connect = true;
@@ -254,7 +267,20 @@ static void tcp_client_task(void *pvParameters)
             ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
                      end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
 
-            vTaskDelay(pdMS_TO_TICKS(2000));   // Read and send every 2 seconds
+            if (udp_metrics_sock >= 0) {
+                char udp_buf[256];
+                snprintf(udp_buf, sizeof(udp_buf), 
+                         "{\"device\": \"client\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
+                         end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+                int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
+                if (sent < 0) {
+                    ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
+                } else {
+                    ESP_LOGI(TAG, "UDP packet sent (%d bytes) to %s:5005", sent, CENTRALIZED_LOG_SERVER);
+                }
+            }
+
+            vTaskDelay(pdMS_TO_TICKS(5000));   // Read and send every 5 seconds
         }
 
         close(sock);

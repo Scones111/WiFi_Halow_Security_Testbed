@@ -3,7 +3,7 @@
 set(src
     "src/mm_app_loadconfig.c"
     "src/mm_app_common.c"
-    "src/iperf.c")
+    "src/tcp_server.c")
 
 set(inc
     "src")
