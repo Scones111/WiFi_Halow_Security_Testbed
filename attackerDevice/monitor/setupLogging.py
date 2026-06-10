@@ -68,7 +68,6 @@ def register_signal_handlers() -> None:
     signal.signal(signal.SIGINT, _cleanup_and_exit)
     signal.signal(signal.SIGTERM, _cleanup_and_exit)
 
-
 def start_monitor_device_logging() -> str:
     
     """
