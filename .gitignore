@@ -3,4 +3,5 @@
 .venv
 attackerDevice/monitor/logs/*
 attackerDevice/monitor/pcaps/*
+mm-iot-esp32/logs/*
 __pycache__/
