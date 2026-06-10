@@ -1,22 +1,26 @@
-from scapy.all import wrpcap
 import attack.appMessages as appMessages
-from attack.attackLogGenerator import EventHandler
-import attack.attacks.setupEvilTwin as setupEvilTwin
 import attack.attacks.evilTwin as evilTwin
+from pathlib import Path
+import os
+import time
+import json
 
-
-# include a start time to allow sync with wireshark
+#helper function to store meta data for attack in csv file
+def log_metaData(start,end,type):
+    path = f"../metaData/{type}.json"
+    os.makedirs("../metaData/", exist_ok=True)
+    metaData = {"attackType":type,"attackStart":start,"attackEnd":end}
+    with open(path,"w") as file:
+        json.dump(metaData,file)
 
 def run():
     appMessages.print_intro()
 
-    log = EventHandler()
-
-
     # initialize variables for choice and raw frame
     continue_choice = None
     mode_choice = None
-    client = None
+    attack_start = None
+    attack_type = None
     # loop for mode selection
     while(True):
         print("which attack do you want to perform?")
@@ -31,20 +35,24 @@ def run():
                 print("Invalid choice. Please enter a valid number.")
 
         if mode_choice == "1":
+            attack_start = time.time()
+            attack_type = "evil_twin"
             print("Evil Twin attack selected")
-            #setup evil twin
-            client = setupEvilTwin.connect_to_evilTwin()
-            setupEvilTwin.start_evil_twin(client)
-            log.log_event("evil_twin_initiated","evil twin has been initialed and is transmitting beacon frames")
-            #transmit frames
-            evilTwin.transmit_frame_deauth(log)
-            setupEvilTwin.stop_evil_twin(client)
-            setupEvilTwin.disconnect_evil_twin(client)
+            #call shell script to start evil twin AP
+            # can disconnect after
+            os.system("./~/WiFi_HaLow_Security_Testbed/shellScript/start_evil_twin.sh")
+
+            evilTwin.transmit_frame_deauth()
+
+            # connect before stopping evil twin AP
+            # call shell script to stop evil twin
+            os.system("./~/WiFi_HaLow_Security_Testbed/shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
             print("DoS deauthentication attack selected")
             # insert code for DoS attack
         
+        log_metaData(attack_start,time.time(),attack_type)
         # exit or select another mode
         continue_choice = input("\nDo you want to select another mode? (y/n):")
         while(continue_choice not in ["y", "n"]):
@@ -52,5 +60,3 @@ def run():
         if continue_choice == "n":
             break
 
-    print("exiting, writing saving log")
-    log.write_log_json("example")
