@@ -1,20 +1,17 @@
 #!/bin/bash
 set -e
 
-BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
-EXAMPLES_DIR="$BASE_DIR/gr-ieee802-11ah/examples"
+exec_folder="$(cd "$(dirname "$0")" && pwd)"
+grc_folder="$exec_folder/gr-ieee802-11ah/examples"
 
 PHY="halow_phy_hier.grc"
 TX="halow_tx.grc"
 
-echo "[INFO] Entering $EXAMPLES_DIR"
-cd "$EXAMPLES_DIR"
+cd "$grc_folder"
 
-echo "[INFO] Compiling PHY..."
 grcc -o "$HOME/.local/state/gnuradio" "$PHY"
 
-echo "[INFO] Compiling TX..."
-grcc -o "$EXAMPLES_DIR" "$TX"
+grcc -o "$grc_folder" "$TX"
 
 echo "[INFO] Running TX..."
-python3 "$EXAMPLES_DIR/halow_tx.py"
+python3 "$grc_folder/halow_tx.py"
