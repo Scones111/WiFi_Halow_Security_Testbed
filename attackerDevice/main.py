@@ -7,7 +7,7 @@ from monitor import setupLogging
 if __name__ == "__main__":
     print("Select an option:")
     print("1. Attacker")
-    print("2. Logger")
+    print("2. post processing of logs")
     print("3. ESP32 Metrics Capture")
     print("4. Router Metrics Capture")
     choice = input("Type 1, 2, 3, or 4: ")
