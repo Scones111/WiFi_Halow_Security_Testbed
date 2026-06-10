@@ -1,5 +1,8 @@
 import attack.appMessages as appMessages
 import attack.attacks.evilTwin as evilTwin
+from attack.attacks import dragonblood
+
+# include a start time to allow sync with wireshark
 from pathlib import Path
 import os
 import time
@@ -32,7 +35,7 @@ def run():
     while(True):
         print("which attack do you want to perform?")
         print("1. evil twin attack")
-        print("2. DoS deauthentication attack")
+        print("2. Dragonblood DoS attack")
 
         while(True):
             mode_choice = input("Enter the number corresponding to the mode: ")
@@ -56,12 +59,13 @@ def run():
             os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
-            print("DoS deauthentication attack selected")
-            # insert code for DoS attack
+            print("Dragonblood DoS attack selected")
+            log.log_event("dragonblood_dos_initiated", "transmitting sae commit frames")
+            dragonblood.start_dos()
         
         log_metaData(attack_start,time.time(),attack_type)
         # exit or select another mode
-        continue_choice = input("\nDo you want to select another mode? (y/n):")
+        continue_choice = input("\nDo you want to perform another attack? (y/n):")
         while(continue_choice not in ["y", "n"]):
             continue_choice = input("Invalid input. Please enter 'y' for yes or 'n' for no: ")
         if continue_choice == "n":

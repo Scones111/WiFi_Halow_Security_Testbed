@@ -2,17 +2,17 @@
   "TrustedAP": [
     {
       "name": "Heltec",
-      "ip": "10.42.33.73",
+      "ip": "192.168.0.100",
       "mac": "78:72:64:ea:b9:14"
     }
   ],
   "EvilTwin": [
     {
       "name": "EvilTwin",
-      "ip": "raspberrypi.local",
+      "ip": "10.42.0.2",
       "mac": "9c:04:b6:46:07:34",
       "user": "rpi5",
-      "password":"halow",
+      "password": "halow",
       "ssh_port": 24
     }
   ],
@@ -22,19 +22,19 @@
       "ip": "10.42.0.1",
       "mac": "",
       "user": "root",
-      "password":"halow",
+      "password": "halow",
       "ssh_port": 22
     }
   ],
-  "STA":[
+  "STA": [
     {
       "name": "tcp_server",
-      "ip": "10.43.33.100",
+      "ip": "192.168.0.200",
       "mac": "3c:22:7f:71:dc:b8"
     },
     {
       "name": "tcp_client",
-      "ip": "10.43.33.150",
+      "ip": "192.168.0.150",
       "mac": "3c:22:7f:71:df:d6"
     }
   ]
