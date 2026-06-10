@@ -7,8 +7,15 @@ import json
 
 #helper function to store meta data for attack in csv file
 def log_metaData(start,end,type):
-    path = f"../metaData/{type}.json"
+    file_number = 0
+    file = f"{type}_{file_number}.json"
+    path = f"metaData"
+    
     os.makedirs("../metaData/", exist_ok=True)
+    while os.path.exists(os.path.join(path, file)):
+        file_number += 1
+        file = f"{type}_{file_number}.json"
+    
     metaData = {"attackType":type,"attackStart":start,"attackEnd":end}
     with open(path,"w") as file:
         json.dump(metaData,file)
@@ -40,13 +47,13 @@ def run():
             print("Evil Twin attack selected")
             #call shell script to start evil twin AP
             # can disconnect after
-            os.system("./~/WiFi_HaLow_Security_Testbed/shellScript/start_evil_twin.sh")
+            os.system("./../shellScript/start_evil_twin.sh")
 
             evilTwin.transmit_frame_deauth()
 
             # connect before stopping evil twin AP
             # call shell script to stop evil twin
-            os.system("./~/WiFi_HaLow_Security_Testbed/shellScript/stop_evil_twin.sh")
+            os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
             print("DoS deauthentication attack selected")
