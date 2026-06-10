@@ -20,18 +20,16 @@ TRUSTED_AP = utils.get_mac("TrustedAP")[0]
 EVIL_TWIN = utils.get_mac("EvilTwin")[0]
 STA = utils.get_mac("STA")
 
-# Use this to be used to compare and log the known attack frame we are transmitting
-# allows for filtering out other similar frames easily
-KNOWN_ATTACK_FRAMES =  generateAllFrames.retrieve_all_attack_frames()
+# retrieve known attack frames to log them correctly
+ATTACK_FRAMES =  generateAllFrames.retrieve_all_attack_frames()
+
+# keep a counter of deauthentication frames
+deauth_no = 0
 
 #initialize columns to be used:
 columns = [
-    "packet_number", # keep track of packet number in pcap
+    "packet_number", 
     "frame_name",
-
-    #features according to the specification of Pick Quality Over Quantity: 
-    #Expert Feature Selection and Data Preprocessing for 802.11 Intrusion Detection Systems
-    #=================================================
     "frame_len",
     "length",
     "dbm_antsignal",
@@ -45,7 +43,6 @@ columns = [
     "moredata",
     "protected",
     "duration",
-    #=================================================
     "label" # ground truth
 ]
 
@@ -74,8 +71,8 @@ frame_map = {
     "reason": ("wlan.mgt", "all", "reason_code")
 }
 # ================================================================
-# Provided the types from specification of the MAC and PHY as according to ieee802.11
-managementSubTypes = {
+# frame types
+mgtSubTypes = {
     0: "Association Request",
     1: "Association Response",
     2: "Reassociation Request",
@@ -92,7 +89,7 @@ managementSubTypes = {
     14: "Action No Ack"
 }
 
-controlSubTypes = {
+ctrlSubTypes = {
     2: "Trigger",
     3: "TACK",
     4: "Beamforming Report Poll",
@@ -122,30 +119,27 @@ dataSubtypes = {
     15: "QoS CF-ACK + CF-Poll"
 }
 
-extendedSubtypes = {
+extSubType = {
     0: "DMG Beacon",
     1: "S1G Beacon"
 }
 
 frameTypes = {
-    0: managementSubTypes,
-    1: controlSubTypes,
+    0: mgtSubTypes,
+    1: ctrlSubTypes,
     2: dataSubtypes,
-    3: extendedSubtypes
+    3: extSubType
 }
 
 # ================================================================
-# Post processing, for machine learning according to AWID3 paper
-# intended for extracting features and assigning labels for machine learning
+# Post processing of logs, the field retrieve are specified in the AWID3 paper
 
-#iterate through tags
 def tags_extract(tags,field):
     for tag in tags:
         if hasattr(tag,field):
             return getattr(tag,field).get_default_value()
     return None
 
-#function to load attributes
 def packet_extract(packet,field):
     temp_fields = frame_map[field]
 
@@ -172,7 +166,7 @@ def MLLog_processing(packets):
     label=0
 
     #initialize pandas dataframe
-    features = pd.DataFrame(columns=columns)
+    frt_df = pd.DataFrame(columns=columns)
 
     i = 0
     #iterate through packets
@@ -180,10 +174,10 @@ def MLLog_processing(packets):
         #reset label to 0, for normal traffic
         label = 0
 
-        features.loc[i,"packet_number"] = packet_extract(packet,"packet_number")
+        frt_df.loc[i,"packet_number"] = packet_extract(packet,"packet_number")
         fc_type = int(packet_extract(packet,"type"))
         fc_subtype = int(packet_extract(packet,"subtype"))
-        features.loc[i,"frame_name"] = frameTypes[fc_type][fc_subtype]
+        frt_df.loc[i,"frame_name"] = frameTypes[fc_type][fc_subtype]
 
         if hasattr(packet.wlan,"bssid"):
             if packet.wlan.bssid == EVIL_TWIN:
@@ -194,29 +188,20 @@ def MLLog_processing(packets):
         elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in KNOWN_ATTACK_FRAMES:
             label = 1
 
-        features.loc[i,"label"] = label
+        frt_df.loc[i,"label"] = label
 
 
         for feature in columns:
             if feature not in ["packet_number","frame_name","label"]:
-                features.loc[i,feature] = packet_extract(packet,feature)
+                frt_df.loc[i,feature] = packet_extract(packet,feature)
 
         i += 1
 
-    utils.write_to_ml_log(features)
+    utils.write_to_ml_log(frt_df)
 
-
-# ================================================================
 # Code for logging the information and events from capture pcap file
 # pure attack logging, can contain information for machine learning,
 # but intended purpose is to log events and details for better overview of attacks
-
-deauth_no = 0
-def deauth_counter():
-    global deauth_no 
-    deauth_no += 1
-    return deauth_no
-
 
 def process_wlan(packet:Packet):
     #todo change this code to use packet_extract
@@ -262,44 +247,50 @@ def process_wlan(packet:Packet):
         "status":status,
         "details":None,
     }
-    # Filter out packet frames not relevant to attack
-    store_packet_to_log = False
     
+    write_log = False
+    
+    # check deauthentication
     if frameTypes[fc_type][fc_subtype] == "Deauthentication":
-        store_packet_to_log = True
-        events.handle_deauth(event,packet,deauth_counter())
+        write_log = True
+        deauth_no += 1
+        events.handle_deauth(event,packet,deauth_no)
 
+    # check probe requests
     if frameTypes[fc_type][fc_subtype] == "Probe Request":
-        store_packet_to_log = True
+        write_log = True
         mgt = getattr(packet,'wlan.mgt')
         ssid = getattr(mgt,'wlan.ssid',None)
         events.handle_probe_req(event)
 
+    # check probe response
     elif frameTypes[fc_type][fc_subtype] == "Probe Response":
-        store_packet_to_log = True
+        write_log = True
         events.handle_probe_resp(event)
 
+    # check authentication
     elif frameTypes[fc_type][fc_subtype] == "Authentication":
         if src != bssid:
-            store_packet_to_log = True
+            write_log = True
             events.handle_authentication_req(event)
         elif src == bssid:
-            store_packet_to_log = True
+            write_log = True
             events.handle_authentication_resp(event)
 
+    # check association
     elif frameTypes[fc_type][fc_subtype] == "Association Request":
-        store_packet_to_log = True
+        write_log = True
         events.handle_association_req(event)
 
     elif frameTypes[fc_type][fc_subtype] == "Association Response":
-        store_packet_to_log = True
+        write_log = True
         events.handle_association_resp(event)
 
-    if store_packet_to_log:
+    # write to log if packet detected
+    if write_log:
         utils.write_to_attacklog(event)
 
 def process_tcp(packet:Packet):
-    #todo change this code to use packet_extract
     packet_number = packet_extract(packet,"packet_number")
     ts = packet_extract(packet,"timestamp")
     rf = packet_extract(packet,"dbm_antsignal")
@@ -327,34 +318,29 @@ def process_tcp(packet:Packet):
     utils.write_to_tcp_log(event)
 
 
-# implement logging https://docs.zeek.org/en/master/frameworks/logging.html
-def log_events(pcap,pcap_filter):
+def log_events(pcap_file,pcap_filter):
     packets = pyshark.FileCapture(
-        pcap,
+        pcap_file,
         display_filter=pcap_filter,
         keep_packets=False,
         use_json=True,
         include_raw=True,
     )
 
+    #iterate through packets
     for packet in packets:
-
         has_wlan = hasattr(packet, 'wlan')
         has_tcp  = hasattr(packet, 'tcp')
 
+        #process either tcp or wlan
         if has_wlan and has_tcp:
             process_tcp(packet)
         elif has_wlan:
             process_wlan(packet)
-    
-    #todo implement post process for machine learning features
 
     MLLog_processing(packets)
 
     packets.close()
-    
-    
-# ================================================================    
 
 # test code
 """

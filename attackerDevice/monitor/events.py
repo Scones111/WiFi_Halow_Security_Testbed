@@ -7,9 +7,6 @@ TRUSTED_AP = utils.load_json()["TrustedAP"][0]["mac"]
 STA_MACS = utils.get_mac("STA")
 KNOWN_DEAUTH_FRAME = retrieve_all_attack_frames()
 
-# populate this file for handling events and adding details to the log for better overview
-
-#=================================================================
 # TCP events
 def handle_tcp(event):
     if event['bssid'] == EVIL_TWIN:
@@ -20,7 +17,6 @@ def handle_tcp(event):
 
 #todo add more specific events for tcp
 
-#=================================================================
 #wlan events
 def handle_deauth(event,packet,deauth_no):
     if packet.frame_raw.value[int(packet.radiotap.length)*2:] in KNOWN_DEAUTH_FRAME:
@@ -87,4 +83,4 @@ def handle_association_resp(event):
 
     return event
 
-#=================================================================
+#todo: add more events here

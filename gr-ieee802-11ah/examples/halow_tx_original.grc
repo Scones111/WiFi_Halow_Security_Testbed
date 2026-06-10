@@ -262,15 +262,15 @@ blocks:
     labels: '[]'
     num_opts: '3'
     option0: '0'
-    option1: -1e6
-    option2: 1e6
+    option1: -1.5e6
+    option2: 1.5e6
     option3: '3'
     option4: '4'
     options: '[0, 1, 2]'
     orient: Qt.QVBoxLayout
     type: real
-    value: 1e6
-    widget: radio_buttons
+    value: 1.5e6
+    widget: combo_box
   states:
     bus_sink: false
     bus_source: false
@@ -284,7 +284,7 @@ blocks:
     beta: '6.76'
     comment: ''
     cutoff_freq: 500e3
-    gain: '4.5'
+    gain: tx_gain
     samp_rate: samp_rate
     value: ''
     width: 100e3
@@ -350,7 +350,7 @@ blocks:
     options: '[1e6, 2e6, 4e6, 8e6, 16e6]'
     orient: Qt.QVBoxLayout
     type: real
-    value: 4e6
+    value: 8e6
     widget: combo_box
   states:
     bus_sink: false
@@ -370,14 +370,14 @@ blocks:
     rangeType: float
     start: '0'
     step: '0.01'
-    stop: '1'
-    value: '0.75'
+    stop: '20'
+    value: '8'
     widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 20.0]
+    coordinate: [1272, 156.0]
     rotation: 0
     state: enabled
 - name: analog_sig_source_x_0
@@ -392,7 +392,7 @@ blocks:
     minoutbuf: '0'
     offset: '0'
     phase: '0'
-    samp_rate: 4e6
+    samp_rate: samp_rate
     showports: 'False'
     type: complex
     waveform: analog.GR_COS_WAVE
@@ -438,7 +438,7 @@ blocks:
     bus_structure: null
     coordinate: [248, 140.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
   parameters:
@@ -532,7 +532,7 @@ blocks:
     bus_structure: null
     coordinate: [536, 220.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: network_socket_pdu_0
   id: network_socket_pdu
   parameters:
@@ -552,7 +552,7 @@ blocks:
     bus_structure: null
     coordinate: [304, 236.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: osmosdr_sink_0
   id: osmosdr_sink
   parameters:
@@ -591,7 +591,7 @@ blocks:
     ant8: ''
     ant9: ''
     args: hackrf=0
-    bb_gain0: '0'
+    bb_gain0: 2*BB_gain
     bb_gain1: '20'
     bb_gain10: '20'
     bb_gain11: '20'
@@ -760,7 +760,7 @@ blocks:
     gain7: '10'
     gain8: '10'
     gain9: '10'
-    if_gain0: 8*IF_gain
+    if_gain0: '0'
     if_gain1: '20'
     if_gain10: '20'
     if_gain11: '20'
@@ -832,7 +832,7 @@ blocks:
     autoscale: 'False'
     average: '1.0'
     axislabels: 'True'
-    bw: samp_rate
+    bw: 8e6
     color1: '"blue"'
     color10: '"dark blue"'
     color2: '"red"'
@@ -951,7 +951,7 @@ blocks:
     name: '"tagged triggered time sink"'
     nconnections: '1'
     size: 2561*100
-    srate: samp_rate
+    srate: 8e6
     stemplot: 'False'
     style1: '1'
     style10: '1'
@@ -1048,7 +1048,7 @@ blocks:
     name: '"Free running time sink"'
     nconnections: '1'
     size: 2561*100
-    srate: samp_rate
+    srate: 8e6
     stemplot: 'False'
     style1: '1'
     style10: '1'

@@ -1,21 +1,36 @@
-from scapy.all import wrpcap
 import attack.appMessages as appMessages
-from attack.attackLogGenerator import EventHandler
-import attack.attacks.setupEvilTwin as setupEvilTwin
 import attack.attacks.evilTwin as evilTwin
 from attack.attacks import dragonblood
 
 # include a start time to allow sync with wireshark
+from pathlib import Path
+import os
+import time
+import json
+
+#helper function to store meta data for attack in csv file
+def log_metaData(start,end,type):
+    file_number = 0
+    file = f"{type}_{file_number}.json"
+    path = f"metaData"
+    
+    os.makedirs(path+"/", exist_ok=True)
+    while os.path.exists(os.path.join(path, file)):
+        file_number += 1
+        file = f"{type}_{file_number}.json"
+    
+    metaData = {"attackType":type,"attackStart":start,"attackEnd":end}
+    with open(os.path.join(path, file),"w") as file:
+        json.dump(metaData,file)
 
 def run():
     appMessages.print_intro()
 
-    log = EventHandler()
-    log.log_event("attack_start", "attack has been started")
     # initialize variables for choice and raw frame
     continue_choice = None
     mode_choice = None
-    client = None
+    attack_start = None
+    attack_type = None
     # loop for mode selection
     while(True):
         print("which attack do you want to perform?")
@@ -30,22 +45,25 @@ def run():
                 print("Invalid choice. Please enter a valid number.")
 
         if mode_choice == "1":
+            attack_start = time.time()
+            attack_type = "evil_twin"
             print("Evil Twin attack selected")
-            #setup evil twin
-            client = setupEvilTwin.connect_to_evilTwin()
-            setupEvilTwin.start_evil_twin(client)
-            log.log_event("evil_twin_initiated","evil twin has been initiated and is transmitting beacon frames")
-            #transmit frames
-            evilTwin.transmit_frame_deauth(log)
-            setupEvilTwin.stop_evil_twin(client)
-            setupEvilTwin.disconnect_evil_twin(client)
+            #call shell script to start evil twin AP
+            # can disconnect after
+            os.system("./../shellScript/start_evil_twin.sh")
+
+            evilTwin.transmit_frame_deauth()
+
+            # connect before stopping evil twin AP
+            # call shell script to stop evil twin
+            os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
             print("Dragonblood DoS attack selected")
             log.log_event("dragonblood_dos_initiated", "transmitting sae commit frames")
             dragonblood.start_dos()
         
-        log.end_log()
+        log_metaData(attack_start,time.time(),attack_type)
         # exit or select another mode
         continue_choice = input("\nDo you want to perform another attack? (y/n):")
         while(continue_choice not in ["y", "n"]):
@@ -53,5 +71,3 @@ def run():
         if continue_choice == "n":
             break
 
-    print("exiting, writing saving log")
-    log.write_log_json("example")
