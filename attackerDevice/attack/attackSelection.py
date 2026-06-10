@@ -11,13 +11,13 @@ def log_metaData(start,end,type):
     file = f"{type}_{file_number}.json"
     path = f"metaData"
     
-    os.makedirs("../metaData/", exist_ok=True)
+    os.makedirs(path+"/", exist_ok=True)
     while os.path.exists(os.path.join(path, file)):
         file_number += 1
         file = f"{type}_{file_number}.json"
     
     metaData = {"attackType":type,"attackStart":start,"attackEnd":end}
-    with open(path,"w") as file:
+    with open(os.path.join(path, file),"w") as file:
         json.dump(metaData,file)
 
 def run():
