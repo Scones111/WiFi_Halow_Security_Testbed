@@ -9,7 +9,7 @@ class EventHandler:
         self.end = 0.0
 
     def log_event(self, event_type, details):
-        timestamp = time.time() - self.start
+        timestamp = time.time()
         new_event = {"timestamp": timestamp, "event_type": event_type, "details": details}
         temp_pd = pd.DataFrame([new_event])
         self.events = pd.concat([self.events,temp_pd], ignore_index=True)
