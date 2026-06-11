@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+import json
 
 # Add parent directory to sys.path to import centralized_metrics_logger
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -39,9 +40,17 @@ if __name__ == "__main__":
             choice = input("Type 1, 2, or 3: ")
             print("")
 
+        config_path = os.path.join(os.path.dirname(__file__), "config.json")
+        try:
+            with open(config_path, "r") as f:
+                config = json.load(f)
+        except FileNotFoundError:
+            print(f"Error: Configuration file {config_path} not found.")
+            config = {}
+
         if choice == "1":
-            client_port = input("Enter client serial port (leave blank if none): ").strip()
-            server_port = input("Enter server serial port (leave blank if none): ").strip()
+            client_port = config.get("client_port", "")
+            server_port = config.get("server_port", "")
             
             script_path = os.path.join(os.path.dirname(__file__), "..", "mm-iot-esp32", "capture_esp32_metrics.py")
             cmd = [sys.executable, os.path.abspath(script_path)]
@@ -59,9 +68,10 @@ if __name__ == "__main__":
                 except KeyboardInterrupt:
                     print("\nMetrics capture stopped.")
         elif choice == "2":
-            router_ip = input("Enter router IP (leave blank for default 192.168.0.100): ").strip()
-            router_user = input("Enter SSH username (leave blank for default root): ").strip()
-            router_pass = input("Enter SSH password (leave blank for default heltec.org): ").strip()
+            router_config = config.get("router", {})
+            router_ip = router_config.get("ip", "192.168.0.100")
+            router_user = router_config.get("user", "root")
+            router_pass = router_config.get("pass", "heltec.org")
             
             script_path = os.path.join(os.path.dirname(__file__), "..", "capture_router_metrics.py")
             cmd = [sys.executable, os.path.abspath(script_path)]
@@ -79,11 +89,19 @@ if __name__ == "__main__":
                 print("\nRouter metrics capture stopped.")
         elif choice == "3":
             ml_logs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "monitor", "MLLogs")
+            output_config = config.get("output_files", {})
+            
+            def resolve_path(path_str, default_name):
+                if not path_str:
+                    return os.path.join(ml_logs_dir, default_name)
+                if os.path.isabs(path_str):
+                    return path_str
+                return os.path.join(os.path.dirname(os.path.abspath(__file__)), path_str)
             
             args_list = [
-                "--router-output", os.path.join(ml_logs_dir, "router_metrics.csv"),
-                "--client-output", os.path.join(ml_logs_dir, "client_metrics.csv"),
-                "--server-output", os.path.join(ml_logs_dir, "server_metrics.csv")
+                "--router-output", resolve_path(output_config.get("router"), "router_metrics.csv"),
+                "--client-output", resolve_path(output_config.get("client"), "client_metrics.csv"),
+                "--server-output", resolve_path(output_config.get("server"), "server_metrics.csv")
             ]
             
             centralized_metrics_logger.main(args_list)
