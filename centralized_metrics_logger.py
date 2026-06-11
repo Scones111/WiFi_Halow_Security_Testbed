@@ -217,7 +217,7 @@ def signal_handler(sig, frame):
     print("\n[MAIN] Shutting down...")
     running = False
 
-def main():
+def main(args_list=None):
     parser = argparse.ArgumentParser(description="Centralized Network Logging for ESP32 and Heltec AP Metrics")
     
     # Heltec AP args
@@ -232,7 +232,7 @@ def main():
     parser.add_argument("--client-output", default="logs/client_metrics.csv", help="ESP32 Client output CSV (default: logs/client_metrics.csv)")
     parser.add_argument("--server-output", default="logs/server_metrics.csv", help="ESP32 Server output CSV (default: logs/server_metrics.csv)")
 
-    args = parser.parse_args()
+    args = parser.parse_args(args_list)
 
     # Register signal handler for graceful shutdown
     signal.signal(signal.SIGINT, signal_handler)
