@@ -59,8 +59,9 @@ def run():
             os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
+            attack_start = time.time()
+            attack_type = "DragonBlood_DoS"
             print("Dragonblood DoS attack selected")
-            log.log_event("dragonblood_dos_initiated", "transmitting sae commit frames")
             dragonblood.start_dos()
         
         log_metaData(attack_start,time.time(),attack_type)

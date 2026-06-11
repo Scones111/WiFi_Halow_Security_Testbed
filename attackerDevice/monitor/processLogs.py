@@ -185,7 +185,7 @@ def MLLog_processing(packets):
         elif hasattr(packet.wlan,"sa"):
             if packet.wlan.sa == EVIL_TWIN:
                 label = 1
-        elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in KNOWN_ATTACK_FRAMES:
+        elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in ATTACK_FRAMES:
             label = 1
 
         frt_df.loc[i,"label"] = label
