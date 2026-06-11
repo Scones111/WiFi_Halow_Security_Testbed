@@ -39,15 +39,20 @@ def handle_probe_resp(event):
 def handle_authentication_req(event):
     if event["bssid"] == EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
-        event["details"] = "STA is Sending association request to Evil Twin"
+        event["details"] = "STA is Sending Authentication request to Evil Twin"
+    elif event['src'] not in STA_MACS:
+        event["attack_type"] = "Dragonblood DoS"
+        event["details"] = "Attacker is Sending Authentication request to Evil Twin"
     elif event["bssid"] == TRUSTED_AP:
-        event["details"] = "STA is Sending association request to Trusted AP"
+        event["details"] = "STA is Sending Authentication request to Trusted AP"
 
     return event
 
 def handle_authentication_resp(event):
     if event["status"] == 0:
         event["details"] = "Successful Authentication to "
+    elif event["status"] == 19:
+        event["details"] = "Successful Authentication (SAE commit) to "
     else: 
         event["details"] = "Unsuccessful Authentication (check status code) to "
 
