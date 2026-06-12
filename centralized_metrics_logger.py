@@ -218,19 +218,29 @@ def signal_handler(sig, frame):
     running = False
 
 def main(args_list=None):
+    config_path = os.path.join(os.path.dirname(__file__), "attackerDevice", "config.json")
+    try:
+        with open(config_path, "r") as f:
+            config = json.load(f)
+    except FileNotFoundError:
+        config = {}
+        
+    router_config = config.get("router", {})
+    output_config = config.get("output_files", {})
+
     parser = argparse.ArgumentParser(description="Centralized Network Logging for ESP32 and Heltec AP Metrics")
     
     # Heltec AP args
-    parser.add_argument("--ip", default="192.168.0.100", help="Heltec AP IP address (default: 192.168.0.100)")
-    parser.add_argument("--user", default="root", help="Heltec AP SSH username (default: root)")
-    parser.add_argument("--password", default="heltec.org", help="Heltec AP SSH password (default: heltec.org)")
-    parser.add_argument("--router-output", default="router_logs/router_metrics.csv", help="Router output CSV (default: router_logs/router_metrics.csv)")
-    parser.add_argument("-i", "--interval", type=float, default=5.0, help="Router polling interval in seconds (default: 5.0)")
+    parser.add_argument("--ip", default=router_config.get("ip", "192.168.0.100"), help="Heltec AP IP address")
+    parser.add_argument("--user", default=router_config.get("user", "root"), help="Heltec AP SSH username")
+    parser.add_argument("--password", default=router_config.get("pass", "heltec.org"), help="Heltec AP SSH password")
+    parser.add_argument("--router-output", default=output_config.get("router", "router_logs/router_metrics.csv"), help="Router output CSV")
+    parser.add_argument("-i", "--interval", type=float, default=5.0, help="Router polling interval in seconds")
     
     # ESP32 args
-    parser.add_argument("--udp-port", type=int, default=5005, help="UDP port to listen on for ESP32 metrics (default: 5005)")
-    parser.add_argument("--client-output", default="logs/client_metrics.csv", help="ESP32 Client output CSV (default: logs/client_metrics.csv)")
-    parser.add_argument("--server-output", default="logs/server_metrics.csv", help="ESP32 Server output CSV (default: logs/server_metrics.csv)")
+    parser.add_argument("--udp-port", type=int, default=5005, help="UDP port to listen on for ESP32 metrics")
+    parser.add_argument("--client-output", default=output_config.get("client", "logs/client_metrics.csv"), help="ESP32 Client output CSV")
+    parser.add_argument("--server-output", default=output_config.get("server", "logs/server_metrics.csv"), help="ESP32 Server output CSV")
 
     args = parser.parse_args(args_list)
 
