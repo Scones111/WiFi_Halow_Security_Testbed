@@ -1,6 +1,6 @@
 {
-    "client_port": "/dev/ttyUSB0",
-    "server_port": "/dev/ttyUSB1",
+    "client_port": "/dev/cu.usbmodem101",
+    "server_port": "/dev/cu.usbmodem1101",
     "router": {
         "ip": "192.168.0.100",
         "user": "root",
