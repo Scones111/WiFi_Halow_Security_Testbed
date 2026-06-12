@@ -7,6 +7,15 @@ from typing import Optional
 import json
 from monitor import processLogs
 from pathlib import Path
+import utils
+
+devices = utils.load_json()
+
+#load monitor device config
+MON_IP = devices["Monitor"][0]["ip"]
+MON_USER = devices["Monitor"][0]["user"]
+MON_PASS = devices["Monitor"][0]["password"]
+
 
 WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
 
@@ -21,6 +30,41 @@ while os.path.exists(os.path.join(PCAP_DST, PCAP)):
     counter+=1
     PCAP = f"{PCAP_NAME}_{counter}.pcap"
 
+PCAP_PATH = PCAP_DST + "/" + PCAP
+
+tcpdump = None
+
+def start_log():
+    global tcpdump
+    # start monitor mode
+    os.system(f"sshpass -p '{MON_PASS}' ssh {MON_USER}@{MON_IP} './../sniffer_mode.sh'")
+
+    with open(PCAP_PATH, "wb") as pcap_file:
+        cmd = [
+            "sshpass", "-p" ,MON_PASS, 
+            "ssh" ,f"{MON_USER}@{MON_IP}", 
+            "tcpdump", "-i", "morse0", "-U", "-s0", "-w", "-"
+            ]
+        
+        tcpdump = subprocess.Popen(
+            cmd, 
+            stdout=pcap_file,
+            stderr=subprocess.DEVNULL,
+            stdin=subprocess.DEVNULL,
+            start_new_session=True
+            )
+
+def end_log():
+    os.system(f"sshpass -p '{MON_PASS}' ssh {MON_USER}@{MON_IP} 'kill $(pgrep tcpdump)'")
+    #stop logging process
+    tcpdump.terminate()
+    tcpdump.wait()
+
+def post_process():
+    processLogs.log_events(PCAP_PATH,WIRESHARK_FILTER)
+
+
+"""
 def start_monitor_device_logging():
     for temppcap in Path(PCAP_SRC).iterdir():
         if temppcap.is_file() and temppcap.suffix == ".pcap":
@@ -29,3 +73,4 @@ def start_monitor_device_logging():
             print("done prcessing logs")
             temppcap.rename(os.path.join(PCAP_DST,PCAP))
             print("moved processed pcap to the pcaps folder")
+"""

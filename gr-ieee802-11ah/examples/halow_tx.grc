@@ -438,7 +438,7 @@ blocks:
     bus_structure: null
     coordinate: [248, 140.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: blocks_multiply_const_vxx_0
   id: blocks_multiply_const_vxx
   parameters:
@@ -532,7 +532,7 @@ blocks:
     bus_structure: null
     coordinate: [536, 220.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: network_socket_pdu_0
   id: network_socket_pdu
   parameters:
@@ -552,7 +552,7 @@ blocks:
     bus_structure: null
     coordinate: [304, 236.0]
     rotation: 0
-    state: disabled
+    state: enabled
 - name: osmosdr_sink_0
   id: osmosdr_sink
   parameters:

@@ -5,5 +5,7 @@ attackerDevice/monitor/logs/*
 attackerDevice/monitor/pcaps/*
 attackerDevice/monitor/MLLogs/*
 attackerDevice/monitor/tempPcap/*
+attackerDevice/metaData/*
+attackerDevice/router_logs/*
 mm-iot-esp32/logs/*
 __pycache__/

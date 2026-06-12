@@ -14,8 +14,8 @@ from monitor import setupLogging
 
 if __name__ == "__main__":
     print("Select an option:")
-    print("1. Attacker")
-    print("2. Logger")
+    print("1. Attack")
+    print("2. Attack and Capture traffic logs")
     print("3. Metrics Capture")
     choice = input("Type 1, 2, or 3: ")
     print("")
@@ -27,7 +27,10 @@ if __name__ == "__main__":
     if choice == "1":
         attackSelection.run()
     elif choice == "2":
-        setupLogging.start_monitor_device_logging()
+        setupLogging.start_log()
+        attackSelection.run()
+        setupLogging.end_log()
+        setupLogging.post_process()
     elif choice == "3":
         print("Select an option:")
         print("1. ESP32 Metrics Capture")
