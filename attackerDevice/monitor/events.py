@@ -2,17 +2,17 @@ import attackerDevice.utils as utils
 from attackerDevice.attack.frames.deauth import deauth_frame
 from attackerDevice.attack.frames.generateAllFrames import retrieve_all_attack_frames
 
-EVIL_TWIN = utils.load_json()["EvilTwin"][0]["mac"]
-TRUSTED_AP = utils.load_json()["TrustedAP"][0]["mac"]
+EVIL_TWIN = utils.get_mac("EvilTwin")#utils.load_json()["EvilTwin"][0]["mac"]
+TRUSTED_AP = utils.get_mac("TrustedAP")#utils.load_json()["TrustedAP"][0]["mac"]
 STA_MACS = utils.get_mac("STA")
 KNOWN_DEAUTH_FRAME = retrieve_all_attack_frames()
 
 # TCP events
 def handle_tcp(event):
-    if event['bssid'] == EVIL_TWIN:
+    if event['bssid'] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] = "Transmitting data using Evil Twin AP"
-    elif event['bssid'] == TRUSTED_AP:
+    elif event['bssid'] in TRUSTED_AP:
         event["details"] = "Transmitting data using Trusted AP"
 
 #todo add more specific events for tcp
@@ -20,6 +20,7 @@ def handle_tcp(event):
 #wlan events
 def handle_deauth(event,packet,deauth_no):
     if packet.frame_raw.value[int(packet.radiotap.length)*2:] in KNOWN_DEAUTH_FRAME:
+        deauth_no += 1
         event["attack_type"] = "Deauthentication Attack"
         event["details"] = f"Deauthentication frame number {deauth_no} sent by attacker"
     else:
@@ -30,20 +31,26 @@ def handle_probe_req(event):
         event["details"] = "STA is broadcasting probe request"
     
 def handle_probe_resp(event):
-    if event["bssid"] == EVIL_TWIN:
+    if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] = "Evil Twin is sending probe response to STA"
-    if event["bssid"] == TRUSTED_AP:
+    if event["bssid"] in TRUSTED_AP:
         event["details"] = "Trusted AP is sending probe response to STA"
 
+def handle_authentication(event):
+    if event["src"] != event["bssid"]:
+        handle_authentication_req(event)
+    elif event["src"] == event["bssid"]:
+        handle_authentication_resp(event)
+
 def handle_authentication_req(event):
-    if event["bssid"] == EVIL_TWIN:
+    if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] = "STA is Sending Authentication request to Evil Twin"
     elif event['src'] not in STA_MACS:
         event["attack_type"] = "Dragonblood DoS"
         event["details"] = "Attacker is Sending Authentication request to Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
+    elif event["bssid"] in TRUSTED_AP:
         event["details"] = "STA is Sending Authentication request to Trusted AP"
 
     return event
@@ -56,19 +63,19 @@ def handle_authentication_resp(event):
     else: 
         event["details"] = "Unsuccessful Authentication (check status code) to "
 
-    if event["bssid"] == EVIL_TWIN:
+    if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] += "Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
+    elif event["bssid"] in TRUSTED_AP:
         event["details"] += "Trusted AP"
 
     return event
 
 def handle_association_req(event):
-    if event["bssid"] == EVIL_TWIN:
+    if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] = "STA is Sending association request to Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
+    elif event["bssid"] in TRUSTED_AP:
         event["details"] = "STA is Sending association request to Trusted AP"
 
     return event
@@ -79,13 +86,26 @@ def handle_association_resp(event):
     else: 
         event["details"] = "Unsuccessful association (check status code) to "
 
-    if event["bssid"] == EVIL_TWIN:
+    if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] += "Evil Twin"
-    elif event["bssid"] == TRUSTED_AP:
+    elif event["bssid"] in TRUSTED_AP:
         event["attack_type"]
         event["details"] += "Trusted AP"
 
     return event
 
 #todo: add more events here
+
+handle_wlan_events = {
+    "Deauthentication": handle_deauth,
+    "Probe Request": handle_probe_req,
+    "Probe Response": handle_probe_resp,
+    "Authentication": handle_authentication,
+    "Association Request": handle_association_req,
+    "Association Response":handle_association_resp
+}
+
+#todo implement for different tcp events:
+handle_tcp_events = {
+}

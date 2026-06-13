@@ -16,8 +16,8 @@ import attackerDevice.attack.frames.generateAllFrames as generateAllFrames
 import attackerDevice.monitor.events as events
 
 #Load MAC address of the known devices
-TRUSTED_AP = utils.get_mac("TrustedAP")[0]
-EVIL_TWIN = utils.get_mac("EvilTwin")[0]
+TRUSTED_AP = utils.get_mac("TrustedAP")
+EVIL_TWIN = utils.get_mac("EvilTwin")
 STA = utils.get_mac("STA")
 
 # retrieve known attack frames to log them correctly
@@ -180,10 +180,10 @@ def MLLog_processing(packets):
         frt_df.loc[i,"frame_name"] = frameTypes[fc_type][fc_subtype]
 
         if hasattr(packet.wlan,"bssid"):
-            if packet.wlan.bssid == EVIL_TWIN:
+            if packet.wlan.bssid in EVIL_TWIN:
                 label = 1
         elif hasattr(packet.wlan,"sa"):
-            if packet.wlan.sa == EVIL_TWIN:
+            if packet.wlan.sa in EVIL_TWIN:
                 label = 1
             elif packet.wlan.sa not in STA:
                 label = 1
@@ -206,6 +206,7 @@ def MLLog_processing(packets):
 # but intended purpose is to log events and details for better overview of attacks
 
 def process_wlan(packet:Packet):
+    global deauth_no
     #todo change this code to use packet_extract
     packet_number = packet_extract(packet,"packet_number")
     ts = packet_extract(packet,"timestamp")
@@ -251,43 +252,13 @@ def process_wlan(packet:Packet):
     }
     
     write_log = False
-    
-    # check deauthentication
-    if frameTypes[fc_type][fc_subtype] == "Deauthentication":
+
+    if frameTypes[fc_type][fc_subtype] in events.handle_wlan_events:
         write_log = True
-        deauth_no += 1
-        events.handle_deauth(event,packet,deauth_no)
-
-    # check probe requests
-    if frameTypes[fc_type][fc_subtype] == "Probe Request":
-        write_log = True
-        mgt = getattr(packet,'wlan.mgt')
-        ssid = getattr(mgt,'wlan.ssid',None)
-        events.handle_probe_req(event)
-
-    # check probe response
-    elif frameTypes[fc_type][fc_subtype] == "Probe Response":
-        write_log = True
-        events.handle_probe_resp(event)
-
-    # check authentication
-    elif frameTypes[fc_type][fc_subtype] == "Authentication":
-        if src != bssid:
-            write_log = True
-            events.handle_authentication_req(event)
-        elif src == bssid:
-            write_log = True
-            events.handle_authentication_resp(event)
-
-    # check association
-    elif frameTypes[fc_type][fc_subtype] == "Association Request":
-        write_log = True
-        events.handle_association_req(event)
-
-    elif frameTypes[fc_type][fc_subtype] == "Association Response":
-        write_log = True
-        events.handle_association_resp(event)
-
+        if frameTypes[fc_type][fc_subtype] == "Deauthentication":
+            events.handle_wlan_events[frameTypes[fc_type][fc_subtype]](event,packet,deauth_no)
+        else:
+            events.handle_wlan_events[frameTypes[fc_type][fc_subtype]](event)
     # write to log if packet detected
     if write_log:
         utils.write_to_attacklog(event)
@@ -345,7 +316,7 @@ def log_events(pcap_file,pcap_filter):
     packets.close()
 
 # test code
-"""
+
 filename = Path(__file__).resolve().parent / "testbed_2.pcap"
 
 packets = pyshark.FileCapture(
@@ -369,5 +340,3 @@ for packet in packets:
 MLLog_processing(packets)
 
 packets.close()
-
-"""
