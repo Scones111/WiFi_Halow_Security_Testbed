@@ -48,6 +48,9 @@
 
 static const char *TAG = "TCP_SERVER";
 volatile uint32_t tcp_disconnect_count = 0;
+static uint32_t bytes_received = 0;
+static int64_t throughput_current_time = 0;
+static float last_throughput_mbps = 0.0f;
 
 static float get_cpu_usage_percent(void)
 {
@@ -90,6 +93,29 @@ static float get_cpu_usage_percent(void)
     return cpu_used_percent;
 }
 
+static float get_throughput(void)
+{
+    int64_t currentTime = esp_timer_get_time()
+
+    if (throughput_current_time == 0){
+        throughput_current_time = currentTime;
+        return 0.0f
+    }
+
+    double elapsed_time = (now - throughput_current_time) / 1000000.0;
+
+    if (elapsed_time >= 5.0) {
+        if (bytes_received > 0) {
+            last_throughput_mbps = (bytes_received * 8.0) / (elapsed_time * 1000000.0);
+        }
+
+        bytes_received = 0;
+        throughput_current_time = currentTime;
+    }
+
+    return last_throughput_mbps
+}
+
 static void udp_metrics_task(void *pvParameters)
 {
     // Wait until fully connected
@@ -123,16 +149,22 @@ static void udp_metrics_task(void *pvParameters)
         uint32_t total_heap = heap_caps_get_total_size(MALLOC_CAP_DEFAULT);
         float ram_used_percent = ((float)(total_heap - free_heap) / (float)total_heap) * 100.0f;
         float cpu_used_percent = get_cpu_usage_percent();
+        float throughput = get_throughput();
         uint32_t tcp_disconnects = tcp_disconnect_count;
 
-        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, TCP_Disconnects: %lu", 
-                 end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, Throughput: %.2f%%, TCP_Disconnects: %lu", 
+                 end_time, cpu_used_percent, ram_used_percent, throughput, tcp_disconnects);
 
         if (udp_metrics_sock >= 0) {
             char udp_buf[256];
             snprintf(udp_buf, sizeof(udp_buf), 
-                     "{\"device\": \"server\", \"esp32_uptime_us\": %lld, \"cpu_used_pct\": %.2f, \"ram_used_pct\": %.2f, \"tcp_disconnects\": %lu}", 
-                     end_time, cpu_used_percent, ram_used_percent, tcp_disconnects);
+                     "{\"device\": \"server\", 
+                     \"esp32_uptime_us\": %lld, 
+                     \"cpu_used_pct\": %.2f, 
+                     \"ram_used_pct\": %.2f, 
+                     \"tcp_throughput_mbps\": %.2f,
+                     \"tcp_disconnects\": %lu}", 
+                     end_time, cpu_used_percent, ram_used_percent, throughput, tcp_disconnects);
             int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
             if (sent < 0) {
                 ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
@@ -237,6 +269,7 @@ static void tcp_server_task(void *pvParameters)
                 rx_buffer[len] = '\0';
                 ESP_LOGI(TAG, "Received %d bytes: %s", len, rx_buffer);
                 
+                bytes_received += len
                 // Echo back
                 send(client_sock, "OK\n", 3, 0);
             }

@@ -17,7 +17,7 @@ import attackerDevice.monitor.events as events
 
 #Load MAC address of the known devices
 TRUSTED_AP = utils.get_mac("TrustedAP")
-EVIL_TWIN = utils.get_mac("EvilTwin")
+EVIL_TWIN = utils.get_mac("EvilTwin") # called evil twin but can be a any rouge MAC
 STA = utils.get_mac("STA")
 
 # retrieve known attack frames to log them correctly
