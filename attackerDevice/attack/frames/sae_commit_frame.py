@@ -57,6 +57,3 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
         )
 
     return bytes(frame)
-
-
-commit_frame(1,2)

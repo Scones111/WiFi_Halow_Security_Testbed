@@ -47,12 +47,11 @@ def handle_authentication_req(event):
     if event["bssid"] in EVIL_TWIN:
         event["attack_type"] = "Evil Twin Attack"
         event["details"] = "STA is Sending Authentication request to Evil Twin"
-    elif event['src'] not in STA_MACS:
+    elif event['src'] not in STA_MACS and event["bssid"] in TRUSTED_AP:
         event["attack_type"] = "Dragonblood DoS"
-        event["details"] = "Attacker is Sending Authentication request to Evil Twin"
+        event["details"] = "Attacker is Sending Authentication request to trusted AP"
     elif event["bssid"] in TRUSTED_AP:
         event["details"] = "STA is Sending Authentication request to Trusted AP"
-
     return event
 
 def handle_authentication_resp(event):

@@ -7,7 +7,7 @@ import pandas as pd
 #from attackerDevice.attack.frames.deauth import deauth_frame
 
 #get device file path
-DEVICE_FILE = "devices.json"
+DEVICE_FILE = "attackerDevice/devices.json"
 
 # create log files
 FILE_DEST = "monitor/logs"

@@ -317,7 +317,8 @@ def log_events(pcap_file,pcap_filter):
 
 # test code
 
-filename = Path(__file__).resolve().parent / "testbed_2.pcap"
+"""
+filename = Path(__file__).resolve().parent / "testbed_16.pcap"
 
 packets = pyshark.FileCapture(
     filename,
@@ -326,9 +327,9 @@ packets = pyshark.FileCapture(
     display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 and !basicxid",
     keep_packets=False
 )
-
+print("amount of packets to be processed: ", len(packets))
+i = 0
 for packet in packets:
-
     has_wlan = hasattr(packet, 'wlan')
     has_tcp  = hasattr(packet, 'tcp')
 
@@ -337,6 +338,9 @@ for packet in packets:
     elif has_wlan:
         process_wlan(packet)
 
+    i += 1
+
 MLLog_processing(packets)
 
 packets.close()
+"""
