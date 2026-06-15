@@ -55,7 +55,7 @@ static const char *TAG_TEMP = "TEMP_SENSOR";
 
 static uint32_t bytes_received = 0;
 static int64_t throughput_current_time = 0;
-static float last_throughput_mbps = 0.0f;
+static float last_throughput_bps = 0.0f;
 
 static float get_cpu_usage_percent(void)
 {
@@ -101,25 +101,27 @@ static float get_cpu_usage_percent(void)
 
 static float get_throughput(void)
 {
-    int64_t currentTime = esp_timer_get_time()
+    int64_t currentTime = esp_timer_get_time();
 
     if (throughput_current_time == 0){
         throughput_current_time = currentTime;
-        return 0.0f
+        return 0.0f;
     }
 
-    double elapsed_time = (now - throughput_current_time) / 1000000.0;
+    double elapsed_time = (currentTime - throughput_current_time) / 1000000.0;
 
     if (elapsed_time >= 5.0) {
         if (bytes_received > 0) {
-            last_throughput_mbps = (bytes_received * 8.0) / (elapsed_time * 1000000.0);
+            last_throughput_bps = (bytes_received * 8.0) / elapsed_time;
+        } else {
+            last_throughput_bps = 0.0f;
         }
 
         bytes_received = 0;
         throughput_current_time = currentTime;
     }
 
-    return last_throughput_mbps
+    return last_throughput_bps;
 }
 
 static void udp_metrics_task(void *pvParameters)
@@ -158,19 +160,19 @@ static void udp_metrics_task(void *pvParameters)
         float throughput = get_throughput();
         uint32_t tcp_disconnects = tcp_disconnect_count;
 
-        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, Throughput: %.2f%%, TCP_Disconnects: %lu", 
-                 end_time, cpu_used_percent, ram_used_percent, throughput, tcp_disconnects);
+        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, Throughput: %.2f bps, TCP_Disconnects: %lu", 
+                 end_time, cpu_used_percent, ram_used_percent, throughput, (unsigned long)tcp_disconnects);
 
         if (udp_metrics_sock >= 0) {
             char udp_buf[256];
             snprintf(udp_buf, sizeof(udp_buf), 
-                     "{\"device\": \"server\", 
-                     \"esp32_uptime_us\": %lld, 
-                     \"cpu_used_pct\": %.2f, 
-                     \"ram_used_pct\": %.2f, 
-                     \"tcp_throughput_mbps\": %.2f,
-                     \"tcp_disconnects\": %lu}", 
-                     end_time, cpu_used_percent, ram_used_percent, throughput, tcp_disconnects);
+                     "{\"device\": \"server\", "
+                     "\"esp32_uptime_us\": %lld, "
+                     "\"cpu_used_pct\": %.2f, "
+                     "\"ram_used_pct\": %.2f, "
+                     "\"tcp_throughput_bps\": %.2f, "
+                     "\"tcp_disconnects\": %lu}", 
+                     end_time, cpu_used_percent, ram_used_percent, throughput, (unsigned long)tcp_disconnects);
             int sent = sendto(udp_metrics_sock, udp_buf, strlen(udp_buf), 0, (struct sockaddr *)&udp_dest_addr, sizeof(udp_dest_addr));
             if (sent < 0) {
                 ESP_LOGE(TAG, "UDP sendto failed: errno %d", errno);
@@ -332,7 +334,7 @@ static void tcp_client_task(void *pvParameters)
             }
 
             rx_buffer[len] = '\0';
-            bytes_received += len
+            bytes_received += len;
             ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
 
             vTaskDelay(pdMS_TO_TICKS(5000));   // Read and send every 5 seconds
