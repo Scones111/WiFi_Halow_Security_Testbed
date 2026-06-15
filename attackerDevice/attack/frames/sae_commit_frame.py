@@ -35,7 +35,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
                 addr3=target_mac, # BSSID is typically the AP's MAC
                 SC=(1 << 4)
                 ) /
-            Dot11Auth(algo=3, seqnum=1, status=0    ) /
+            Dot11Auth(algo=3, seqnum=1, status=0) /
             Raw(load=sae_payload)
         )
     

@@ -41,7 +41,7 @@
 #ifndef SAE_PASSPHRASE
 /** Passphrase of the AP (ignored if security type is not SAE).
  *  (Do not quote; it will be stringified.) */
-//#define SAE_PASSPHRASE                  Hs&U82DVN$DV
+#define SAE_PASSPHRASE                  Hs&U82DVN$DV
 #endif
 
 /* Default security type  */

