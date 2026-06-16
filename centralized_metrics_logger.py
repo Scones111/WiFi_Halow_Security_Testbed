@@ -149,7 +149,7 @@ def udp_thread_func(args):
     client_csv_file = open(args.client_output, mode='a', newline='')
     server_csv_file = open(args.server_output, mode='a', newline='')
     
-    esp_fieldnames = ["host_timestamp", "local_time", "device", "esp32_uptime_us", "cpu_used_pct", "ram_used_pct", "tcp_disconnects"]
+    esp_fieldnames = ["host_timestamp", "local_time", "device", "esp32_uptime_us", "cpu_used_pct", "ram_used_pct", "throughput_bps", "tcp_disconnects"]
     
     client_writer = csv.DictWriter(client_csv_file, fieldnames=esp_fieldnames)
     server_writer = csv.DictWriter(server_csv_file, fieldnames=esp_fieldnames)
@@ -184,17 +184,18 @@ def udp_thread_func(args):
                         "esp32_uptime_us": payload.get("esp32_uptime_us", 0),
                         "cpu_used_pct": payload.get("cpu_used_pct", 0.0),
                         "ram_used_pct": payload.get("ram_used_pct", 0.0),
+                        "throughput_bps": payload.get("tcp_throughput_bps", 0.0),
                         "tcp_disconnects": payload.get("tcp_disconnects", 0)
                     }
                     
                     if device == "client":
                         client_writer.writerow(metrics)
                         client_csv_file.flush()
-                        print(f"[CLIENT] Capt -> CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Drops: {metrics['tcp_disconnects']}")
+                        print(f"[CLIENT] Capt -> CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Throughput: {metrics['throughput_bps']:>7.2f} bps | Drops: {metrics['tcp_disconnects']}")
                     elif device == "server":
                         server_writer.writerow(metrics)
                         server_csv_file.flush()
-                        print(f"[SERVER] Capt -> CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Drops: {metrics['tcp_disconnects']}")
+                        print(f"[SERVER] Capt -> CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Throughput: {metrics['throughput_bps']:>7.2f} bps | Drops: {metrics['tcp_disconnects']}")
                     else:
                         print(f"[UDP] Unknown device payload: {payload_str}")
                         
