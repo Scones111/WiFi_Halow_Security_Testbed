@@ -329,6 +329,18 @@ blocks:
     coordinate: [192, 20.0]
     rotation: 0
     state: enabled
+- name: rate_val
+  id: variable
+  parameters:
+    comment: ''
+    value: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1224, 204.0]
+    rotation: 0
+    state: enabled
 - name: samp_rate
   id: variable_qtgui_chooser
   parameters:
@@ -550,7 +562,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 236.0]
+    coordinate: [336, 244.0]
     rotation: 0
     state: enabled
 - name: osmosdr_sink_0
@@ -894,7 +906,7 @@ blocks:
     bus_structure: null
     coordinate: [1168, 824.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_0_0
   id: qtgui_time_sink_x
   parameters:
@@ -991,7 +1003,7 @@ blocks:
     bus_structure: null
     coordinate: [1168, 724.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_time_sink_x_0_0_1
   id: qtgui_time_sink_x
   parameters:
@@ -1088,7 +1100,7 @@ blocks:
     bus_structure: null
     coordinate: [1168, 620.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: rational_resampler_xxx_0
   id: rational_resampler_xxx
   parameters:
