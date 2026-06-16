@@ -166,7 +166,7 @@ static void udp_metrics_task(void *pvParameters)
         if (udp_metrics_sock >= 0) {
             char udp_buf[256];
             snprintf(udp_buf, sizeof(udp_buf), 
-                     "{\"device\": \"server\", "
+                     "{\"device\": \"client\", "
                      "\"esp32_uptime_us\": %lld, "
                      "\"cpu_used_pct\": %.2f, "
                      "\"ram_used_pct\": %.2f, "
