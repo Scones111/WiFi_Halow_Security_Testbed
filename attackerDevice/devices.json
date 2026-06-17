@@ -44,6 +44,7 @@
   ],
   "MetricsCapture": {
     "baudrate": 115200,
-    "output_folder": "../logs/metrics/"
+    "output_folder": "../logs/metrics/",
+    "polling_interval": 5.0
   }
 }

@@ -1,6 +1,6 @@
 import paramiko
 import time
-import argparse
+import json
 import csv
 import sys
 import os
@@ -74,34 +74,47 @@ def parse_ram_stats(raw_data):
     return (used / mem_total) * 100.0
 
 def main():
-    parser = argparse.ArgumentParser(description="Capture CPU/RAM metrics from Heltec Router via SSH")
-    parser.add_argument("--ip", default="192.168.0.100", help="Router IP address (default: 192.168.0.100)")
-    parser.add_argument("--user", default="root", help="SSH username (default: root)")
-    parser.add_argument("--password", default="heltec.org", help="SSH password (default: heltec.org)")
-    parser.add_argument("-o", "--output", default="router_logs/router_metrics.csv", help="Output CSV file (default: router_logs/router_metrics.csv)")
-    parser.add_argument("-i", "--interval", type=float, default=5.0, help="Polling interval in seconds (default: 5.0)")
+    config_path = os.path.join(os.path.dirname(__file__), "attackerDevice", "devices.json")
+    try:
+        with open(config_path, "r") as f:
+            config = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Configuration file {os.path.abspath(config_path)} not found.")
+        sys.exit(1)
+
+    router_config = config.get("TrustedAP", [{}])[0]
+    router_ip = router_config.get("ip", "192.168.0.100")
+    router_user = router_config.get("user", "root")
+    router_pass = router_config.get("pass", "heltec.org")
     
-    args = parser.parse_args()
+    metrics_config = config.get("MetricsCapture", {})
+    attacker_device_dir = os.path.join(os.path.dirname(__file__), "attackerDevice")
+    
+    timestamp_str = time.strftime("%Y%m%d_%H%M")
+    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"), f"{timestamp_str}/")
+    output_file = os.path.join(output_folder, "router_metrics.csv")
+    
+    interval = metrics_config.get("polling_interval", 5.0)
     
     # Setup CSV Logging
-    os.makedirs(os.path.dirname(os.path.abspath(args.output)), exist_ok=True)
-    csv_file = open(args.output, mode='a', newline='')
+    os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
+    csv_file = open(output_file, mode='a', newline='')
     fieldnames = ["host_timestamp", "local_time", "cpu_used_pct", "ram_used_pct"]
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     
     if csv_file.tell() == 0:
         writer.writeheader()
         
-    abs_path = os.path.abspath(args.output)
+    abs_path = os.path.abspath(output_file)
     print(f"[ROUTER] Logging metrics to {abs_path}")
     
     # Connect via SSH
-    print(f"[ROUTER] Connecting to {args.user}@{args.ip}...")
+    print(f"[ROUTER] Connecting to {router_user}@{router_ip}...")
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     
     try:
-        ssh.connect(args.ip, username=args.user, password=args.password, timeout=5)
+        ssh.connect(router_ip, username=router_user, password=router_pass, timeout=5)
         print("[ROUTER] Successfully connected!")
     except Exception as e:
         print(f"Failed to connect to router: {e}")
@@ -152,7 +165,7 @@ def main():
             
             # Sleep precisely to match the interval
             elapsed = time.time() - start_time
-            sleep_time = args.interval - elapsed
+            sleep_time = interval - elapsed
             if sleep_time > 0:
                 time.sleep(sleep_time)
                 

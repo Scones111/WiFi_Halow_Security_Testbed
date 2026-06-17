@@ -1,7 +1,7 @@
 import serial
 import re
 import csv
-import argparse
+import json
 import sys
 import time
 import os
@@ -59,27 +59,37 @@ def setup_device(port, baud, output_file, device_name):
         return None
 
 def main():
-    parser = argparse.ArgumentParser(description="Capture ESP32 ML_DATA metrics from serial ports simultaneously")
-    parser.add_argument("--client-port", help="Serial port for the Client ESP32")
-    parser.add_argument("--server-port", help="Serial port for the Server ESP32")
-    parser.add_argument("-b", "--baud", type=int, default=115200, help="Baud rate (default: 115200)")
-    parser.add_argument("--client-output", default="logs/client_metrics.csv", help="Output CSV for Client (default: logs/client_metrics.csv)")
-    parser.add_argument("--server-output", default="logs/server_metrics.csv", help="Output CSV for Server (default: logs/server_metrics.csv)")
+    config_path = os.path.join(os.path.dirname(__file__), "..", "attackerDevice", "devices.json")
+    try:
+        with open(config_path, "r") as f:
+            config = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: Configuration file {os.path.abspath(config_path)} not found.")
+        sys.exit(1)
+
+    stas = config.get("STA", [])
     
-    args = parser.parse_args()
+    metrics_config = config.get("MetricsCapture", {})
+    baud = metrics_config.get("baudrate", 115200)
     
-    if not args.client_port and not args.server_port:
-        parser.error("You must specify at least one of --client-port or --server-port")
+    attacker_device_dir = os.path.join(os.path.dirname(__file__), "..", "attackerDevice")
+    timestamp_str = time.strftime("%Y%m%d_%H%M")
+    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"), f"{timestamp_str}/")
+    
+    if not stas:
+        print("Error: No STA devices found in devices.json")
+        sys.exit(1)
         
     devices = []
     
-    if args.client_port:
-        dev = setup_device(args.client_port, args.baud, args.client_output, "client")
-        if dev: devices.append(dev)
-            
-    if args.server_port:
-        dev = setup_device(args.server_port, args.baud, args.server_output, "server")
-        if dev: devices.append(dev)
+    for sta in stas:
+        port = sta.get("serial_port")
+        name = sta.get("name", "unknown_sta")
+        
+        if port:
+            output_file = os.path.join(output_folder, f"{name}_metrics.csv")
+            dev = setup_device(port, baud, output_file, name)
+            if dev: devices.append(dev)
         
     if not devices:
         print("No devices were successfully connected. Exiting.")

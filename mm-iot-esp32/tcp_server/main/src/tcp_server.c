@@ -44,7 +44,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-#define CENTRALIZED_LOG_SERVER "192.168.0.101"  // ← CHANGE TO YOUR DEVICE IP
 
 static const char *TAG = "TCP_SERVER";
 volatile uint32_t tcp_disconnect_count = 0;
@@ -125,7 +124,7 @@ static void metrics_task(void *pvParameters)
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 
-    ESP_LOGI(TAG, "Starting dedicated UDP metrics task");
+    ESP_LOGI(TAG, "Starting dedicated metrics task");
 
     while (1) {
 

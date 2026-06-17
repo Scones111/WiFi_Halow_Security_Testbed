@@ -47,7 +47,6 @@
 #include "esp_adc/adc_cali_scheme.h"
 
 #define TCP_SERVER_IP "192.168.0.200"            // ← CHANGE TO YOUR SERVER IP
-#define CENTRALIZED_LOG_SERVER "192.168.0.101"  // ← CHANGE TO YOUR DEVICE IP
 
 static const char *TAG = "TCP_CLIENT";
 volatile uint32_t tcp_disconnect_count = 0;
@@ -124,14 +123,14 @@ static float get_throughput(void)
     return last_throughput_bps;
 }
 
-static void udp_metrics_task(void *pvParameters)
+static void metrics_task(void *pvParameters)
 {
     // Wait until fully connected
     while (mmwlan_get_sta_state() != MMWLAN_STA_CONNECTED) {
         vTaskDelay(pdMS_TO_TICKS(500));
     }
 
-    ESP_LOGI(TAG, "Starting dedicated UDP metrics task");
+    ESP_LOGI(TAG, "Starting dedicated metrics task");
 
     while (1) {
         int64_t end_time = esp_timer_get_time();
@@ -297,7 +296,7 @@ static void tcp_client_task(void *pvParameters)
                 break; // Break inner loop to trigger reconnect
             }
 
-            rx_buffer[len] = '\0';
+            rx_buffer[len] = 0; // Null-terminate whatever we received and treat like a string
             bytes_received += len;
             ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
 
@@ -322,6 +321,6 @@ void app_main(void)
     printf("Link is up, proceeding to start TCP client\n");
 
     xTaskCreate(tcp_client_task, "tcp_client", 8192, NULL, 5, NULL);
-    xTaskCreate(udp_metrics_task, "udp_metrics", 4096, NULL, 5, NULL);
+    xTaskCreate(metrics_task, "metrics", 4096, NULL, 5, NULL);
 
 }
