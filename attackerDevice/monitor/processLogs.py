@@ -28,7 +28,8 @@ deauth_no = 0
 
 #initialize columns to be used:
 columns = [
-    "packet_number", 
+    "packet_number",
+    "timestamp",
     "frame_name",
     "frame_len",
     "length",
@@ -185,7 +186,7 @@ def MLLog_processing(packets):
         elif hasattr(packet.wlan,"sa"):
             if packet.wlan.sa in EVIL_TWIN:
                 label = 1
-            elif packet.wlan.sa not in STA:
+            elif packet.wlan.sa not in STA and packet.wlan.sa not in TRUSTED_AP:
                 label = 1
         elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in ATTACK_FRAMES:
             label = 1

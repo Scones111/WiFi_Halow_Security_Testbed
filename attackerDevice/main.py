@@ -17,11 +17,12 @@ if __name__ == "__main__":
     print("1. Attack")
     print("2. Attack and Capture traffic logs")
     print("3. Metrics Capture")
-    choice = input("Type 1, 2, or 3: ")
+    print("4. Capture Base Network")
+    choice = input("Type 1, 2, 3 or 4: ")
     print("")
-    while choice not in ["1", "2", "3"]:
+    while choice not in ["1", "2", "3", "4"]:
         print("Not a valid choice try again!")
-        choice = input("Type 1, 2, or 3: ")
+        choice = input("Type 1, 2, 3 or 4: ")
         print("")
 
     if choice == "1":
@@ -108,3 +109,9 @@ if __name__ == "__main__":
             ]
             
             centralized_metrics_logger.main(args_list)
+    elif choice == "4":
+        setupLogging.start_log()
+        input("Press enter to stop monitoring:")
+        setupLogging.end_log()
+        setupLogging.post_process()
+

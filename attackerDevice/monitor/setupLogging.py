@@ -18,7 +18,7 @@ MON_USER = devices["Monitor"][0]["user"]
 MON_PASS = devices["Monitor"][0]["password"]
 
 
-WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
+WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 && (wlan.sa != )"
 
 PCAP_SRC = "monitor/tempPcap"
 PCAP_DST = "monitor/pcaps"
@@ -38,17 +38,19 @@ tcpdump = None
 def start_log():
     global tcpdump
     # start monitor mode
+    os.system(f"sshpass -p 'halow' ssh root@10.42.01 'date -s \'@$(date -u +%s)\''")
+
     os.system(f"sshpass -p '{MON_PASS}' ssh {MON_USER}@{MON_IP} './../sniffer_mode.sh'")
 
     with open(PCAP_PATH, "wb") as pcap_file:
-        cmd = [
+        tcpdump_cmd = [
             "sshpass", "-p" ,MON_PASS, 
             "ssh" ,f"{MON_USER}@{MON_IP}", 
             "tcpdump", "-i", "morse0", "-U", "-s0", "-w", "-"
             ]
         
         tcpdump = subprocess.Popen(
-            cmd, 
+            tcpdump_cmd, 
             stdout=pcap_file,
             stderr=subprocess.DEVNULL,
             stdin=subprocess.DEVNULL,
