@@ -20,7 +20,12 @@ def check_con_devices():
             con_devices[port] = True
 
     #ping to check for connection
-    res = subprocess.run(f"ping -c 1 {trustedAP['ip']}",stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode
+    res = -1
+    try:
+        res = subprocess.run(f"ping -c 1 {trustedAP['ip']}",stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode
+    except:
+        pass
+
     if res == 0:
         con_devices[trustedAP["name"]] = True
 
@@ -35,13 +40,12 @@ def setup_client():
     logger_process = None
     router_process = None
     esp_process = None
-    client = None
-
+    client = socket(AF_INET, SOCK_STREAM)
     #wait till server is ready
     while(True):
         try:
-            client = socket(AF_INET, SOCK_STREAM)
-            client.connect(('127.0.0.1', 5005))
+            client.connect(('10.209.201.56', 5005))
+            print("connected to server")
             break
         except:
             print("server not up wait")
@@ -49,6 +53,7 @@ def setup_client():
             time.sleep(2)
     
     #check for connected devices
+    print("checking connected devices")
     con_devices = check_con_devices()
     #iterate through devices and transmit, the ones that are true
     for device_n, device_c in con_devices.items():

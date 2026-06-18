@@ -69,7 +69,7 @@ def con_devices_check(server,con_devices,clients):
             if all(value == True for value in con_devices.values()):
                 break
         try:
-            con, _, = socket.accept()
+            con, _, = server.accept()
             if con is not None:
                 #client sock inherits non blocking, set to be blocking here again
                 con.setblocking(True)
