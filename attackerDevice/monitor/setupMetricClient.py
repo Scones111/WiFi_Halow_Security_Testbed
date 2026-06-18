@@ -16,8 +16,8 @@ def check_con_devices():
     sta_ports = {device["serial_port"]:device["name"] for device in utils.load_json()["STA"]}
 
     for port in ports:
-        if sta_ports[port] != None:
-            con_devices[port] = True
+        if port.device in sta_ports:
+            con_devices[sta_ports[port.device]] = True
 
     #ping to check for connection
     res = -1
@@ -40,9 +40,10 @@ def setup_client():
     logger_process = None
     router_process = None
     esp_process = None
-    client = socket(AF_INET, SOCK_STREAM)
+    
     #wait till server is ready
     while(True):
+        client = socket(AF_INET, SOCK_STREAM)
         try:
             client.connect(('10.209.201.56', 5005))
             print("connected to server")
@@ -59,13 +60,13 @@ def setup_client():
     for device_n, device_c in con_devices.items():
         print(device_n,device_c)
         if device_c:
-            msg = f"{device_n},{device_c}".encode('utf-8')
+            msg = f"{device_n},{device_c}\n".encode('utf-8')
             client.send(msg)
             time.sleep(0.1)
 
     print("done sending connected devices")
     #flag to tell server it is done transmitting
-    client.send("done".encode('utf-8'))
+    client.send("done\n".encode('utf-8'))
 
     print("now waiting for command to run")
     msg = client.recv(1024)
@@ -109,14 +110,18 @@ def setup_client():
 
     #todo iterate through logs stored and transmit them over tcp
     for file in range(3): #change range(3) to be a folder to iterate through
-        with open(file,"rb") as f:
+        file_name = str(file)
+        if not os.path.exists(file_name):
+            continue
+            
+        with open(file_name,"rb") as f:
             data = f.read()
 
         #transmit file name
-        client.send(f"{file}".encode('utf-8'))
+        client.send(f"{file_name}\n".encode('utf-8'))
         time.sleep(0.01)
         #transmit length of data
-        client.send(f"{len(data)}".encode('utf-8'))
+        client.send(f"{len(data)}\n".encode('utf-8'))
 
         #transmit all data
         client.sendall(data)

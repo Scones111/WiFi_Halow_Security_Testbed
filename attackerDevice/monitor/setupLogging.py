@@ -1,4 +1,4 @@
-﻿import os
+import os
 import subprocess
 from monitor import processLogs
 import utils
@@ -41,23 +41,34 @@ def load_config():
     FULLPATH = os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME)
 
 def get_in_dev_con(client, con_devices, clients):
+    buffer = ""
     while(True):
         #check for messages of connected devices
-        msg = client.recv(1024)
-        msg_str = msg.decode('utf-8')
-        if msg_str == "done":
+        try:
+            msg = client.recv(1024)
+            if not msg:
+                break
+            
+            buffer += msg.decode('utf-8')
+            while "\n" in buffer:
+                line, buffer = buffer.split("\n", 1)
+                if line == "done":
+                    return
+                elif line:
+                    msg_split = line.split(',')
+                    if len(msg_split) >= 2 and msg_split[1] == "True":
+                        with lock:
+                            #update for break condition
+                            con_devices[msg_split[0]] = True
+                            # add new client with the know connected device
+                            if client not in clients:
+                                clients[client] = [msg_split[0]]
+                            else:
+                                if msg_split[0] not in clients[client]:
+                                    clients[client].append(msg_split[0])
+        except Exception as e:
+            print(f"Error receiving from client: {e}")
             break
-        elif msg:
-            msg_split = msg_str.split(',')
-            if msg_split[1] == "True":
-                with lock:
-                    #update for break condition
-                    con_devices[msg_split[0]] = True
-                    # add new client with the know connected device
-                    if client not in clients:
-                        clients[client] = [msg_split[0]]
-                    else:
-                        clients[client].append(msg_split[0])
 
 # used for establishing incoming connections
 def con_devices_check(server,con_devices,clients):
@@ -114,13 +125,38 @@ def init_metric_logs():
 def recv_metric_data(client):
     #set timeout, avoid block
     client.settimeout(5.0)
+    
+    # helper to read line by line for headers
+    def recv_line(sock):
+        line = ""
+        while True:
+            try:
+                char = sock.recv(1).decode('utf-8')
+                if char == '\n':
+                    break
+                if not char:
+                    break
+                line += char
+            except Exception:
+                break
+        return line
+
     #name of file to be stored
-    file_name = client.recv(1024).decode('utf-8')
-    file_size = int(client.recv(1024).decode('utf-8'))
+    file_name = recv_line(client)
+    if not file_name:
+        return
+        
+    size_str = recv_line(client)
+    if not size_str:
+        return
+    file_size = int(size_str)
 
     buffer = b""
     while(file_size > len(buffer)):
-        data = client.recv(1024*4)
+        chunk_size = min(1024*4, file_size - len(buffer))
+        data = client.recv(chunk_size)
+        if not data:
+            break
         buffer += data
     
     #write file name to be stored
