@@ -162,7 +162,7 @@ def packet_extract(packet,field):
     
     return final_extract
 
-def MLLog_processing(packets):
+def MLLog_processing(packets,folder_path):
     # normal traffic = 0, malicious traffic = 1
     label=0
 
@@ -200,13 +200,13 @@ def MLLog_processing(packets):
 
         i += 1
 
-    utils.write_to_ml_log(frt_df)
+    utils.write_to_ml_log(frt_df,folder_path)
 
 # Code for logging the information and events from capture pcap file
 # pure attack logging, can contain information for machine learning,
 # but intended purpose is to log events and details for better overview of attacks
 
-def process_wlan(packet:Packet):
+def process_wlan(packet:Packet,folder_path):
     global deauth_no
     #todo change this code to use packet_extract
     packet_number = packet_extract(packet,"packet_number")
@@ -262,9 +262,9 @@ def process_wlan(packet:Packet):
             events.handle_wlan_events[frameTypes[fc_type][fc_subtype]](event)
     # write to log if packet detected
     if write_log:
-        utils.write_to_attacklog(event)
+        utils.write_to_attacklog(event,folder_path)
 
-def process_tcp(packet:Packet):
+def process_tcp(packet:Packet,folder_path):
     packet_number = packet_extract(packet,"packet_number")
     ts = packet_extract(packet,"timestamp")
     rf = packet_extract(packet,"dbm_antsignal")
@@ -289,10 +289,10 @@ def process_tcp(packet:Packet):
     
     events.handle_tcp(event)
 
-    utils.write_to_tcp_log(event)
+    utils.write_to_tcp_log(event,folder_path)
 
 
-def log_events(pcap_file,pcap_filter):
+def log_events(pcap_file,pcap_filter,folder_path):
     packets = pyshark.FileCapture(
         pcap_file,
         display_filter=pcap_filter,
@@ -308,11 +308,11 @@ def log_events(pcap_file,pcap_filter):
 
         #process either tcp or wlan
         if has_wlan and has_tcp:
-            process_tcp(packet)
+            process_tcp(packet,folder_path)
         elif has_wlan:
-            process_wlan(packet)
+            process_wlan(packet,folder_path)
 
-    MLLog_processing(packets)
+    MLLog_processing(packets,folder_path)
 
     packets.close()
 

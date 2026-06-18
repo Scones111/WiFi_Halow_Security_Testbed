@@ -1,5 +1,7 @@
 import socket
 import paramiko
+import psutil
+import serial
 import time
 import argparse
 import csv
@@ -9,6 +11,8 @@ import re
 import threading
 import json
 import signal
+import attackerDevice.utils as utils
+import subprocess
 
 # Global flag to control threads
 running = True
@@ -225,7 +229,7 @@ def main(args_list=None):
             config = json.load(f)
     except FileNotFoundError:
         config = {}
-        
+    
     router_config = config.get("router", {})
     output_config = config.get("output_files", {})
 
@@ -264,5 +268,29 @@ def main(args_list=None):
 
     print("[MAIN] Shutdown complete.")
 
+import serial.tools.list_ports
+
+def check_con_devices():
+    con_devices = {device["name"]:False for device in utils.load_json()["STA"]}
+    trustedAP = utils.load_json()["TrustedAP"][0]
+    con_devices[trustedAP["name"]] = False
+    
+    print("Remeber to configure the devices to use the correct ports")
+    ports = serial.tools.list_ports.comports()
+    sta_ports = {device["serial_port"]:device["name"] for device in utils.load_json()["STA"]}
+
+    for port in ports:
+        if sta_ports[port] != None:
+            con_devices[port] = True
+
+    #ping to check for connection
+    print(trustedAP["ip"])
+    res = subprocess.run(f"ping -c 1 {trustedAP['ip']}",stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode
+    if res == 0:
+        con_devices[trustedAP["name"]] = True
+
+    return con_devices
+
 if __name__ == "__main__":
-    main()
+    check_con_devices()
+    #main()

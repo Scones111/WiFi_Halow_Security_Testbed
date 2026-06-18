@@ -9,20 +9,9 @@ import time
 import json
 
 #helper function to store meta data for attack in csv file
-def log_metaData(start,end,type):
-    file_number = 0
-    file = f"{type}_{file_number}.json"
-    path = f"metaData"
-    
-    os.makedirs(path+"/", exist_ok=True)
-    while os.path.exists(os.path.join(path, file)):
-        file_number += 1
-        file = f"{type}_{file_number}.json"
-    
-    metaData = {"attackType":type,"attackStart":start,"attackEnd":end}
-    with open(os.path.join(path, file),"w") as file:
-        json.dump(metaData,file)
+"""
 
+"""
 def run():
     appMessages.print_intro()
 
@@ -31,11 +20,15 @@ def run():
     mode_choice = None
     attack_start = None
     attack_type = None
+
+    att_meta = {"attackType":None,"attackStart":None,"attackEnd":None}
+    att_metadata = []
     # loop for mode selection
     while(True):
         print("which attack do you want to perform?")
         print("1. evil twin attack")
         print("2. Dragonblood DoS attack")
+        print("Note: that you can wait, to collect more data outside of attack")
 
         while(True):
             mode_choice = input("Enter the number corresponding to the mode: ")
@@ -45,30 +38,34 @@ def run():
                 print("Invalid choice. Please enter a valid number.")
 
         if mode_choice == "1":
-            attack_start = time.time()
-            attack_type = "evil_twin"
+            att_meta["attackType"].append("evil_twin")
+            att_meta["attackStart"].append(time.time())
             print("Evil Twin attack selected")
+            print("remeber to plug in rouge AP")
             #call shell script to start evil twin AP
             # can disconnect after
-            os.system("./../shellScript/start_evil_twin.sh")
+            #os.system("./../shellScript/start_evil_twin.sh")
 
             evilTwin.transmit_frame_deauth()
 
             # connect before stopping evil twin AP
             # call shell script to stop evil twin
-            os.system("./../shellScript/stop_evil_twin.sh")
+            #os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
-            attack_start = time.time()
-            attack_type = "DragonBlood_DoS"
+            att_meta["attackType"].append("DragonBlood_DoS")
+            att_meta["attackStart"].append(time.time())
             print("Dragonblood DoS attack selected")
             dragonblood.start_dos()
         
-        log_metaData(attack_start,time.time(),attack_type)
+        att_meta["attackEnd"] = time.time()
+        att_metadata.append(att_metadata)
+        #log_metaData(attack_start,time.time(),attack_type)
         # exit or select another mode
         continue_choice = input("\nDo you want to perform another attack? (y/n):")
         while(continue_choice not in ["y", "n"]):
             continue_choice = input("Invalid input. Please enter 'y' for yes or 'n' for no: ")
         if continue_choice == "n":
             break
-
+    
+    return att_metadata

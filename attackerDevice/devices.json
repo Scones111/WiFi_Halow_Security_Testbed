@@ -3,7 +3,9 @@
     {
       "name": "Heltec",
       "ip": "192.168.0.100",
-      "mac": "78:72:64:ea:b9:14"
+      "mac": "78:72:64:ea:b9:14",
+      "user": "root",
+      "pass": "heltec.org"
     }
   ],
   "EvilTwin": [
@@ -30,12 +32,18 @@
     {
       "name": "tcp_server",
       "ip": "192.168.0.200",
-      "mac": "3c:22:7f:71:dc:b8"
+      "mac": "3c:22:7f:71:dc:b8",
+      "serial_port": "/dev/cu.usbmodem101"
     },
     {
       "name": "tcp_client",
       "ip": "192.168.0.150",
-      "mac": "3c:22:7f:71:df:d6"
+      "mac": "3c:22:7f:71:df:d6",
+      "serial_port": "/dev/cu.usbmodem2101"
     }
-  ]
+  ],
+  "MetricsCapture": {
+    "baudrate": 115200,
+    "output_folder": "../logs/metrics/"
+  }
 }
