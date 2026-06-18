@@ -19,14 +19,18 @@ if __name__ == "__main__":
     if choice == "1":
         attackSelection.run()
     elif choice == "2":
-        setupLogging.start_log()
+        setupLogging.load_config()
+        setupLogging.start_traffic_log()
+        clients = setupLogging.init_metric_logs()
         attackSelection.run()
-        setupLogging.end_log()
+        setupLogging.stop_metric_logs(clients)
+        setupLogging.end_traffic_log()
         setupLogging.post_process()
     elif choice == "3":
-        setupLogging.start_log()
+        setupLogging.load_config()
+        setupLogging.start_traffic_log()
         input("Press enter to stop monitoring:")
-        setupLogging.end_log()
+        setupLogging.end_traffic_log()
         setupLogging.post_process()
     elif choice == "4":
         print("You have selected the metric capture!")

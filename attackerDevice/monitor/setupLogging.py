@@ -19,6 +19,8 @@ FULLPATH = None
 
 def load_config():
     global MON_IP, MON_USER, MON_PASS, FULLPATH, FOLDER
+    if FULLPATH is not None:
+        return
     devices = utils.load_json()
 
     #load monitor device config
@@ -76,8 +78,8 @@ def con_devices_check(server,con_devices,clients):
             #sleep when no device have trying to connect
             time.sleep(0.01)
 
-def init_metric_Logs():
-    print("UDP server running...")
+def init_metric_logs():
+    print("TCP server running...")
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(("0.0.0.0", 5005))
     server.listen(5)
@@ -128,9 +130,10 @@ def recv_metric_data(client):
     
 
 def stop_metric_logs(clients):
-    #can sent anything, the client waits on a signal top stop
+    #can send anything, the client waits on a signal top stop
+    stop_msg = "stop logging"
     for client, devices in clients.items():
-        client.send("stop logging".encode('utf-8'))
+        client.send(stop_msg.encode('utf-8'))
         for _ in devices:
             recv_metric_data(client)
     

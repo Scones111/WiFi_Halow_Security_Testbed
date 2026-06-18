@@ -4,9 +4,9 @@ import subprocess
 import time
 
 def main():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     
-    esp32_script = os.path.join(base_dir, "mm-iot-esp32", "capture_esp32_metrics.py")
+    esp32_script = os.path.join(base_dir, "capture_esp32_metrics.py")
     router_script = os.path.join(base_dir, "capture_router_metrics.py")
     
     print("Starting Centralized Metrics Logger...")

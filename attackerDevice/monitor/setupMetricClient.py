@@ -4,6 +4,7 @@ import serial.tools.list_ports
 import subprocess
 import utils
 import time
+import os
 
 def check_con_devices():
     con_devices = {device["name"]:False for device in utils.load_json()["STA"]}
@@ -27,7 +28,15 @@ def check_con_devices():
 
 
 def setup_client():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    esp32_script = os.path.join(base_dir, "capture_esp32_metrics.py")
+    router_script = os.path.join(base_dir, "capture_router_metrics.py")
+    centralized_script = os.path.join(base_dir, "centralized_metrics_logger.py")
+    logger_process = None
+    router_process = None
+    esp_process = None
     client = None
+
     #wait till server is ready
     while(True):
         try:
@@ -60,15 +69,38 @@ def setup_client():
 
     #Todo implement more options here
     if msg_str == "run centralized logging":
-        print("will now start logging")
-        #todo implement threading here or subprocess here
+        print("will now start logging router and esp devices")
+        try:
+            logger_process = subprocess.Popen([sys.executable, os.path.abspath(centralized_script)])
+        except Exception as e:
+            print(f"Error starting logger: {e}")
         #needs to be none blocking, so we can move recv that will be called when logging should be stopped
-    elif msg_str:
-        pass
+    elif msg_str == "run router logging":
+        print("will now start logging router")
+        try:
+            router_process = subprocess.Popen([sys.executable, os.path.abspath(router_script)])
+        except Exception as e:
+            print(f"Error starting router process: {e}")
+    elif msg_str == "run esp logging":
+        print("will now start logging esp devices")
+        try:
+            esp_process = subprocess.Popen([sys.executable, os.path.abspath(esp32_script)])
+        except Exception as e:
+            print(f"Error starting esp process: {e}")
 
     #stop logging can be anything
     #blocks until server transmit a message
-    client.recv(1024)
+    stop_msg = client.recv(1024).decode('utf-8')
+    if stop_msg == "stop logging":
+        if logger_process:
+            logger_process.terminate()
+            logger_process.wait()
+        if router_process:
+            router_process.terminate()
+            router_process.wait()
+        if esp_process:
+            esp_process.terminate()
+            esp_process.wait()
 
     #todo iterate through logs stored and transmit them over tcp
     for file in range(3): #change range(3) to be a folder to iterate through
