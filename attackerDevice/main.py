@@ -8,7 +8,7 @@ if __name__ == "__main__":
     print("1. Attack")
     print("2. Attack and Capture traffic logs")
     print("3. Capture Base Network")
-    print("4. Metrics Capture")
+    print("4. Capture Metrics")
     choice = input("Type 1, 2, 3 or 4: ")
     print("")
     while choice not in ["1", "2", "3", "4"]:
