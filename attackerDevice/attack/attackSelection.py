@@ -38,8 +38,8 @@ def run():
                 print("Invalid choice. Please enter a valid number.")
 
         if mode_choice == "1":
-            att_meta["attackType"].append("evil_twin")
-            att_meta["attackStart"].append(time.time())
+            att_meta["attackType"] = "evil_twin"
+            att_meta["attackStart"] = time.time()
             print("Evil Twin attack selected")
             print("remeber to plug in rouge AP")
             #call shell script to start evil twin AP
@@ -53,8 +53,8 @@ def run():
             #os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
-            att_meta["attackType"].append("DragonBlood_DoS")
-            att_meta["attackStart"].append(time.time())
+            att_meta["attackType"] = "DragonBlood_DoS"
+            att_meta["attackStart"] = time.time()
             print("Dragonblood DoS attack selected")
             dragonblood.start_dos()
         
