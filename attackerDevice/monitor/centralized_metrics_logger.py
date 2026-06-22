@@ -20,6 +20,11 @@ def start_logging():
         print(f"Failed to start metric captures: {e}")
         return None, None
 
+def main():
+    esp_process, router_process = start_logging()
+    if not esp_process or not router_process:
+        return
+
     print("\nCapturing metrics from both sources... Press Ctrl+C to stop.\n")
     
     try:

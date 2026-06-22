@@ -6,7 +6,7 @@ import utils
 import time
 import sys
 import os
-from attackerDevice.monitor import centralized_metrics_logger
+import centralized_metrics_logger
 
 def check_con_devices():
     con_devices = {device["name"]:False for device in utils.load_json()["STA"]}

@@ -13,7 +13,7 @@ MON_IP = None
 MON_USER = None
 MON_PASS = None
 
-WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 && (wlan.sa != )"
+WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
 
 FULLPATH = None
 
