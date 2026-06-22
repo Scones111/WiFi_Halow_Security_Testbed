@@ -38,7 +38,6 @@ def setup_client():
     esp32_script = os.path.join(base_dir, "capture_esp32_metrics.py")
     router_script = os.path.join(base_dir, "capture_router_metrics.py")
     centralized_script = os.path.join(base_dir, "centralized_metrics_logger.py")
-    logger_process = None
     router_process = None
     esp_process = None
     client = socket(AF_INET, SOCK_STREAM)
@@ -103,9 +102,6 @@ def setup_client():
     #blocks until server transmit a message
     stop_msg = client.recv(1024).decode('utf-8')
     if stop_msg == "stop logging":
-        #if logger_process:
-        #    logger_process.terminate()
-        #    logger_process.wait()
         if router_process:
             router_process.terminate()
             router_process.wait()

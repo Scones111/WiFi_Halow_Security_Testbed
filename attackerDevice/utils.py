@@ -52,4 +52,4 @@ def turn_hex_to_string(hex:str):
     return hex_bytes.decode('utf-8', errors='replace')
 
 def write_to_ml_log(features:pd.DataFrame,folder_path):
-    features.to_csv(os.path.join(folder_path, "ML_LOG"), mode='a', header=not os.path.exists(os.path.join(ML_FILE_DEST, ML_LOG)), index=False)
+    features.to_csv(os.path.join(folder_path, "ML_LOG.csv"), mode='a', header=not os.path.exists(os.path.join(folder_path, "ML_LOG.csv")), index=False)

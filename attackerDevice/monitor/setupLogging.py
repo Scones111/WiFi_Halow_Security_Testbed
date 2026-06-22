@@ -28,12 +28,12 @@ def load_config():
     MON_USER = devices["Monitor"][0]["user"]
     MON_PASS = devices["Monitor"][0]["password"]
 
-    PATH_TO_EXPERIMENTS = "monitor/results"
-    FOLDER_NAME = "experiment_0"
+    PATH_TO_EXPERIMENTS = "monitor/results/"
+    FOLDER_NAME = "experiment_0/"
 
     counter = 0
     while os.path.exists(os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME)):
-        FOLDER_NAME = f"experiment_{counter}"
+        FOLDER_NAME = f"experiment_{counter}/"
         counter += 1
 
     os.makedirs(os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME))
@@ -97,6 +97,8 @@ def init_metric_logs():
 
     clients = {}
     con_devices_check(server=server,con_devices=con_devices,clients=clients)
+    print("after con_devices_check")
+    print(con_devices)
 
     centralized = len(clients) == 1
 
@@ -104,19 +106,25 @@ def init_metric_logs():
     for sock,value in clients.items():
         if centralized:
             sock.send("run centralized logging".encode('utf-8'))
-        if utils.load_json()["TrustedAP"][0]['name'] in value and set(value).isdisjoint(sta_names):
+        elif utils.load_json()["TrustedAP"][0]['name'] in value and set(value).isdisjoint(sta_names):
             sock.send("run router logging".encode('utf-8'))
         else:
             sock.send("run esp logging".encode('utf-8'))
-
+    print(clients)
     return clients
 
 def recv_metric_data(client):
     #set timeout, avoid block
     client.settimeout(5.0)
+    client.send(b"ok")
     #name of file to be stored
     file_name = client.recv(1024).decode('utf-8')
-    file_size = int(client.recv(1024).decode('utf-8'))
+    client.send(b"ok")
+    
+    print(file_name)
+    file_size = client.recv(1024).decode('utf-8')
+    file_size = int(file_size)
+    client.send(b"ok")
 
     buffer = b""
     while(file_size > len(buffer)):
@@ -177,7 +185,9 @@ def log_metaData(att_metaData):
         json.dump(att_metaData,file)
 
 def post_process():
-    processLogs.log_events(os.path.join(FULLPATH,"traffic.pcap"),WIRESHARK_FILTER,FULLPATH)
+    cwd = os.path.dirname(os.path.abspath(__file__))
+    corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, FULLPATH))
+    processLogs.log_events(os.path.join(corrected_path,"traffic.pcap"),WIRESHARK_FILTER,corrected_path)
 
 
 """

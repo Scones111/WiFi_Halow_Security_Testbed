@@ -29,7 +29,9 @@ if __name__ == "__main__":
     elif choice == "3":
         setupLogging.load_config()
         setupLogging.start_traffic_log()
+        clients = setupLogging.init_metric_logs()
         input("Press enter to stop monitoring:")
+        setupLogging.stop_metric_logs(clients)
         setupLogging.end_traffic_log()
         setupLogging.post_process()
     elif choice == "4":

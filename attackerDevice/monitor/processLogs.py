@@ -199,7 +199,7 @@ def MLLog_processing(packets,folder_path):
                 frt_df.loc[i,feature] = packet_extract(packet,feature)
 
         i += 1
-
+    print(f"Saved in {folder_path}")
     utils.write_to_ml_log(frt_df,folder_path)
 
 # Code for logging the information and events from capture pcap file
@@ -300,7 +300,6 @@ def log_events(pcap_file,pcap_filter,folder_path):
         use_json=True,
         include_raw=True,
     )
-
     #iterate through packets
     for packet in packets:
         has_wlan = hasattr(packet, 'wlan')
@@ -345,3 +344,4 @@ MLLog_processing(packets)
 
 packets.close()
 """
+
