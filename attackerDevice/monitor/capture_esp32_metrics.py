@@ -36,7 +36,7 @@ def setup_device(port, baud, output_file, device_name):
         # Ensure the directory exists
         os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
         
-        csv_file = open(output_file, mode='a', newline='')
+        csv_file = open(output_file, mode='w', newline='')
         fieldnames = ["host_timestamp", "local_time", "esp32_uptime_us", "cpu_used_pct", "ram_used_pct", "throughput_bps", "tcp_disconnects"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         
@@ -74,7 +74,7 @@ def main():
     
     attacker_device_dir = os.path.join(os.path.dirname(__file__), "..")
     timestamp_str = time.strftime("%Y%m%d_%H%M")
-    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"), f"{timestamp_str}/")
+    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"))
     
     if not stas:
         print("Error: No STA devices found in devices.json")

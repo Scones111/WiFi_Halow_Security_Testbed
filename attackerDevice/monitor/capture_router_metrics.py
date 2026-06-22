@@ -91,14 +91,14 @@ def main():
     attacker_device_dir = os.path.join(os.path.dirname(__file__), "..")
     
     timestamp_str = time.strftime("%Y%m%d_%H%M")
-    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"), f"{timestamp_str}/")
+    output_folder = os.path.join(attacker_device_dir, metrics_config.get("output_folder", "../logs/metrics/"))
     output_file = os.path.join(output_folder, "router_metrics.csv")
     
     interval = metrics_config.get("polling_interval", 5.0)
     
     # Setup CSV Logging
     os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
-    csv_file = open(output_file, mode='a', newline='')
+    csv_file = open(output_file, mode='w', newline='')
     fieldnames = ["host_timestamp", "local_time", "cpu_used_pct", "ram_used_pct"]
     writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
     

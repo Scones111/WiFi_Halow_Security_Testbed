@@ -3,7 +3,7 @@ import sys
 import subprocess
 import time
 
-def main():
+def start_logging():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
     esp32_script = os.path.join(base_dir, "capture_esp32_metrics.py")
@@ -15,9 +15,10 @@ def main():
     try:
         esp_process = subprocess.Popen([sys.executable, os.path.abspath(esp32_script)])
         router_process = subprocess.Popen([sys.executable, os.path.abspath(router_script)])
+        return esp_process, router_process
     except Exception as e:
         print(f"Failed to start metric captures: {e}")
-        return
+        return None, None
 
     print("\nCapturing metrics from both sources... Press Ctrl+C to stop.\n")
     
