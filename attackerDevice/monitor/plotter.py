@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # Load data
-df_server = pd.read_csv('tcp_server_metrics.csv')
-df_client = pd.read_csv('tcp_client_metrics.csv')
-df_router = pd.read_csv('router_metrics.csv')
+df_server = pd.read_csv('tcp_server_metrics.csv').iloc[1:]
+df_client = pd.read_csv('tcp_client_metrics.csv').iloc[1:]
+df_router = pd.read_csv('router_metrics.csv').iloc[1:]
 
 # Convert local_time to datetime
 df_server['local_time'] = pd.to_datetime(df_server['local_time'])
