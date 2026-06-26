@@ -1,4 +1,4 @@
-﻿import os
+import os
 import subprocess
 from monitor import processLogs
 import utils
@@ -188,6 +188,14 @@ def post_process():
     cwd = os.path.dirname(os.path.abspath(__file__))
     corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, FULLPATH))
     processLogs.log_events(os.path.join(corrected_path,"traffic.pcap"),WIRESHARK_FILTER,corrected_path)
+
+    plotter_script = os.path.join(cwd, "plotter.py")
+    try:
+        import sys
+        subprocess.run([sys.executable, plotter_script], cwd=corrected_path, check=True)
+        print(f"Successfully ran plotter.py in {corrected_path}")
+    except Exception as e:
+        print(f"Error running plotter.py: {e}")
 
 
 """
