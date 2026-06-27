@@ -26,7 +26,7 @@ def _track_cookie():
     sshpass -p 'halow' ssh \
     root@10.42.0.1 \
     "tcpdump --immediate-mode -nn -l -i morse0 'type mgt and subtype auth and wlan addr2 78:72:64:ea:b9:14' -U -s0 -w - 2>/dev/null" |
-    tshark -l -i - -Y "wlan.fixed.anti_clogging_token" \
+    tshark -l -r - -Y "wlan.fixed.anti_clogging_token" \
     -T fields \
     -e wlan.sa \
     -e wlan.da \
