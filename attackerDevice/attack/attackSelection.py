@@ -41,16 +41,8 @@ def run():
             att_meta["attackType"] = "evil_twin"
             att_meta["attackStart"] = time.time()
             print("Evil Twin attack selected")
-            print("remeber to plug in rouge AP")
-            #call shell script to start evil twin AP
-            # can disconnect after
-            #os.system("./../shellScript/start_evil_twin.sh")
-
+            print("remeber to plug in evil twin AP")
             evilTwin.transmit_frame_deauth()
-
-            # connect before stopping evil twin AP
-            # call shell script to stop evil twin
-            #os.system("./../shellScript/stop_evil_twin.sh")
 
         elif mode_choice == "2":
             att_meta["attackType"] = "DragonBlood_DoS"
@@ -60,7 +52,6 @@ def run():
         
         att_meta["attackEnd"] = time.time()
         att_metadata.append(att_metadata)
-        #log_metaData(attack_start,time.time(),attack_type)
         # exit or select another mode
         continue_choice = input("\nDo you want to perform another attack? (y/n):")
         while(continue_choice not in ["y", "n"]):

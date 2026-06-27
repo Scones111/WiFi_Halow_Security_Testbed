@@ -30,6 +30,7 @@ def check_con_devices():
     if res == 0:
         con_devices[trustedAP["name"]] = True
 
+    print(con_devices)
     return con_devices
 
 
