@@ -7,6 +7,7 @@ import threading
 import subprocess
 import sys
 import os
+import signal
 
 time_filter = f'frame.time >= "{time.time()}""'
 pcap = None
@@ -39,7 +40,8 @@ def _track_cookie():
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
         bufsize = 0,
-        universal_newlines=True
+        universal_newlines=True,
+        start_new_session=True
     )
     stdout = tshark.stdout
     # loop through the output of stdout
@@ -118,7 +120,11 @@ def start_dos():
     sys.setswitchinterval(og_interval)
     #stop threading
     stop_track.set()
-    tshark.wait()
+    try:
+        os.killpg(os.getpgid(tshark.pid), signal.SIGTERM)
+    except Exception:
+        pass
+    tshark.communicate()
 
 
 
