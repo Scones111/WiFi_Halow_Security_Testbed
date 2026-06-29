@@ -23,7 +23,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None,status=126):
 
     frame = None
     if cookie != None:
-        sae_payload = b'\x13\x00' + dummy_scalar + dummy_element + cookie
+        sae_payload = b'\x13\x00' + cookie + dummy_scalar + dummy_element
         frame = (
             Dot11FCS(
                 proto=0,
