@@ -3,7 +3,7 @@ from scapy.layers.dot11 import Dot11, Dot11Auth, Dot11FCS
 from cryptography.hazmat.primitives.asymmetric import ec
 
 
-def commit_frame(target_mac:str, src_mac:str,cookie=None):
+def commit_frame(target_mac:str, src_mac:str,cookie=None,status=126):
     # For WPA3 SAE (Dragonfly), we use Authentication Algorithm 3
     # SAE Commit payload for Group 19 consists of:
     # - Group ID: 19 (little-endian: b'\x13\x00')
@@ -35,7 +35,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
                 addr3=target_mac, # BSSID is typically the AP's MAC
                 SC=(1 << 4)
                 ) /
-            Dot11Auth(algo=3, seqnum=1, status=126) /
+            Dot11Auth(algo=3, seqnum=1, status=status) /
             Raw(load=sae_payload)
         )
     
@@ -52,7 +52,7 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None):
                 addr3=target_mac, # BSSID is typically the AP's MAC
                 SC=(1 << 4)
                 ) /
-            Dot11Auth(algo=3, seqnum=1, status=126) /
+            Dot11Auth(algo=3, seqnum=1, status=status) /
             Raw(load=sae_payload)
         )
 

