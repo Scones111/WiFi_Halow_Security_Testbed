@@ -23,16 +23,16 @@
 #include "mmwlan.h"
 #include "mmwlan_regdb.def"
 
-// #define COUNTRY_CODE "AU"
+#define COUNTRY_CODE "US"
 #ifndef COUNTRY_CODE
 #error COUNTRY_CODE must be defined to the appropriate 2 character country code. \
        See mmwlan_regdb.def for valid options.
 #endif
 
 /** SSID of the AP to connect to. */
-#define SSID "MorseMicro"
+#define SSID "H7608"
 /** Passphrase of the AP to connect to. Comment out for OWE. */
-#define PASSPHRASE "12345678"
+#define PASSPHRASE "Hs&U82DVN$DV"
 
 /** Delay before triggering another instance of the reboot iteration */
 #define REBOOT_DELAY_MS 50
@@ -142,6 +142,7 @@ static void reboot_iteration(struct mmosal_semb *link_up_semaphore)
     sta_args.passphrase_len = sizeof(PASSPHRASE) - 1;
     memcpy(sta_args.passphrase, PASSPHRASE, sta_args.passphrase_len);
     sta_args.security_type = MMWLAN_SAE;
+    sta_args.pmf_mode = MMWLAN_PMF_DISABLED;
 #else
     /* We default to OWE if PASSPHRASE is not defined. Alternatively, MMWLAN_OPEN is provided
      * to completely disable security. */
