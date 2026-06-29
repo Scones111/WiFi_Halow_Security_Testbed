@@ -21,4 +21,4 @@ if(DEFINED COUNTRY_CODE)
 endif()
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(iperf)
+project(tcp_client)
