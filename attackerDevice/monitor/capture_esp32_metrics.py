@@ -89,7 +89,8 @@ def main():
         if port:
             output_file = os.path.join(output_folder, f"{name}_metrics.csv")
             dev = setup_device(port, baud, output_file, name)
-            if dev: devices.append(dev)
+            if dev:
+                devices.append(dev)
         
     if not devices:
         print("No devices were successfully connected. Exiting.")

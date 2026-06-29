@@ -80,6 +80,7 @@ def setup_client():
     if msg_str == "run centralized logging":
         print("will now start logging router and esp devices")
         try:
+            print("begin logging")
             esp_process, router_process = centralized_metrics_logger.start_logging()
         except Exception as e:
             print(f"Error starting logger: {e}")
