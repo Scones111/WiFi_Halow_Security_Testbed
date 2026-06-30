@@ -3,6 +3,7 @@ from pathlib import Path
 import csv
 import os
 import pandas as pd
+import subprocess
 #import attackerDevice.attack.frames as frames
 #from attackerDevice.attack.frames.deauth import deauth_frame
 
@@ -53,3 +54,20 @@ def turn_hex_to_string(hex:str):
 
 def write_to_ml_log(features:pd.DataFrame,folder_path):
     features.to_csv(os.path.join(folder_path, "ML_LOG.csv"), mode='a', header=not os.path.exists(os.path.join(folder_path, "ML_LOG.csv")), index=False)
+
+def start_sdr_tx():
+    """
+    Initializes the SDR and runs the transmission script in the background.
+    Returns the Popen process object so it can be terminated later if needed.
+    """
+    # Get absolute path to the workspace root directory
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    script_dir = os.path.join(base_dir, "shellScript")
+    script_path = os.path.join(script_dir, "compile_and_run_tx.sh")
+    
+    print(f"[INFO] Starting SDR TX script in background: {script_path}")
+    process = subprocess.Popen(
+        ["/bin/bash", script_path], 
+        cwd=script_dir,
+    )
+    return process
