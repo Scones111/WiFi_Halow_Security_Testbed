@@ -18,42 +18,24 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None,status=126):
 
     dummy_scalar = dummy_scalar.to_bytes(32,"big")
     dummy_element = e1.to_bytes(32,"big") + e2.to_bytes(32,"big") 
-    sae_payload = None
 
+    sae_payload = b'\x13\x00' + dummy_scalar + dummy_element
+    if cookie is not None:
+        sae_payload += cookie
 
-    frame = None
-    if cookie != None:
-        sae_payload = b'\x13\x00' + cookie + dummy_scalar + dummy_element
-        frame = (
-            Dot11FCS(
-                proto=0,
-                type=0,
-                subtype=11, # 11 is Authentication
-                FCfield=0,
-                addr1=target_mac,
-                addr2=src_mac,
-                addr3=target_mac, # BSSID is typically the AP's MAC
-                SC=(1 << 4)
-                ) /
-            Dot11Auth(algo=3, seqnum=1, status=status) /
-            Raw(load=sae_payload)
-        )
-    
-    else:
-        sae_payload = b'\x13\x00' + dummy_scalar + dummy_element
-        frame = (
-            Dot11FCS(
-                proto=0,
-                type=0,
-                subtype=11, # 11 is Authentication
-                FCfield=0,
-                addr1=target_mac,
-                addr2=src_mac,
-                addr3=target_mac, # BSSID is typically the AP's MAC
-                SC=(1 << 4)
-                ) /
-            Dot11Auth(algo=3, seqnum=1, status=status) /
-            Raw(load=sae_payload)
-        )
+    frame = (
+        Dot11FCS(
+            proto=0,
+            type=0,
+            subtype=11, # 11 is Authentication
+            FCfield=0,
+            addr1=target_mac,
+            addr2=src_mac,
+            addr3=target_mac, # BSSID is typically the AP's MAC
+            SC=(1 << 4)
+            ) /
+        Dot11Auth(algo=3, seqnum=1, status=status) /
+        Raw(load=sae_payload)
+    )
 
     return bytes(frame)
