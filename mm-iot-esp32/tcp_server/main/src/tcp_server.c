@@ -135,9 +135,10 @@ static void metrics_task(void *pvParameters)
         float cpu_used_percent = get_cpu_usage_percent();
         float throughput = get_throughput();
         uint32_t tcp_disconnects = tcp_disconnect_count;
+        int32_t current_rssi = mmwlan_get_rssi();
 
-        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, Throughput: %.2f bps, TCP_Disconnects: %lu", 
-                 end_time, cpu_used_percent, ram_used_percent, throughput, (unsigned long)tcp_disconnects);
+        ESP_LOGI("ML_DATA", "Timestamp: %lld, CPU_Used: %.2f%%, RAM_Used: %.2f%%, Throughput: %.2f bps, TCP_Disconnects: %lu, RSSI: %ld", 
+                 end_time, cpu_used_percent, ram_used_percent, throughput, (unsigned long)tcp_disconnects, current_rssi);
 
         vTaskDelay(pdMS_TO_TICKS(5000));
     }
