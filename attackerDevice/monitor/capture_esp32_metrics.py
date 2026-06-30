@@ -15,7 +15,7 @@ def parse_ml_data(line):
         return None
     
     # Regex to extract the metrics
-    pattern = r"Timestamp:\s*(\d+),\s*CPU_Used:\s*([\d\.]+)%,\s*RAM_Used:\s*([\d\.]+)%,\s*Throughput:\s*([\d\.]+)\s*bps,\s*TCP_Disconnects:\s*(\d+)"
+    pattern = r"Timestamp:\s*(\d+),\s*CPU_Used:\s*([\d\.]+)%,\s*RAM_Used:\s*([\d\.]+)%,\s*Throughput:\s*([\d\.]+)\s*bps,\s*TCP_Disconnects:\s*(\d+),\s*RSSI:\s*(-?\d+)"
     match = re.search(pattern, line)
     
     if match:
@@ -24,7 +24,8 @@ def parse_ml_data(line):
             "cpu_used_pct": float(match.group(2)),
             "ram_used_pct": float(match.group(3)),
             "throughput_bps": float(match.group(4)),
-            "tcp_disconnects": int(match.group(5))
+            "tcp_disconnects": int(match.group(5)),
+            "rssi": int(match.group(6))
         }
     return None
 
@@ -37,7 +38,7 @@ def setup_device(port, baud, output_file, device_name):
         os.makedirs(os.path.dirname(os.path.abspath(output_file)), exist_ok=True)
         
         csv_file = open(output_file, mode='w', newline='')
-        fieldnames = ["host_timestamp", "local_time", "esp32_uptime_us", "cpu_used_pct", "ram_used_pct", "throughput_bps", "tcp_disconnects"]
+        fieldnames = ["host_timestamp", "local_time", "esp32_uptime_us", "cpu_used_pct", "ram_used_pct", "throughput_bps", "tcp_disconnects", "rssi"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         
         if csv_file.tell() == 0:
@@ -118,7 +119,7 @@ def main():
                                 dev["writer"].writerow(metrics)
                                 dev["csv_file"].flush()
                                 
-                                print(f"[{dev['name'].upper():<6}] CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Throughput: {metrics['throughput_bps']:>7.2f} bps | Drops: {metrics['tcp_disconnects']}")
+                                print(f"[{dev['name'].upper():<6}] CPU: {metrics['cpu_used_pct']:>5.2f}% | RAM: {metrics['ram_used_pct']:>5.2f}% | Throughput: {metrics['throughput_bps']:>7.2f} bps | Drops: {metrics['tcp_disconnects']} | RSSI: {metrics['rssi']} dBm")
                     except Exception as e:
                         print(f"Error reading from {dev['name']}: {e}")
                         
