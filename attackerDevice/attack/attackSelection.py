@@ -8,6 +8,7 @@ def run():
     # initialize variables for choice and raw frame
     continue_choice = None
     mode_choice = None
+    results_folder = None
 
     # loop for mode selection
     while(True):
@@ -16,12 +17,14 @@ def run():
         print("2. Dragonblood DoS attack")
         print("Note: that you can wait, to collect more data outside of attack")
 
-        while(True):
-            mode_choice = input("Enter the number corresponding to the mode: ")
-            if mode_choice in ["1", "2"]:
-                break
-            else:
-                print("Invalid choice. Please enter a valid number.")
+        mode_choice = "2"
+        print("Automated input: mode_choice = 2")
+        # while(True):
+        #     mode_choice = input("Enter the number corresponding to the mode: ")
+        #     if mode_choice in ["1", "2"]:
+        #         break
+        #     else:
+        #         print("Invalid choice. Please enter a valid number.")
 
         if mode_choice == "1":
             print("Evil Twin attack selected")
@@ -30,11 +33,18 @@ def run():
 
         elif mode_choice == "2":
             print("Dragonblood DoS attack selected")
-            dragonblood.start_dos()
+            results_folder = dragonblood.start_dos()
         
         # exit or select another mode
-        continue_choice = input("\nDo you want to perform another attack? (y/n):")
-        while(continue_choice not in ["y", "n"]):
-            continue_choice = input("Invalid input. Please enter 'y' for yes or 'n' for no: ")
+        print("\nWaiting 3 mins before stopping...")
+        import time
+        time.sleep(180)
+        continue_choice = "n"
+        print("Automated input: continue_choice = n")
+        # continue_choice = input("\nDo you want to perform another attack? (y/n):")
+        # while(continue_choice not in ["y", "n"]):
+        #     continue_choice = input("Invalid input. Please enter 'y' for yes or 'n' for no: ")
         if continue_choice == "n":
             break
+
+    return results_folder
