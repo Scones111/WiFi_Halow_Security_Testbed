@@ -223,7 +223,7 @@ static void tcp_client_task(void *pvParameters)
         }
 
         struct timeval timeout;
-        timeout.tv_sec = 3;
+        timeout.tv_sec = 20;
         timeout.tv_usec = 0;
         setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
         setsockopt(sock, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
@@ -301,7 +301,7 @@ static void tcp_client_task(void *pvParameters)
             bytes_received += len;
             ESP_LOGI(TAG, "Server replied: %s", rx_buffer);
 
-            vTaskDelay(pdMS_TO_TICKS(5000));   // Read and send every 5 seconds
+            vTaskDelay(pdMS_TO_TICKS(16000));   // Read and send every 16 seconds
         }
 
         close(sock);
@@ -309,15 +309,38 @@ static void tcp_client_task(void *pvParameters)
     }
 }
 
+static void add_twt_configuration(void)
+{
+    enum mmwlan_status status;
+    struct mmwlan_twt_config_args twt_config = MMWLAN_TWT_CONFIG_ARGS_INIT;
+
+    twt_config.twt_mode = MMWLAN_TWT_REQUESTER;
+    twt_config.twt_setup_command = MMWLAN_TWT_SETUP_REQUEST;
+    twt_config.twt_wake_interval_us = 16000000;
+    twt_config.twt_min_wake_duration_us = 65280;
+    status = mmwlan_twt_add_configuration(&twt_config);
+    if (status == MMWLAN_SUCCESS)
+    {
+        printf("Successfully added TWT configuration\n");
+    }
+    else
+    {
+        printf("Failed to set TWT configuration\n");
+    }
+}
+
 void app_main(void)
 {
     printf("\n\nMorse Iperf Demo (Built " __DATE__ " " __TIME__ ")\n\n");
+
+    /* Setup TWT (do this before connecting to Wi-Fi) */
+    add_twt_configuration();
 
     /* Initialize and connect to Wi-Fi, blocks till connected */
     app_wlan_init();
     app_wlan_start();
 
-    mmwlan_set_power_save_mode(MMWLAN_PS_DISABLED);
+    // mmwlan_set_power_save_mode(MMWLAN_PS_DISABLED);
 
     printf("Link is up, proceeding to start TCP client\n");
 

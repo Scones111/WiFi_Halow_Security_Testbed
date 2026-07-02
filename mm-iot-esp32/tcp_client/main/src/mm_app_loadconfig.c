@@ -47,7 +47,7 @@
 /* Default security type  */
 #ifndef SECURITY_TYPE
 /** Security type (@see mmwlan_security_type). */
-#define SECURITY_TYPE                   MMWLAN_OPEN
+#define SECURITY_TYPE                   MMWLAN_SAE
 #endif
 
 /* Configure the STA to use DHCP, this overrides any static configuration.
