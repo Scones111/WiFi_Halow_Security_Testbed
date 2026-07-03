@@ -1,0 +1,16 @@
+attack_type,packet Number,event_type,time_stamp,signal_strength,ssid,bssid,src,dst,reason,status,details
+Deauthentication Attack,1055,Deauthentication,2026-07-03T15:46:34.417374000Z,-53,,78:72:64:ea:b9:14,78:72:64:ea:b9:14,ff:ff:ff:ff:ff:ff,3,,Deauthentication frame number 1 sent by attacker
+,1062,Probe Request,2026-07-03T15:46:36.943313000Z,-12,,ff:ff:ff:ff:ff:ff,3c:22:7f:71:dc:b8,ff:ff:ff:ff:ff:ff,,,STA is broadcasting probe request
+,1063,Probe Response,2026-07-03T15:46:36.964262000Z,-60,H7608,78:72:64:ea:b9:14,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,,,Trusted AP is sending probe response to STA
+Evil Twin Attack,1065,Probe Response,2026-07-03T15:46:36.969660000Z,-51,H7608,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,,,Evil Twin is sending probe response to STA
+Evil Twin Attack,1073,Authentication,2026-07-03T15:46:39.783078000Z,-12,,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,9c:04:b6:46:07:34,,0,STA is Sending Authentication request to Evil Twin
+Evil Twin Attack,1075,Authentication,2026-07-03T15:46:39.785794000Z,-51,,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,,0,Successful Authentication to Evil Twin
+Evil Twin Attack,1077,Association Request,2026-07-03T15:46:39.804060000Z,-12,H7608,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,9c:04:b6:46:07:34,,,STA is Sending association request to Evil Twin
+Evil Twin Attack,1079,Association Response,2026-07-03T15:46:39.810349000Z,-51,,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,,0,Successful association to Evil Twin
+,1127,Probe Request,2026-07-03T15:46:47.206993000Z,-8,,ff:ff:ff:ff:ff:ff,3c:22:7f:71:df:d6,ff:ff:ff:ff:ff:ff,,,STA is broadcasting probe request
+Evil Twin Attack,1128,Probe Response,2026-07-03T15:46:47.212566000Z,-51,H7608,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,,,Evil Twin is sending probe response to STA
+,1130,Probe Response,2026-07-03T15:46:47.217912000Z,-59,H7608,78:72:64:ea:b9:14,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,,,Trusted AP is sending probe response to STA
+Evil Twin Attack,1143,Authentication,2026-07-03T15:46:50.046382000Z,-7,,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,9c:04:b6:46:07:34,,0,STA is Sending Authentication request to Evil Twin
+Evil Twin Attack,1145,Authentication,2026-07-03T15:46:50.049153000Z,-51,,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,,0,Successful Authentication to Evil Twin
+Evil Twin Attack,1147,Association Request,2026-07-03T15:46:50.066936000Z,-8,H7608,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,9c:04:b6:46:07:34,,,STA is Sending association request to Evil Twin
+Evil Twin Attack,1149,Association Response,2026-07-03T15:46:50.073388000Z,-51,,9c:04:b6:46:07:34,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,,0,Successful association to Evil Twin

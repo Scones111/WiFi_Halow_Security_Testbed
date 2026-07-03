@@ -1,0 +1,2 @@
+attack_type,packet Number,event_type,time_stamp,signal_strength,ssid,bssid,src,dst,reason,status,details
+,2622,Deauthentication,2026-07-03T14:23:14.649721000Z,-51,,9c:04:b6:46:07:34,9c:04:b6:46:07:34,ff:ff:ff:ff:ff:ff,2,,Legitimate Deauthentication frame not sent by attacker
