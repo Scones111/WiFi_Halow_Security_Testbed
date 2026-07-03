@@ -39,8 +39,7 @@ if __name__ == "__main__":
 
     if opt == "attack":
         params = sys.argv[2:]
-        if params[0] == "1":
-            attackSelection.run(params)
+        attackSelection.run(params)
 
     if opt == "attack_log":
         params = sys.argv[2:]

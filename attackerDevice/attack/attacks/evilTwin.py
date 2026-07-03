@@ -1,5 +1,5 @@
 # code to run the evil twin attack
-from attack import frames
+import attack.frames.deauth as frames
 from SDRtransmitTCP import transmitData
 import time
 

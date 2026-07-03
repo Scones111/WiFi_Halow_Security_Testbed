@@ -71,7 +71,7 @@ def con_devices_check(server,con_devices,clients):
             #sleep when no device have trying to connect
             time.sleep(0.01)
 
-def init_metric_logs():
+def init_metric_logs(params=None):
     print("TCP server running...")
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -83,7 +83,9 @@ def init_metric_logs():
     con_devices = {sta:False for sta in sta_names}
     # we only allow for 1 router
     trustetAP = utils.load_json()["TrustedAP"][0]['name']
-    con_devices[trustetAP] = False
+    
+    if params is not None and params[0] == "2":
+        con_devices[trustetAP] = False
 
     print("waiting to connect the following devices")
     print(con_devices)
@@ -93,13 +95,13 @@ def init_metric_logs():
     print("after con_devices_check")
     print(con_devices)
 
-    centralized = len(clients) == 1
+    centralized = len(clients) == 1 and (trustetAP in con_devices)
 
     #specify type of logging to be done depending on devices connected
     for sock,value in clients.items():
-        if centralized:
+        if trustetAP in value and (trustetAP in con_devices):
             sock.send("run centralized logging".encode('utf-8'))
-        elif utils.load_json()["TrustedAP"][0]['name'] in value and set(value).isdisjoint(sta_names):
+        elif trustetAP in value and set(value).isdisjoint(sta_names):
             sock.send("run router logging".encode('utf-8'))
         else:
             sock.send("run esp logging".encode('utf-8'))
@@ -186,7 +188,12 @@ def post_process(params=None):
     elif params[0] == "1":
         results_folder = f"evilTwin/evilTwin_{params[1]}_{params[2]}"
     elif params[0] == "2":
-        results_folder = f"sae_pwe={params[1]}/dragonDos_{params[2]}_{params[3]}_{params[4]}"
+        sae_pwe = "?"
+        if params[1] == "126":
+            sae_pwe = "1"
+        else:
+            sae_pwe = "0"
+        results_folder = f"sae_pwe={sae_pwe}/dragonDos_{params[2]}_{params[3]}_{params[4]}"
     
     cwd = os.path.dirname(os.path.abspath(__file__))
     
