@@ -6,11 +6,24 @@ from monitor import setupLogging,setupMetricClient,summarizer
 import time
 
 def print_usage():
-    print("Usage: python main.py [option]")
-    print("Options:")
-    print("  attack: Run the attack selection")
-    print("  capture: Capture traffic logs and metrics")
-    print("  monitor: Monitor the network and capture metrics")
+    usage = """
+    Usage: python main.py [option]
+    Options:
+      attack: Run the attack selection
+        - For Evil Twin: python main.py attack 1 <duration> <rate>
+        - For Dragon Dos: python main.py attack 2 <sae_pwe> <duration> <rate> <num_devices>
+      attack_log: Run the attack and capture logs
+        - For Evil Twin: python main.py attack_log 1 <duration> <rate>
+        - For Dragon Dos: python main.py attack_log 2 <sae_pwe>
+      base_network: Capture base network traffic
+        - capture: network traffic and metrics
+      metric_client: Capture metrics
+        - sets up client to capture metrics from the victim devices
+      sum: Summarize results
+        - For Evil Twin: python main.py sum 1
+        - For Dragon Dos: python main.py sum 2
+    """
+    print(usage)
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
