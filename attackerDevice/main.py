@@ -26,7 +26,7 @@ def print_usage():
     print(usage)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print_usage()
         sys.exit(1)
 
