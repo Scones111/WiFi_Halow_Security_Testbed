@@ -204,16 +204,17 @@ def post_process(params=None):
     corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, final_path))
     processLogs.log_events(os.path.join(corrected_path,"traffic.pcap"),WIRESHARK_FILTER,corrected_path)
     plotter_script = None
-    if params[0] == "1":
-        plotter_script = os.path.join(cwd, "plotter_evilTwin.py")
-    elif params[0] == "2":
-        plotter_script = os.path.join(cwd, "plotter_dragonDos.py")
-    try:
-        import sys
-        subprocess.run([sys.executable, plotter_script], cwd=corrected_path, check=True)
-        print(f"Successfully ran plotter.py in {corrected_path}")
-    except Exception as e:
-        print(f"Error running plotter.py: {e}")
+    if params is not None:
+        if params[0] == "1":
+            plotter_script = os.path.join(cwd, "plotter_evilTwin.py")
+        elif params[0] == "2":
+            plotter_script = os.path.join(cwd, "plotter_dragonDos.py")
+        try:
+            import sys
+            subprocess.run([sys.executable, plotter_script], cwd=corrected_path, check=True)
+            print(f"Successfully ran plotter.py in {corrected_path}")
+        except Exception as e:
+            print(f"Error running plotter.py: {e}")
 
 
 """
