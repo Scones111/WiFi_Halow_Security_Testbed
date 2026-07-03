@@ -177,8 +177,18 @@ def log_metaData(att_metaData):
     with open(os.path.join(TEMPPATH, "attackMetaData.json"),"w") as file:
         json.dump(att_metaData,file)
 
-def post_process(results_folder):
+def post_process(params=None):
     global TEMPPATH
+
+    if params == None:
+        results_folder = "base_network"
+
+    results_folder = None
+    if params[0] == "1":
+        results_folder = f"evilTwin/evilTwin_{params[1]}_{params[2]}"
+    elif params[0] == "2":
+        results_folder = f"sae_pwe={params[1]}/dragonDos_{params[2]}_{params[3]}_{params[4]}"
+    
     cwd = os.path.dirname(os.path.abspath(__file__))
     
     final_path = os.path.join(PATH_TO_EXPERIMENTS, results_folder)
@@ -194,8 +204,11 @@ def post_process(results_folder):
     
     corrected_path = os.path.normpath(os.path.join(cwd, os.pardir, final_path))
     processLogs.log_events(os.path.join(corrected_path,"traffic.pcap"),WIRESHARK_FILTER,corrected_path)
-
-    plotter_script = os.path.join(cwd, "plotter.py")
+    plotter_script = None
+    if params[0] == "1":
+        plotter_script = os.path.join(cwd, "plotter_evilTwin.py")
+    elif params[0] == "2":
+        plotter_script = os.path.join(cwd, "plotter_dragonDos.py")
     try:
         import sys
         subprocess.run([sys.executable, plotter_script], cwd=corrected_path, check=True)

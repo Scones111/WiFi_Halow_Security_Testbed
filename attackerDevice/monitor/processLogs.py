@@ -188,6 +188,8 @@ def MLLog_processing(packets,folder_path):
                 label = 1
             elif packet.wlan.sa not in STA and packet.wlan.sa not in TRUSTED_AP:
                 label = 1
+            elif packet.wlan.da not in STA and packet.wlan.da not in TRUSTED_AP:
+                label = 1
         elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in ATTACK_FRAMES:
             label = 1
 

