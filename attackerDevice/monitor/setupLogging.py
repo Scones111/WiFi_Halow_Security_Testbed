@@ -179,12 +179,11 @@ def log_metaData(att_metaData):
 
 def post_process(params=None):
     global TEMPPATH
-
+    results_folder = None
+    
     if params == None:
         results_folder = "base_network"
-
-    results_folder = None
-    if params[0] == "1":
+    elif params[0] == "1":
         results_folder = f"evilTwin/evilTwin_{params[1]}_{params[2]}"
     elif params[0] == "2":
         results_folder = f"sae_pwe={params[1]}/dragonDos_{params[2]}_{params[3]}_{params[4]}"

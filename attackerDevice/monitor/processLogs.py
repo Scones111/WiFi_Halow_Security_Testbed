@@ -318,10 +318,10 @@ def log_events(pcap_file,pcap_filter,folder_path):
     packets.close()
 
 # test code
-
 """
-filename = Path(__file__).resolve().parent / "testbed_16.pcap"
-
+filename = Path(__file__).resolve().parent / "results/base_open/traffic.pcap"
+folder_path = Path(__file__).resolve().parent / "results/base_open"
+print(filename)
 packets = pyshark.FileCapture(
     filename,
     use_json=True,
@@ -329,16 +329,15 @@ packets = pyshark.FileCapture(
     display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 and !basicxid",
     keep_packets=False
 )
-print("amount of packets to be processed: ", len(packets))
 i = 0
 for packet in packets:
     has_wlan = hasattr(packet, 'wlan')
     has_tcp  = hasattr(packet, 'tcp')
-
     if has_wlan and has_tcp:
-        process_tcp(packet)
+        process_tcp(packet,folder_path)
     elif has_wlan:
-        process_wlan(packet)
+        continue
+        process_wlan(packet,folder_path)
 
     i += 1
 
@@ -346,4 +345,3 @@ MLLog_processing(packets)
 
 packets.close()
 """
-
