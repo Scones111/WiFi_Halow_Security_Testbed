@@ -7,13 +7,13 @@ trustedAP = "78:72:64:ea:b9:14"
 server = "3c:22:7f:71:dc:b8"
 client ="3c:22:7f:71:df:d6"
 
-attack_log = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/ATTACK_LOG.csv')
-client_metric = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/tcp_client_metrics.csv')
-server_metric = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/tcp_server_metrics.csv')
+#attack_log = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/ATTACK_LOG.csv')
+#client_metric = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/tcp_client_metrics.csv')
+#server_metric = pd.read_csv('attackerDevice/monitor/results/evilTwin/second_evilTwin_50_0.02/tcp_server_metrics.csv')
 
-#attack_log = pd.read_csv('ATTACK_LOG.csv')
-#client_metric = pd.read_csv('tcp_client_metrics.csv')
-#server_metric = pd.read_csv('tcp_server_metrics.csv')
+attack_log = pd.read_csv('ATTACK_LOG.csv')
+client_metric = pd.read_csv('tcp_client_metrics.csv')
+server_metric = pd.read_csv('tcp_server_metrics.csv')
 
 plt.figure(figsize=(12, 6))
 attack_log["time_stamp"] = pd.to_datetime(attack_log['time_stamp'],utc=True).dt.tz_convert("Europe/Copenhagen").dt.tz_localize(None)
