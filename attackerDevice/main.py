@@ -45,9 +45,7 @@ if __name__ == "__main__":
         params = sys.argv[2:]
         setupLogging.load_config()
         setupLogging.start_traffic_log()
-        clients = setupLogging.init_metric_logs()
-        print("Waiting 3 mins before starting attack...")
-        time.sleep(180)
+        clients = setupLogging.init_metric_logs(params)
         results_folder = attackSelection.run(params)
         setupLogging.stop_metric_logs(clients)
         setupLogging.end_traffic_log()
