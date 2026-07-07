@@ -91,8 +91,15 @@ def handle_association_resp(event):
     elif event["bssid"] in TRUSTED_AP:
         event["attack_type"]
         event["details"] += "Trusted AP"
-
     return event
+
+def handle_s1g_beacon(event):
+    if event["bssid"] in EVIL_TWIN:
+        event["attack_type"] = "Evil Twin Attack"
+        event["details"] += "Evil Twin"
+    elif event["bssid"] in TRUSTED_AP:
+        event["attack_type"]
+        event["details"] += "Trusted AP"
 
 #todo: add more events here
 
@@ -102,7 +109,8 @@ handle_wlan_events = {
     "Probe Response": handle_probe_resp,
     "Authentication": handle_authentication,
     "Association Request": handle_association_req,
-    "Association Response":handle_association_resp
+    "Association Response":handle_association_resp,
+    "S1G Beacon": handle_s1g_beacon
 }
 
 #todo implement for different tcp events:
