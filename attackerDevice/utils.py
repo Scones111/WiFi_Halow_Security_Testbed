@@ -70,6 +70,7 @@ def start_sdr_tx():
     process = subprocess.Popen(
         ["/bin/bash", script_path], 
         cwd=script_dir,
+        stdout=subprocess.DEVNULL,
     )
     return process
     
