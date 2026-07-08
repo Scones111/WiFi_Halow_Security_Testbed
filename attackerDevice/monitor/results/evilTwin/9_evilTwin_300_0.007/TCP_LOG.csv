@@ -1,0 +1,132 @@
+attack_type,packet Number,event_type,time_stamp,signal_strength,bssid,src,dst,details
+,16,QoS Data,2026-07-07T15:47:17.450814000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,35,QoS Data,2026-07-07T15:47:22.465814000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,38,QoS Data,2026-07-07T15:47:22.475156000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,41,QoS Data,2026-07-07T15:47:22.634066000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,59,QoS Data,2026-07-07T15:47:27.492531000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,62,QoS Data,2026-07-07T15:47:27.503806000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,65,QoS Data,2026-07-07T15:47:27.633955000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,66,QoS Data,2026-07-07T15:47:27.637344000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,83,QoS Data,2026-07-07T15:47:32.511440000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,84,QoS Data,2026-07-07T15:47:32.513826000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,106,QoS Data,2026-07-07T15:47:33.888585000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,109,QoS Data,2026-07-07T15:47:34.015461000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,112,QoS Data,2026-07-07T15:47:34.136191000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,148,QoS Data,2026-07-07T15:47:39.064089000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,151,QoS Data,2026-07-07T15:47:39.072603000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,162,QoS Data,2026-07-07T15:47:40.383734000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,165,QoS Data,2026-07-07T15:47:40.392457000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,167,QoS Data,2026-07-07T15:47:40.634071000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,174,QoS Data,2026-07-07T15:47:42.384060000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,177,QoS Data,2026-07-07T15:47:42.390950000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,192,QoS Data,2026-07-07T15:47:45.410844000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,195,QoS Data,2026-07-07T15:47:45.634046000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,213,QoS Data,2026-07-07T15:47:50.431037000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,215,QoS Data,2026-07-07T15:47:50.440180000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,219,QoS Data,2026-07-07T15:47:50.637114000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,236,QoS Data,2026-07-07T15:47:55.451438000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,239,QoS Data,2026-07-07T15:47:55.460342000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,243,QoS Data,2026-07-07T15:47:55.633989000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,273,QoS Data,2026-07-07T15:48:00.474954000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,275,QoS Data,2026-07-07T15:48:00.483994000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,278,QoS Data,2026-07-07T15:48:00.633984000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,296,QoS Data,2026-07-07T15:48:05.492591000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,299,QoS Data,2026-07-07T15:48:05.501579000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,303,QoS Data,2026-07-07T15:48:05.638674000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,321,QoS Data,2026-07-07T15:48:10.514218000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,324,QoS Data,2026-07-07T15:48:10.523676000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,327,QoS Data,2026-07-07T15:48:10.634082000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,346,QoS Data,2026-07-07T15:48:15.541148000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,349,QoS Data,2026-07-07T15:48:15.635132000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,378,QoS Data,2026-07-07T15:48:20.551524000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,396,QoS Data,2026-07-07T15:48:21.883847000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,401,QoS Data,2026-07-07T15:48:22.008366000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,404,QoS Data,2026-07-07T15:48:22.134061000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,421,QoS Data,2026-07-07T15:48:27.021815000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,424,QoS Data,2026-07-07T15:48:27.031365000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,427,QoS Data,2026-07-07T15:48:27.134021000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,445,QoS Data,2026-07-07T15:48:32.041075000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,448,QoS Data,2026-07-07T15:48:32.050263000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,451,QoS Data,2026-07-07T15:48:32.133631000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,466,QoS Data,2026-07-07T15:48:37.061164000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,469,QoS Data,2026-07-07T15:48:37.070754000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,472,QoS Data,2026-07-07T15:48:37.134837000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,500,QoS Data,2026-07-07T15:48:42.083878000Z,-4,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,502,QoS Data,2026-07-07T15:48:42.093451000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,505,QoS Data,2026-07-07T15:48:42.133655000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,524,QoS Data,2026-07-07T15:48:47.101493000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,527,QoS Data,2026-07-07T15:48:47.110946000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,530,QoS Data,2026-07-07T15:48:47.134093000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,547,QoS Data,2026-07-07T15:48:52.122214000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,550,QoS Data,2026-07-07T15:48:52.131890000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,555,QoS Data,2026-07-07T15:48:52.384143000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,556,QoS Data,2026-07-07T15:48:52.386646000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,569,QoS Data,2026-07-07T15:48:57.141140000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,572,QoS Data,2026-07-07T15:48:57.150516000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,605,QoS Data,2026-07-07T15:49:02.161568000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,608,QoS Data,2026-07-07T15:49:02.172068000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,611,QoS Data,2026-07-07T15:49:02.385373000Z,-4,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,631,QoS Data,2026-07-07T15:49:07.181570000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,634,QoS Data,2026-07-07T15:49:07.191256000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,637,QoS Data,2026-07-07T15:49:07.388068000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,654,QoS Data,2026-07-07T15:49:12.201575000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,657,QoS Data,2026-07-07T15:49:12.211338000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,660,QoS Data,2026-07-07T15:49:12.384124000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,676,QoS Data,2026-07-07T15:49:17.222343000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,679,QoS Data,2026-07-07T15:49:17.231793000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,692,QoS Data,2026-07-07T15:49:17.417283000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,722,QoS Data,2026-07-07T15:49:22.241760000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,724,QoS Data,2026-07-07T15:49:22.250894000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,727,QoS Data,2026-07-07T15:49:22.384127000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,745,QoS Data,2026-07-07T15:49:27.261780000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,748,QoS Data,2026-07-07T15:49:27.272725000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,767,QoS Data,2026-07-07T15:49:32.281226000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,770,QoS Data,2026-07-07T15:49:32.290937000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,773,QoS Data,2026-07-07T15:49:32.387826000Z,-2,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,791,QoS Data,2026-07-07T15:49:37.311536000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,794,QoS Data,2026-07-07T15:49:37.320782000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,798,QoS Data,2026-07-07T15:49:37.384227000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,825,QoS Data,2026-07-07T15:49:42.332375000Z,-3,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,829,QoS Data,2026-07-07T15:49:42.356873000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,832,QoS Data,2026-07-07T15:49:42.383772000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,855,QoS Data,2026-07-07T15:49:47.371130000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+,858,QoS Data,2026-07-07T15:49:47.380484000Z,0,78:72:64:ea:b9:14,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Trusted AP
+,861,QoS Data,2026-07-07T15:49:47.633725000Z,-1,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP
+Evil Twin Attack,928,QoS Data,2026-07-07T15:49:54.562949000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Evil Twin AP
+Evil Twin Attack,933,QoS Data,2026-07-07T15:49:55.395279000Z,-3,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,941,QoS Data,2026-07-07T15:49:56.392508000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,944,QoS Data,2026-07-07T15:49:56.884283000Z,-2,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,947,QoS Data,2026-07-07T15:49:57.063037000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Evil Twin AP
+Evil Twin Attack,954,QoS Data,2026-07-07T15:49:58.384176000Z,-3,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,965,QoS Data,2026-07-07T15:50:00.384367000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,970,QoS Data,2026-07-07T15:50:01.384208000Z,-3,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,975,QoS Data,2026-07-07T15:50:02.063319000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Evil Twin AP
+Evil Twin Attack,985,QoS Data,2026-07-07T15:50:02.884333000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1014,QoS Data,2026-07-07T15:50:05.895875000Z,-2,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1020,QoS Data,2026-07-07T15:50:07.384125000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1024,QoS Data,2026-07-07T15:50:08.383822000Z,-2,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1026,QoS Data,2026-07-07T15:50:08.884296000Z,-3,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1034,QoS Data,2026-07-07T15:50:10.384582000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1047,QoS Data,2026-07-07T15:50:11.899312000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1051,QoS Data,2026-07-07T15:50:12.066389000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Evil Twin AP
+Evil Twin Attack,1058,QoS Data,2026-07-07T15:50:13.383776000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1059,QoS Data,2026-07-07T15:50:13.386646000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1061,QoS Data,2026-07-07T15:50:13.392053000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1072,QoS Data,2026-07-07T15:50:15.890822000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1078,QoS Data,2026-07-07T15:50:17.384225000Z,-1,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1098,QoS Data,2026-07-07T15:50:20.384423000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1114,QoS Data,2026-07-07T15:50:21.912470000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1121,QoS Data,2026-07-07T15:50:23.383817000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1147,QoS Data,2026-07-07T15:50:24.409595000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1154,QoS Data,2026-07-07T15:50:24.888844000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1184,QoS Data,2026-07-07T15:50:26.446443000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1199,QoS Data,2026-07-07T15:50:27.917266000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1207,QoS Data,2026-07-07T15:50:29.384479000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1219,QoS Data,2026-07-07T15:50:30.906759000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1228,QoS Data,2026-07-07T15:50:32.065926000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:dc:b8,3c:22:7f:71:df:d6,Transmitting data using Evil Twin AP
+Evil Twin Attack,1231,QoS Data,2026-07-07T15:50:32.384493000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1238,QoS Data,2026-07-07T15:50:33.893336000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1249,QoS Data,2026-07-07T15:50:36.388334000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1256,QoS Data,2026-07-07T15:50:37.887610000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1261,QoS Data,2026-07-07T15:50:39.384355000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
+Evil Twin Attack,1270,QoS Data,2026-07-07T15:50:40.887709000Z,0,9c:04:b6:46:07:34,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Evil Twin AP
