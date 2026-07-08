@@ -42,6 +42,7 @@ if __name__ == "__main__":
         if opt in ["attack","attack_log"]:
             sdr_process = start_sdr_tx()
             print("Waiting for SDR to initialize...")
+            time.sleep(5)
         if opt == "attack":
             params = sys.argv[2:]
             attackSelection.run(params)
