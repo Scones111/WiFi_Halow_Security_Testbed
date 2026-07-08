@@ -71,6 +71,7 @@ def start_sdr_tx():
         ["/bin/bash", script_path], 
         cwd=script_dir,
         stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
     )
     return process
     
