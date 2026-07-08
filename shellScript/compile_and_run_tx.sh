@@ -16,5 +16,5 @@ grcc -o "$HOME/.local/state/gnuradio" "$PHY"
 grcc -o "$grc_folder" "$TX"
 
 echo "[INFO] Running TX..."
-/usr/bin/python3 "$grc_folder/halow_tx.py"
+exec /usr/bin/python3 "$grc_folder/halow_tx.py"
 

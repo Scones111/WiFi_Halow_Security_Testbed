@@ -84,7 +84,7 @@ if __name__ == "__main__":
                 summarizer.dragonDos_summarize()
 
     finally:
-    # This block ALWAYS runs, even if you press ctrl+c or the script crashes
+        # This block ALWAYS runs, even if you press ctrl+c or the script crashes
         if sdr_process is not None:
             print("\n[INFO] Terminating SDR process...")
             sdr_process.terminate()
