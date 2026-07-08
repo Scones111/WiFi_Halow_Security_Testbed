@@ -1,7 +1,7 @@
 from scapy.all import *
 from scapy.layers.dot11 import *
 import os
-import attackerDevice.utils as utils
+import utils as utils
 
 data = utils.load_json()
 #with open("devices.json", "r") as file:

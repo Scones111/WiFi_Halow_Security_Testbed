@@ -86,6 +86,8 @@ def init_metric_logs(params=None):
     
     if params is not None and params[0] == "2":
         con_devices[trustetAP] = False
+    elif params is None: # For base_network
+        con_devices[trustetAP] = False
 
     print("waiting to connect the following devices")
     print(con_devices)
