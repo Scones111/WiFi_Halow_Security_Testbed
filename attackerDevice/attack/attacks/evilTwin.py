@@ -8,9 +8,9 @@ def transmit_frame_deauth(params):
     rate = float(params[1])
     start_time = time.time()
     while(time.time() - start_time < duration):
+        time.sleep(1/rate)
         raw_frame = frames.start_deauthentication_frame_generator()
         transmitData(raw_frame)
-        time.sleep(1/rate)
     
     """
     while(True):

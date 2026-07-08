@@ -1,7 +1,7 @@
 from scapy.all import *
 from scapy.layers.dot11 import *
 import os
-import utils
+import attackerDevice.utils as utils
 
 data = utils.load_json()
 #with open("devices.json", "r") as file:
@@ -36,4 +36,5 @@ def start_deauthentication_frame_generator():
 
     raw_frame = deauth_frame(mac_sta)
 
-    return raw_frame
+    return raw_frame
+

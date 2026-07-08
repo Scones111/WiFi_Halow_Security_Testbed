@@ -324,8 +324,8 @@ def log_events(pcap_file,pcap_filter,folder_path):
 
 # test code
 """
-filename = Path(__file__).resolve().parent / "results/base_open/traffic.pcap"
-folder_path = Path(__file__).resolve().parent / "results/base_open"
+filename = Path(__file__).resolve().parent / "results/evilTwin/2_evilTwin_300_0.0167/traffic.pcap"
+folder_path = Path(__file__).resolve().parent / "results/evilTwin/2_evilTwin_300_0.0167"
 print(filename)
 packets = pyshark.FileCapture(
     filename,
@@ -341,12 +341,11 @@ for packet in packets:
     if has_wlan and has_tcp:
         process_tcp(packet,folder_path)
     elif has_wlan:
-        continue
         process_wlan(packet,folder_path)
 
     i += 1
 
-MLLog_processing(packets)
+MLLog_processing(packets, folder_path)
 
 packets.close()
 """
