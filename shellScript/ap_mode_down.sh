@@ -6,7 +6,7 @@ sudo killall hostapd_s1g 2>/dev/null
 # 2. Remove the static gateway IP address from the interface
 sudo ip addr flush dev wlan1
 
-3. Stop the DHCP server
+# 3. Stop the DHCP server
 sudo systemctl stop dnsmasq
 
 # 4. Bring the physical interface down safely

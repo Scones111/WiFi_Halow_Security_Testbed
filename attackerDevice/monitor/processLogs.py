@@ -163,8 +163,9 @@ def packet_extract(packet,field):
     return final_extract
 
 def MLLog_processing(packets,folder_path):
-    # normal traffic = 0, malicious traffic = 1
+    # normal traffic = 0, malicious traffic (evil twin) = 1, dragon dos = 2
     label=0
+    is_dragon_dos = "dragondos" in str(folder_path).lower()
 
     #initialize pandas dataframe
     frt_df = pd.DataFrame(columns=columns)
@@ -187,14 +188,12 @@ def MLLog_processing(packets,folder_path):
             if packet.wlan.sa in EVIL_TWIN:
                 label = 1
             elif packet.wlan.sa not in STA and packet.wlan.sa not in TRUSTED_AP:
-                label = 1
+                label = 2 if is_dragon_dos else 1
         elif hasattr(packet.wlan,"da"):
             if packet.wlan.da in EVIL_TWIN:
                 label = 1
             elif packet.wlan.da not in STA and packet.wlan.da not in TRUSTED_AP:
-                label = 1
-            elif packet.wlan.da not in STA and packet.wlan.da not in TRUSTED_AP:
-                label = 1
+                label = 2 if is_dragon_dos else 1
         elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in ATTACK_FRAMES:
             label = 1
 
