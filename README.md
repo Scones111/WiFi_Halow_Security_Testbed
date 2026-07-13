@@ -10,11 +10,12 @@ The novel contributions for our Master's thesis begin on **21st of may 2026**, s
 
 For academic evaluation, please refer **only** to the work committed by `Scones111` and `simonhermansen`. 
 
-Our primary original contributions are located in the following directories:
+Our original contributions are located in the following directories:
 * `/attackerDevice` - A tool to perform security test using the tools from the different folder
 * `/mm-iot-esp32/tcp-client/main/src/tcp_client.c` - Creates a tcp-client to produce background traffic - using the prebuilt configurations made by seeed studios
 * `/mm-iot-esp32/tcp-server/main/src/tcp_server.c` - Creates a tcp-server to produce background traffic - using the prebuilt configurations made by seeed studios
 * `/gr-ieee802-11ah/examples/halow_tx.grc` - adapted to allow for 1MHz transmission for HackRF One
+* `./shellscripts` - adapted to allow for 1MHz transmission for HackRF One
 
 # WiFi_Halow_Security_Testbed
 
