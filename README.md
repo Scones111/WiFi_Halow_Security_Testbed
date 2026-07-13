@@ -1,3 +1,21 @@
+# Disclaimer
+
+### ⚠️ Academic Evaluation Notice: Master's Thesis
+
+**Project Origin & Attribution**  
+This repository utilize two open-source projects: **gr-ieee802-11ah by irongiant33** and **mm-iot-esp32 by Seeed Studio**. To ensure proper academic attribution and comply with open-source licensing, we chose to preserve the original `.git` commit history from these repositories. Therefore, the original developers appear in the GitHub contributors sidebar.
+
+**Scope of Original Thesis Work**  
+The novel contributions for our Master's thesis begin on **21st of may 2026**, starting specifically from commit `015a261e221b659bd2272f98d74c7ab9fb43fff3`. All commits prior to this point belong entirely to the original open-source authors of the respective projects. 
+
+For academic evaluation, please refer **only** to the work committed by `Scones111` and `simonhermansen`. 
+
+Our primary original contributions are located in the following directories:
+* `/attackerDevice` - A tool to perform security test using the tools from the different folder
+* `/mm-iot-esp32/tcp-client/main/src/tcp_client.c` - Creates a tcp-client to produce background traffic - using the prebuilt configurations made by seeed studios
+* `/mm-iot-esp32/tcp-server/main/src/tcp_server.c` - Creates a tcp-server to produce background traffic - using the prebuilt configurations made by seeed studios
+* `/gr-ieee802-11ah/examples/halow_tx.grc` - adapted to allow for 1MHz transmission for HackRF One
+
 # WiFi_Halow_Security_Testbed
 
 This is a testbed, that was developed in relation to a master thesis, with the purpose of implementing attacks for Wi-Fi HaLow.
@@ -11,9 +29,7 @@ The tool was deployed and conducted in the kali linux virtual machine environmen
 
 To allow for easy execution, [mm-iot-esp32](https://github.com) Developed by seeed studio and [gr-ieee802.11ah](https://github.com) developed by .
 
-
 ## 
-
 
 ## Getting Started
 Brief description of what the tool does, its main purpose, and the types of attacks or scenarios it supports (e.g., Evil Twin, Dragonblood resource exhaustion).
