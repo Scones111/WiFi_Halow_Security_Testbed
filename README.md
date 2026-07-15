@@ -15,7 +15,7 @@ Our original contributions are located in the following directories:
 * `/mm-iot-esp32/tcp-client/main/src/tcp_client.c` - Creates a TCP client to produce background traffic - using the prebuilt configurations made by Seeed Studios, and the underlying morse micro
 * `/mm-iot-esp32/tcp-server/main/src/tcp_server.c` - Creates a TCP server to produce background traffic - using the prebuilt configurations made by Seeed Studios, and the underlying morse micro
 * `/gr-ieee802-11ah/examples/halow_tx.grc` - adapted to allow for 1MHz transmission for HackRF One
-* `./shellscripts` - adapted to allow for 1MHz transmission for HackRF One
+* `./shellscripts` - Helper scripts created throught out this project
 
 # WiFi_Halow_Security_Testbed
 
