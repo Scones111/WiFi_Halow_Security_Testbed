@@ -81,3 +81,12 @@ The tool has been developed to allow for the creation of multiple TCP clients th
    ```bash
    pip install -r requirements.txt
    ```
+## Licensing and Dependencies
+
+This project is licensed under the **GNU General Public License v3.0** (see the root `LICENSE` file).
+
+This repository contains third-party components housed in their own subdirectories:
+*   **`gr-ieee802-11ah/`**: Licensed under the GNU General Public License v3.0.
+*   **`mm-iot-esp32/`**: Licensed under the Apache License 2.0 (fully compatible with GPLv3 distribution).
+
+Please ensure you respect the respective licenses when modifying files within those subdirectories.
