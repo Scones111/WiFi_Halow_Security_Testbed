@@ -30,10 +30,8 @@ The tool was deployed and executed in the Kali Linux virtual machine environment
 
 To allow for easy execution, [mm-iot-esp32](https://github.com) Developed by seeed studio and [gr-ieee802.11ah](https://github.com) developed by .
 
-## 
 
 ## Getting Started
-Brief description of what the tool does, its main purpose, and the types of attacks or scenarios it supports (e.g., Evil Twin, Dragonblood resource exhaustion).
 The testbed implements two attacks:
 
 Currently supports two different attacks
@@ -43,7 +41,7 @@ Currently supports two different attacks
 Capabilities:
 - Allows for the execution of attacks, with or without logging
 - Captures the metrics of the basenetwork
-- Initiate the client for metric logging 
+- Initiate the client for metric logging
 
 Important detail: to allow for the execution of attacks and logging of data, it requires at minimum two laptops, such that one can capture the metrics of the connected device and the router. while the other is performing that attack.
 
@@ -51,36 +49,24 @@ The tool has been developed to allow for the creation of multiple TCP clients th
 
 <img width="502" height="152" alt="image" src="https://github.com/user-attachments/assets/558989cb-bdf6-4681-9245-e3dab0ad1f52" />
 
+## Installation guide
+First step is to run the -r requirement.txt to provude the necessary libraries.
 
-### Prerequisites
+```bash
+pip install -r requirements.txt
+```
 
-- Python 3.x
-- SDR
-- Wireshark
+The tool requires the use of GNU Radio, when running the tool, it will execute a shellscript that will activate a hackrf in tx.
 
-### Installation
+```bash
+pip install -r requirements.txt
+```
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Scones111/WiFi_Halow_Security_Testbed.git
-   cd WiFi_Halow_Security_Testbed
-   ```
+### Installation of evil twin
+For the installation of the evil twin you can follow the guide in [RPI5 HaLow Build thread](https://community.morsemicro.com/t/build-thread-halow-for-raspberry-pi-os/1124)
 
-2. **Create a virtual environment:**
-   (Assuming a Linux/macOS environment)
-   ```bash
-   python3 -m venv .venv
-   ```
+It will provide you the necessary tools in order to instiate a RPI5 to act as a station and a AP.
 
-3. **Activate the virtual environment:**
-   ```bash
-   source .venv/bin/activate
-   ```
-
-4. **Install the dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
 ## Licensing and Dependencies
 
 This project is licensed under the **GNU General Public License v3.0** (see the root `LICENSE` file).
