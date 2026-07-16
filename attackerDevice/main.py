@@ -20,9 +20,6 @@ def print_usage():
         - capture: network traffic and metrics
       metric_client: Capture metrics
         - sets up client to capture metrics from the victim devices
-      sum: Summarize results
-        - For Evil Twin: python main.py sum 1
-        - For Dragon Dos: python main.py sum 2
     """
     print(usage)
 
@@ -76,15 +73,8 @@ if __name__ == "__main__":
             print(info)
             while True:
                 setupMetricClient.setup_client()
-        if opt == "sum":
-            params = sys.argv[2:]
-            if params[0] == "1":
-                summarizer.evilTwin_summarize()
-            elif params[0] == "2":
-                summarizer.dragonDos_summarize()
 
     finally:
-        # This block ALWAYS runs, even if you press ctrl+c or the script crashes
         if sdr_process is not None:
             print("\n[INFO] Terminating SDR process...")
             sdr_process.terminate()

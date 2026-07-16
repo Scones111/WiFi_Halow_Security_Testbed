@@ -1,12 +1,20 @@
+# Reference:
+# Chatzoglou, E., Kambourakis, G., Kolias, C., & Smiliotopoulos, C. (2022).
+# "Pick Quality Over Quantity: Expert Feature Selection and Data Preprocessing
+# for 802.11 Intrusion Detection Systems". IEEE Access, vol. 10, pp. 64761-64784.
+# DOI: 10.1109/ACCESS.2022.3183597
+#
+# This code collects the features provided in from the above paper.
+
 import sys
 import os
+import gc
 
 # Add the current working directory to Python path
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.abspath(os.path.join(script_dir, '..', '..'))
 sys.path.insert(0, project_root)
 
-from datetime import datetime, timezone
 from pathlib import Path
 import pyshark
 from pyshark.packet.packet import Packet
@@ -29,7 +37,7 @@ deauth_no = 0
 #initialize columns to be used:
 columns = [
     "packet_number",
-    "timestamp",
+    "tsft",
     "frame_name",
     "frame_len",
     "length",
@@ -49,11 +57,12 @@ columns = [
 
 frame_map = {
     "packet_number": ("frame_info","number"),
+    "timestamp": ("sniff_timestamp",),
     "frame_len": ("frame_info", "len"),
     "length": ("radiotap", "length"),
     "dbm_antsignal": ("radiotap", "dbm_antsignal"),
     "channel_freq": ("radiotap", "channel", "freq"),
-    "timestamp": ("sniff_timestamp",),
+    "tsft": ("radiotap","present","tsft"),
     "src": ("wlan", "sa"),
     "dst": ("wlan", "da"),
     "bssid": ("wlan", "bssid"),
@@ -73,6 +82,7 @@ frame_map = {
 }
 # ================================================================
 # frame types
+# Ref: IEEE Std 802.11-2024 clause: 9.2.4.1.3
 mgtSubTypes = {
     0: "Association Request",
     1: "Association Response",
@@ -176,22 +186,29 @@ def MLLog_processing(packets,folder_path):
         #reset label to 0, for normal traffic
         label = 0
 
+        # extract packet
         frt_df.loc[i,"packet_number"] = packet_extract(packet,"packet_number")
         fc_type = int(packet_extract(packet,"type"))
         fc_subtype = int(packet_extract(packet,"subtype"))
         frt_df.loc[i,"frame_name"] = frameTypes[fc_type][fc_subtype]
 
+        
         if hasattr(packet.wlan,"bssid"):
+            #check if bssid is evil twin
             if packet.wlan.bssid in EVIL_TWIN:
                 label = 1
         elif hasattr(packet.wlan,"sa"):
+            #check if sa is evil twin
             if packet.wlan.sa in EVIL_TWIN:
                 label = 1
+            #check if sa is spoofed mac
             elif packet.wlan.sa not in STA and packet.wlan.sa not in TRUSTED_AP:
                 label = 2 if is_dragon_dos else 1
         elif hasattr(packet.wlan,"da"):
+            #check if da is evil twin
             if packet.wlan.da in EVIL_TWIN:
                 label = 1
+            #check if da is spoofed mac
             elif packet.wlan.da not in STA and packet.wlan.da not in TRUSTED_AP:
                 label = 2 if is_dragon_dos else 1
         elif packet.frame_raw.value[int(packet.radiotap.length)*2:] in ATTACK_FRAMES:
@@ -199,12 +216,15 @@ def MLLog_processing(packets,folder_path):
 
         frt_df.loc[i,"label"] = label
 
-
+        # extract features
         for feature in columns:
             if feature not in ["packet_number","frame_name","label"]:
                 frt_df.loc[i,feature] = packet_extract(packet,feature)
 
         i += 1
+        del packet
+        if i % 1000==0:
+            gc.collect()
     print(f"Saved in {folder_path}")
     utils.write_to_ml_log(frt_df,folder_path)
 
@@ -270,34 +290,6 @@ def process_wlan(packet:Packet,folder_path):
     if write_log:
         utils.write_to_attacklog(event,folder_path)
 
-def process_tcp(packet:Packet,folder_path):
-    packet_number = packet_extract(packet,"packet_number")
-    ts = packet_extract(packet,"timestamp")
-    rf = packet_extract(packet,"dbm_antsignal")
-    src = packet_extract(packet,"src")
-    dst = packet_extract(packet,"dst")
-    bssid  = packet_extract(packet,"bssid")
-    fc_type = int(packet_extract(packet,"type"))
-    fc_subtype = int(packet_extract(packet,"subtype"))
-
-
-    event = {
-        "attack_type":None,
-        "packet Number":packet_number,
-        "event_type":frameTypes[fc_type][fc_subtype],
-        "time_stamp": ts,
-        "signal_strength":rf,
-        "bssid": bssid,
-        "src": src,
-        "dst": dst,
-        "details":None,
-    }
-    
-    events.handle_tcp(event)
-
-    utils.write_to_tcp_log(event,folder_path)
-
-
 def log_events(pcap_file,pcap_filter,folder_path):
     packets = pyshark.FileCapture(
         pcap_file,
@@ -309,12 +301,9 @@ def log_events(pcap_file,pcap_filter,folder_path):
     #iterate through packets
     for packet in packets:
         has_wlan = hasattr(packet, 'wlan')
-        has_tcp  = hasattr(packet, 'tcp')
 
         #process either tcp or wlan
-        if has_wlan and has_tcp:
-            process_tcp(packet,folder_path)
-        elif has_wlan:
+        if has_wlan:
             process_wlan(packet,folder_path)
 
     MLLog_processing(packets,folder_path)
@@ -323,28 +312,23 @@ def log_events(pcap_file,pcap_filter,folder_path):
 
 # test code
 """
-filename = Path(__file__).resolve().parent / "results/evilTwin/2_evilTwin_300_0.0167/traffic.pcap"
-folder_path = Path(__file__).resolve().parent / "results/evilTwin/2_evilTwin_300_0.0167"
-print(filename)
-packets = pyshark.FileCapture(
-    filename,
-    use_json=True,
-    include_raw=True,
-    display_filter="(wlan || tcp) && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 and !basicxid",
-    keep_packets=False
-)
-i = 0
-for packet in packets:
-    has_wlan = hasattr(packet, 'wlan')
-    has_tcp  = hasattr(packet, 'tcp')
-    if has_wlan and has_tcp:
-        process_tcp(packet,folder_path)
-    elif has_wlan:
-        process_wlan(packet,folder_path)
+#filename = Path(__file__).resolve().parent / "results/evilTwin/2_evilTwin_300_0.0167/traffic.pcap"
+base_dir = Path(__file__).resolve().parent / "results" / "evilTwin"
 
-    i += 1
+for pcap_path in base_dir.rglob("traffic.pcap"):
+    # Access directory info for each file
+    folder_name = pcap_path.parent.name  # e.g., "2_evilTwin_300_0.0167"
+    folder_path = pcap_path.parent
+    print(f"Processing: {folder_name} -> {pcap_path}")
+    packets = pyshark.FileCapture(
+        pcap_path,
+        use_json=True,
+        include_raw=True,
+        display_filter="(wlan) && !tcp && !arp && !stp && !rldp && !mdns && !udp && !icmpv6 && !igmp && !ipv6 and !basicxid",
+        keep_packets=False
+    )
+    MLLog_processing(packets, folder_path)
 
-MLLog_processing(packets, folder_path)
+    packets.close()
 
-packets.close()
 """

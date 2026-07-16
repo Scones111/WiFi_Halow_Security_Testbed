@@ -1,2 +1,0 @@
-attack_type,packet Number,event_type,time_stamp,signal_strength,bssid,src,dst,details
-,15436,QoS Data,2026-06-29T13:52:11.077121000Z,-31,78:72:64:ea:b9:14,3c:22:7f:71:df:d6,3c:22:7f:71:dc:b8,Transmitting data using Trusted AP

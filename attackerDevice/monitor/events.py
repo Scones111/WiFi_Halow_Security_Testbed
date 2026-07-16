@@ -7,15 +7,6 @@ TRUSTED_AP = utils.get_mac("TrustedAP")#utils.load_json()["TrustedAP"][0]["mac"]
 STA_MACS = utils.get_mac("STA")
 KNOWN_DEAUTH_FRAME = retrieve_all_attack_frames()
 
-# TCP events
-def handle_tcp(event):
-    if event['bssid'] in EVIL_TWIN:
-        event["attack_type"] = "Evil Twin Attack"
-        event["details"] = "Transmitting data using Evil Twin AP"
-    elif event['bssid'] in TRUSTED_AP:
-        event["details"] = "Transmitting data using Trusted AP"
-
-#todo add more specific events for tcp
 
 #wlan events
 def handle_deauth(event,packet,deauth_no):
@@ -113,6 +104,3 @@ handle_wlan_events = {
     "S1G Beacon": handle_s1g_beacon
 }
 
-#todo implement for different tcp events:
-handle_tcp_events = {
-}

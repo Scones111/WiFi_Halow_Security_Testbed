@@ -898,3 +898,118 @@ Evil Twin Attack,2453,S1G Beacon,2026-07-07T12:50:06.533731000Z,-61,,,9c:04:b6:4
 Evil Twin Attack,2457,S1G Beacon,2026-07-07T12:50:07.354757000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
 ,2458,S1G Beacon,2026-07-07T12:50:07.837610000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
 Evil Twin Attack,2462,S1G Beacon,2026-07-07T12:50:08.172177000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,2,S1G Beacon,2026-07-07T12:43:56.726734000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,3,S1G Beacon,2026-07-07T12:43:57.065762000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,2,S1G Beacon,2026-07-07T12:43:56.726734000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,3,S1G Beacon,2026-07-07T12:43:57.065762000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,2,S1G Beacon,2026-07-07T12:43:56.726734000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,3,S1G Beacon,2026-07-07T12:43:57.065762000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,14,S1G Beacon,2026-07-07T12:43:57.547753000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,15,S1G Beacon,2026-07-07T12:43:57.883191000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,16,S1G Beacon,2026-07-07T12:43:58.365185000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,17,S1G Beacon,2026-07-07T12:43:58.704217000Z,-66,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,18,S1G Beacon,2026-07-07T12:43:59.186205000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,20,S1G Beacon,2026-07-07T12:43:59.521623000Z,-66,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,21,S1G Beacon,2026-07-07T12:44:00.003628000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,22,S1G Beacon,2026-07-07T12:44:00.342649000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,23,S1G Beacon,2026-07-07T12:44:00.824666000Z,-60,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,24,S1G Beacon,2026-07-07T12:44:01.160071000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,25,S1G Beacon,2026-07-07T12:44:01.642093000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,26,S1G Beacon,2026-07-07T12:44:01.981095000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,38,S1G Beacon,2026-07-07T12:44:02.463118000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,40,S1G Beacon,2026-07-07T12:44:02.798515000Z,-61,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,41,S1G Beacon,2026-07-07T12:44:03.619546000Z,-60,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,43,S1G Beacon,2026-07-07T12:44:04.436965000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,44,S1G Beacon,2026-07-07T12:44:04.918985000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,45,S1G Beacon,2026-07-07T12:44:05.257991000Z,-62,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,47,S1G Beacon,2026-07-07T12:44:05.740020000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,48,S1G Beacon,2026-07-07T12:44:06.075410000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,49,S1G Beacon,2026-07-07T12:44:06.557432000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,50,S1G Beacon,2026-07-07T12:44:06.896436000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,58,S1G Beacon,2026-07-07T12:44:07.378457000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,62,S1G Beacon,2026-07-07T12:44:07.713866000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,63,S1G Beacon,2026-07-07T12:44:08.195884000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,65,S1G Beacon,2026-07-07T12:44:08.534886000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,66,S1G Beacon,2026-07-07T12:44:09.016914000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,67,S1G Beacon,2026-07-07T12:44:09.352302000Z,-65,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,68,S1G Beacon,2026-07-07T12:44:09.834341000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,76,S1G Beacon,2026-07-07T12:44:10.173334000Z,-65,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,77,S1G Beacon,2026-07-07T12:44:10.655443000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,78,S1G Beacon,2026-07-07T12:44:10.990760000Z,-64,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,83,S1G Beacon,2026-07-07T12:44:11.472787000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,88,S1G Beacon,2026-07-07T12:44:11.811792000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,99,S1G Beacon,2026-07-07T12:44:12.293815000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+,2,S1G Beacon,2026-07-07T12:43:56.726734000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,3,S1G Beacon,2026-07-07T12:43:57.065762000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,14,S1G Beacon,2026-07-07T12:43:57.547753000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,15,S1G Beacon,2026-07-07T12:43:57.883191000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,16,S1G Beacon,2026-07-07T12:43:58.365185000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,17,S1G Beacon,2026-07-07T12:43:58.704217000Z,-66,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,18,S1G Beacon,2026-07-07T12:43:59.186205000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,20,S1G Beacon,2026-07-07T12:43:59.521623000Z,-66,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,21,S1G Beacon,2026-07-07T12:44:00.003628000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,22,S1G Beacon,2026-07-07T12:44:00.342649000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,23,S1G Beacon,2026-07-07T12:44:00.824666000Z,-60,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,24,S1G Beacon,2026-07-07T12:44:01.160071000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,25,S1G Beacon,2026-07-07T12:44:01.642093000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,26,S1G Beacon,2026-07-07T12:44:01.981095000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,38,S1G Beacon,2026-07-07T12:44:02.463118000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,40,S1G Beacon,2026-07-07T12:44:02.798515000Z,-61,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,41,S1G Beacon,2026-07-07T12:44:03.619546000Z,-60,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,43,S1G Beacon,2026-07-07T12:44:04.436965000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,44,S1G Beacon,2026-07-07T12:44:04.918985000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,45,S1G Beacon,2026-07-07T12:44:05.257991000Z,-62,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,47,S1G Beacon,2026-07-07T12:44:05.740020000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,48,S1G Beacon,2026-07-07T12:44:06.075410000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,49,S1G Beacon,2026-07-07T12:44:06.557432000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,50,S1G Beacon,2026-07-07T12:44:06.896436000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,58,S1G Beacon,2026-07-07T12:44:07.378457000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,62,S1G Beacon,2026-07-07T12:44:07.713866000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,63,S1G Beacon,2026-07-07T12:44:08.195884000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,65,S1G Beacon,2026-07-07T12:44:08.534886000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,66,S1G Beacon,2026-07-07T12:44:09.016914000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,67,S1G Beacon,2026-07-07T12:44:09.352302000Z,-65,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,68,S1G Beacon,2026-07-07T12:44:09.834341000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,76,S1G Beacon,2026-07-07T12:44:10.173334000Z,-65,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,77,S1G Beacon,2026-07-07T12:44:10.655443000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,78,S1G Beacon,2026-07-07T12:44:10.990760000Z,-64,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,83,S1G Beacon,2026-07-07T12:44:11.472787000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,88,S1G Beacon,2026-07-07T12:44:11.811792000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,99,S1G Beacon,2026-07-07T12:44:12.293815000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+,2,S1G Beacon,2026-07-07T12:43:56.726734000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,3,S1G Beacon,2026-07-07T12:43:57.065762000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,14,S1G Beacon,2026-07-07T12:43:57.547753000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,15,S1G Beacon,2026-07-07T12:43:57.883191000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,16,S1G Beacon,2026-07-07T12:43:58.365185000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,17,S1G Beacon,2026-07-07T12:43:58.704217000Z,-66,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,18,S1G Beacon,2026-07-07T12:43:59.186205000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,20,S1G Beacon,2026-07-07T12:43:59.521623000Z,-66,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,21,S1G Beacon,2026-07-07T12:44:00.003628000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,22,S1G Beacon,2026-07-07T12:44:00.342649000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,23,S1G Beacon,2026-07-07T12:44:00.824666000Z,-60,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,24,S1G Beacon,2026-07-07T12:44:01.160071000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,25,S1G Beacon,2026-07-07T12:44:01.642093000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,26,S1G Beacon,2026-07-07T12:44:01.981095000Z,-61,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,38,S1G Beacon,2026-07-07T12:44:02.463118000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,40,S1G Beacon,2026-07-07T12:44:02.798515000Z,-61,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,41,S1G Beacon,2026-07-07T12:44:03.619546000Z,-60,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+Evil Twin Attack,43,S1G Beacon,2026-07-07T12:44:04.436965000Z,-62,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,44,S1G Beacon,2026-07-07T12:44:04.918985000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,45,S1G Beacon,2026-07-07T12:44:05.257991000Z,-62,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,47,S1G Beacon,2026-07-07T12:44:05.740020000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,48,S1G Beacon,2026-07-07T12:44:06.075410000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,49,S1G Beacon,2026-07-07T12:44:06.557432000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,50,S1G Beacon,2026-07-07T12:44:06.896436000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,58,S1G Beacon,2026-07-07T12:44:07.378457000Z,-59,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,62,S1G Beacon,2026-07-07T12:44:07.713866000Z,-63,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,63,S1G Beacon,2026-07-07T12:44:08.195884000Z,-57,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,65,S1G Beacon,2026-07-07T12:44:08.534886000Z,-64,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,66,S1G Beacon,2026-07-07T12:44:09.016914000Z,-57,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,67,S1G Beacon,2026-07-07T12:44:09.352302000Z,-65,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,68,S1G Beacon,2026-07-07T12:44:09.834341000Z,-59,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,76,S1G Beacon,2026-07-07T12:44:10.173334000Z,-65,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,77,S1G Beacon,2026-07-07T12:44:10.655443000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,78,S1G Beacon,2026-07-07T12:44:10.990760000Z,-64,,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,83,S1G Beacon,2026-07-07T12:44:11.472787000Z,-58,,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon
+Evil Twin Attack,88,S1G Beacon,2026-07-07T12:44:11.811792000Z,-63,H7608,,9c:04:b6:46:07:34,,,,Evil Twin s1g Beacon
+,99,S1G Beacon,2026-07-07T12:44:12.293815000Z,-58,H7608,,78:72:64:ea:b9:14,,,,Trusted AP s1g Beacon

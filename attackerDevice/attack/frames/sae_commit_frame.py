@@ -1,5 +1,5 @@
 from scapy.all import *
-from scapy.layers.dot11 import Dot11, Dot11Auth, Dot11FCS
+from scapy.layers.dot11 import Dot11Auth, Dot11FCS
 from cryptography.hazmat.primitives.asymmetric import ec
 
 
