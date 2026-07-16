@@ -3,7 +3,7 @@
     {
       "name": "Heltec",
       "ip": "192.168.0.100",
-      "mac": "78:72:64:ea:b9:14",
+      "mac": "xx:xx:xx:xx:xx:xx",
       "user": "root",
       "pass": "heltec.org"
     }
@@ -12,7 +12,7 @@
     {
       "name": "EvilTwin",
       "ip": "10.42.0.2",
-      "mac": "9c:04:b6:46:07:34",
+      "mac": "xx:xx:xx:xx:xx:xx",
       "user": "rpi5",
       "password": "halow",
       "ssh_port": 24
@@ -32,13 +32,13 @@
     {
       "name": "tcp_server",
       "ip": "192.168.0.200",
-      "mac": "3c:22:7f:71:dc:b8",
+      "mac": "xx:xx:xx:xx:xx:xx",
       "serial_port": "/dev/ttyACM0"
     },
     {
       "name": "tcp_client",
       "ip": "192.168.0.150",  
-      "mac": "3c:22:7f:71:df:d6",
+      "mac": "xx:xx:xx:xx:xx:xx",
       "serial_port": "/dev/ttyACM1"
     }
   ],
