@@ -22,7 +22,7 @@
     {
       "name": "Monitor",
       "ip": "10.42.0.1",
-      "mac": "",
+      "mac": "xx:xx:xx:xx:xx:xx",
       "user": "root",
       "password": "halow",
       "ssh_port": 22
