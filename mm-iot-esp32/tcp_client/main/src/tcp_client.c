@@ -309,6 +309,7 @@ static void tcp_client_task(void *pvParameters)
     }
 }
 
+/*Morse micro TWT boiler plate*/
 static void add_twt_configuration(void)
 {
     enum mmwlan_status status;

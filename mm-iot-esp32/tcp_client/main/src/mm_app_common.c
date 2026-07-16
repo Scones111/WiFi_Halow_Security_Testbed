@@ -44,30 +44,6 @@ static void sta_status_callback(enum mmwlan_sta_state sta_state)
 }
 
 
-/**
- * Add a TWT configuration. This code has been provided by Morse Micro as an example of how to use the TWT API.
- * Retrieved directly from morse micro
-
-static void add_twt_configuration(void)
-{
-    enum mmwlan_status status;
-    struct mmwlan_twt_config_args twt_config = MMWLAN_TWT_CONFIG_ARGS_INIT;
-
-    twt_config.twt_mode = MMWLAN_TWT_REQUESTER;
-    twt_config.twt_setup_command = MMWLAN_TWT_SETUP_REQUEST;
-    twt_config.twt_wake_interval_us = 300000000;
-    twt_config.twt_min_wake_duration_us = 65280;
-    status = mmwlan_twt_add_configuration(&twt_config);
-    if (status == MMWLAN_SUCCESS)
-    {
-        printf("Successfully added TWT configuration\n");
-    }
-    else
-    {
-        printf("Failed to set TWT configuration\n");
-    }
-}
-*/
 
 /**
  * Link status callback
@@ -125,9 +101,6 @@ void app_wlan_init(void)
     MMOSAL_ASSERT(status == MMWLAN_SUCCESS);
     printf("Morse firmware version %s, morselib version %s, Morse chip ID 0x%lx\n\n",
            version.morse_fw_version, version.morselib_version, version.morse_chip_id);
-
-    /* Add TWT configuration. called before sta_enable, after mmwlan_init*/
-    //add_twt_configuration();
 }
 
 void app_wlan_start(void)
