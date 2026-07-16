@@ -11,23 +11,5 @@ def transmit_frame_deauth(params):
         time.sleep(1/rate)
         raw_frame = frames.start_deauthentication_frame_generator()
         transmitData(raw_frame)
-    
-    """
-    while(True):
-        choice = None
-        while(True):
-            choice = input("transmit deauth frame? (y/n): ")
-            if choice in ["y", "n"]:
-                break
-            else:
-                print("Invalid choice. Please enter a valid number.")
-        
-        if choice=="y":
-            raw_frame = frames.start_deauthentication_frame_generator()
-            print("transmitting now")
-            transmitData(raw_frame)
-        else:
-            break
-"""
 
 
