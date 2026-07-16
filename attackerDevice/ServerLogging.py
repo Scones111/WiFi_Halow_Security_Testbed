@@ -1,7 +1,6 @@
 import socket
 import utils
 import threading
-import select
 import time
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
