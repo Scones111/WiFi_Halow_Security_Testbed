@@ -59,13 +59,35 @@ pip install -r requirements.txt
 The tool requires the use of GNU Radio, when running the tool, it will execute a shellscript that will activate a hackrf in tx.
 
 ```bash
-pip install -r requirements.txt
+sudo apt-get install gnuradio
 ```
 
 ### Installation of evil twin
 For the installation of the evil twin you can follow the guide in [RPI5 HaLow Build thread](https://community.morsemicro.com/t/build-thread-halow-for-raspberry-pi-os/1124)
 
 It will provide you the necessary tools in order to instiate a RPI5 to act as a station and a AP.
+
+Once the RPI5 has been installed, and the packages from morse micro has been downloaded. Navigate to the hostapd, and create a copy of the hostapd_s1g.conf, called halow_ap.conf.
+
+Inside the shellscript folder exist two different shell scripts for enabling and disabling the AP: ap_mode.sh and ap_mode_down.sh.
+
+Install on rouge AP using, example:
+```bash
+scp ap_mode.sh rpi@raspberrypi.local:ap_mode.sh
+```
+
+### Setup testbed environment
+Two laptops are recommended, one laptop is responsible for connection to the esp32 devices and the router, while the other is an attacker in the test environment.
+
+laptop 1, connected to the HackRF One, and a monitor device through an SSH connection
+
+laptop 2, connected to esp32 and router
+
+Communication happens over communication, it is recommended to use the tailscale VPN to establish a direct tunnel.
+
+## Example usage
+To perfor
+
 
 ## Licensing and Dependencies
 
