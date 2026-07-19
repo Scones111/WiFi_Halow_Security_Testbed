@@ -45,10 +45,6 @@ Capabilities:
 
 Important detail: to allow for the execution of attacks and logging of data, it requires at minimum two laptops, such that one can capture the metrics of the connected device and the router. while the other is performing that attack.
 
-The tool has been developed to allow for the creation of multiple TCP clients that will connect and transmit the result to a server, which is the main attack device.
-
-<img width="502" height="152" alt="image" src="https://github.com/user-attachments/assets/558989cb-bdf6-4681-9245-e3dab0ad1f52" />
-
 ## Installation guide
 First step is to run the -r requirement.txt to provude the necessary libraries.
 
@@ -81,13 +77,37 @@ Two laptops are recommended, one laptop is responsible for connection to the esp
 
 laptop 1, connected to the HackRF One, and a monitor device through an SSH connection
 
-laptop 2, connected to esp32 and router
+laptop 2, connected to esp32, connected via usb and router connected via ssh
 
 Communication happens over communication, it is recommended to use the tailscale VPN to establish a direct tunnel.
 
 ## Example usage
-To perfor
+The tool has been developed to allow for the creation of multiple TCP clients that will connect and transmit the result to a server, which is the main attack device.
 
+<img width="502" height="152" alt="image" src="https://github.com/user-attachments/assets/558989cb-bdf6-4681-9245-e3dab0ad1f52" />
+
+To connect a client for router metrics:
+
+```bash
+python main.py metric_client
+```
+For each attack, a duration and rate is set, duration is set in seconds and rate set in frames per seconds.
+
+### Evil Twin
+To perform an Evil Twin attack and collect metrics, run attack_log with attack=1, duration=300 seconds (5 minutes), and rate=1 (1 frame/s):
+```bash
+python main.py attack_log attack 1 300 1
+```
+Note: The Evil Twin AP requires to be initialized in order to perform attack, so prior to execution, on the rpi5 call:
+```bash
+./ap_mode.sh
+```
+
+### Dragonblood resource exhuastian attack:
+To perform Dragonblood resource exhuastian attack, run attack_log with attack=2, duration=399 seconds (5 minutes), and rate=1 (1 frames/s):
+```bash
+python main.py attack_log attack 2 300 1
+```
 
 ## Licensing and Dependencies
 
