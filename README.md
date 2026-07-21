@@ -63,7 +63,7 @@ For the installation of the evil twin you can follow the guide in [RPI5 HaLow Bu
 
 It will provide you the necessary tools in order to instiate a RPI5 to act as a station and a AP.
 
-Once the RPI5 has been installed, and the packages from morse micro has been downloaded. Navigate to the hostapd, and create a copy of the hostapd_s1g.conf, called halow_ap.conf.
+Once the RPI5 has been installed, and the packages from morse micro has been downloaded. Navigate to the **/hostap/hostapd** folder, and create a copy of the hostapd_s1g.conf, called halow_ap.conf.
 
 Inside the shellscript folder exist two different shell scripts for enabling and disabling the AP: ap_mode.sh and ap_mode_down.sh.
 
