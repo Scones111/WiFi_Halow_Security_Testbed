@@ -20,9 +20,9 @@ def commit_frame(target_mac:str, src_mac:str,cookie=None,status=126):
     dummy_element = e1.to_bytes(32,"big") + e2.to_bytes(32,"big") 
 
     # Determine payload structure based on the status (which carries the pwe setting)
-    # pwe=0 (status=126): cookie comes directly after the Group ID
-    # pwe=1 (status=0): cookie comes at the end as an Extension Tag
-    if status == 126 and cookie is not None:
+    # pwe=0 (status=0): cookie comes directly after the Group ID
+    # pwe=1 (status=126): cookie comes at the end as an Extension Tag
+    if status == 0 and cookie is not None:
         sae_payload = b'\x13\x00' + cookie + dummy_scalar + dummy_element
     else:
         sae_payload = b'\x13\x00' + dummy_scalar + dummy_element
